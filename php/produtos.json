@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "nome": "Cimento Votoran 50kg",
+        "preco": 42.9,
+        "categoria": "bruto",
+        "quantidade": 17,
+        "descricao": "Cimento Portland CP II, ideal para fundações e alvenaria.",
+        "imagem": "..\/imagem\/Cimento.jpg"
+    },
+    {
+        "id": 2,
+        "nome": "Piso Cerâmico 60x60",
+        "preco": 89.9,
+        "categoria": "acabamento",
+        "quantidade": 4,
+        "descricao": "Piso cerâmico de alta resistência para ambientes internos.",
+        "imagem": "..\/imagem\/Piso.png"
+    },
+    {
+        "id": 3,
+        "nome": "Martelo",
+        "preco": 35.5,
+        "categoria": "ferramentas",
+        "quantidade": 67,
+        "descricao": "Martelo profissional para assentamento de pisos.",
+        "imagem": "..\/imagem\/Martelo.jpg"
+    },
+    {
+        "id": 4,
+        "nome": "Areia",
+        "preco": 7.5,
+        "categoria": "bruto",
+        "quantidade": 0,
+        "descricao": "Areia de qualidade para concretagem.",
+        "imagem": "..\/imagem\/Areia.jpg"
+    },
+    {
+        "id": 5,
+        "nome": "Furadeiras",
+        "preco": 199.9,
+        "categoria": "ferramentas",
+        "quantidade": 13,
+        "descricao": "Furadeiras elétricas de alta potência para diversos usos.",
+        "imagem": "..\/imagem\/Furadeiras.jpg"
+    },
+    {
+        "id": 6,
+        "nome": "Torneiras",
+        "preco": 279.49,
+        "categoria": "acabamento",
+        "quantidade": 22,
+        "descricao": "Torneiras de alta qualidade para instalações hidráulicas.",
+        "imagem": "..\/imagem\/Torneiras.jpg"
+    }
+]
