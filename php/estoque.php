@@ -11,7 +11,7 @@ $msgTipo = '';
 
 // ── MOVIMENTAÇÃO ─────────────────────────────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao'])) {
-    $id    = (int)($_POST['produto_id'] ?? 0);
+    $id    = (int)($_POST['produto_id'] ?? 0); abc
     $delta = (int)($_POST['delta'] ?? 0);
 
     foreach ($_SESSION['produtos'] as &$p) {
