@@ -173,7 +173,7 @@ if ($filtroStatus !== '') {
         <div><div class="kpi-label">Inativos</div><div class="kpi-valor" style="font-size:1.4rem"><?php echo $contagens['inativo']; ?></div></div>
       </div>
       <div class="kpi-card <?php echo $contagens['em_falha'] > 0 ? 'kpi-card--red' : 'kpi-card--purple'; ?>" style="padding:.9rem 1rem">
-        <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px">🔴</div>
+        <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px"><?= severidadeIcon('critico') ?></div>
         <div><div class="kpi-label">Em Falha</div><div class="kpi-valor" style="font-size:1.4rem"><?php echo $contagens['em_falha']; ?></div></div>
       </div>
     </div>

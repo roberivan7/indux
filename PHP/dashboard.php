@@ -137,7 +137,7 @@ try {
         </div>
       </div>
       <div class="kpi-card <?php echo $alarmesCriticos > 0 ? 'kpi-card--yellow' : 'kpi-card--green'; ?>">
-        <div class="kpi-icon">🔔</div>
+        <div class="kpi-icon"><?= severidadeIcon('critico') ?></div>
         <div>
           <div class="kpi-label">Alarmes Críticos</div>
           <div class="kpi-valor"><?php echo $alarmesCriticos; ?></div>

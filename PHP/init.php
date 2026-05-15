@@ -58,7 +58,15 @@ function inicialNome(string $nome): string {
 }
 function statusClass(string $status): string { return match($status){ 'ativo'=>'status-ativo','inativo'=>'status-inativo','em_falha'=>'status-em_falha',default=>'' }; }
 function statusLabel(string $status): string { global $statusLabels; return $statusLabels[$status] ?? $status; }
-function severidadeIcon(string $severidade): string { return match($severidade){ 'critico'=>'🔴','alerta'=>'⚠️','informativo'=>'💡',default=>'❓' }; }
+function severidadeIcon(string $severidade): string {
+    $gifCritico = 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXRudXl3eWR3bXNlaWticm0xY3Z5amVwa204Mm5xNW9rZHJwaXc4aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/f4z6vCWrGcMw6xRlOA/giphy.gif';
+    return match($severidade){
+        'critico'=>'<img src="'.$gifCritico.'" alt="Alerta" style="width:22px;height:22px;object-fit:contain;display:inline-block;vertical-align:middle" />',
+        'alerta'=>'⚠️',
+        'informativo'=>'💡',
+        default=>'❓'
+    };
+}
 function tipoAlarmeIcon(string $tipoAlarme): string { return match($tipoAlarme){ 'temperatura'=>'🌡️','pressao'=>'⚙️','falha'=>'🔴','conexao'=>'📡','manutencao'=>'🔧',default=>'❓' }; }
 function avaliarTemp(float $valor, float $minimo, float $maximo): string { if($valor>$maximo||$valor<$minimo)return'danger'; if($valor>($maximo*0.85))return'warning'; return'ok'; }
 function avaliarPressao(float $valor, float $minimo, float $maximo): string { if($valor>$maximo||$valor<$minimo)return'danger'; if($valor>($maximo*0.85))return'warning'; return'ok'; }

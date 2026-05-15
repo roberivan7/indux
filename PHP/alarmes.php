@@ -161,7 +161,9 @@ try {
         <div><div class="kpi-label">Ativos</div><div class="kpi-valor" style="font-size:1.4rem"><?php echo $contagens['total']; ?></div></div>
       </div>
       <div class="kpi-card kpi-card--red" style="padding:.9rem 1rem">
-        <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px">🔴</div>
+        <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px">
+          <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXRudXl3eWR3bXNlaWticm0xY3Z5amVwa204Mm5xNW9rZHJwaXc4aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/f4z6vCWrGcMw6xRlOA/giphy.gif" alt="Crítico" style="width:22px;height:22px;object-fit:contain;display:inline-block;vertical-align:middle" />
+        </div>
         <div><div class="kpi-label">Críticos</div><div class="kpi-valor" style="font-size:1.4rem"><?php echo $contagens['critico']; ?></div></div>
       </div>
       <div class="kpi-card kpi-card--yellow" style="padding:.9rem 1rem">
@@ -184,7 +186,8 @@ try {
         🔔 Pendentes <span class="tab-badge tab-badge--red"><?php echo $contagens['total']; ?></span>
       </a>
       <a href="alarmes.php?res=0&sev=critico" class="tab-btn <?php echo $filtroSeveridade==='critico' ? 'ativo' : ''; ?>">
-        🔴 Críticos <span class="tab-badge tab-badge--red"><?php echo $contagens['critico']; ?></span>
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXRudXl3eWR3bXNlaWticm0xY3Z5amVwa204Mm5xNW9rZHJwaXc4aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/f4z6vCWrGcMw6xRlOA/giphy.gif" alt="Crítico" style="width:18px;height:18px;object-fit:contain;display:inline-block;vertical-align:middle;margin-right:.35rem" />
+        Críticos <span class="tab-badge tab-badge--red"><?php echo $contagens['critico']; ?></span>
       </a>
       <a href="alarmes.php?res=0&sev=alerta" class="tab-btn <?php echo $filtroSeveridade==='alerta' ? 'ativo' : ''; ?>">
         ⚠️ Alertas <span class="tab-badge tab-badge--yellow"><?php echo $contagens['alerta']; ?></span>

@@ -404,7 +404,9 @@ if ($equipFiltro > 0) {
             <?php elseif ($classe==='warning'): ?>
             <span class="status-badge" style="background:var(--yellow-dim);color:var(--yellow);border:1px solid rgba(245,158,11,.3)">⚠️ Alerta</span>
             <?php else: ?>
-            <span class="status-badge status-em_falha">🔴 Crítico</span>
+            <span class="status-badge status-em_falha" style="gap:.35rem">
+              <?= severidadeIcon('critico') ?> Crítico
+            </span>
             <?php endif; ?>
           </div>
         </div>
@@ -486,7 +488,9 @@ if ($equipFiltro > 0) {
             </td>
             <td>
               <?php if ($pior==='danger'): ?>
-              <span class="status-badge status-em_falha" style="font-size:.65rem">🔴 Crítico</span>
+              <span class="status-badge status-em_falha" style="font-size:.65rem;gap:.35rem">
+                <?= severidadeIcon('critico') ?> Crítico
+              </span>
               <?php elseif ($pior==='warning'): ?>
               <span class="status-badge" style="background:var(--yellow-dim);color:var(--yellow);border:1px solid rgba(245,158,11,.3);font-size:.65rem">⚠️ Alerta</span>
               <?php else: ?>
