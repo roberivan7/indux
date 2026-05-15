@@ -7,7 +7,7 @@ $msg     = '';
 $msgTipo = 'info';
 
 // ── EXCLUIR ──────────────────────────────────────────────
-if (isset($_GET['excluir']) && ehGestor()) {
+if (isset($_GET['excluir']) && podeExcluirEquip()) {
     $equipamentoId = (int)$_GET['excluir'];
     try {
         $db   = getDB();
@@ -29,7 +29,7 @@ if (isset($_GET['excluir']) && ehGestor()) {
 }
 
 // ── ALTERAR STATUS ────────────────────────────────────────
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['alterar_status']) && ehGestor()) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['alterar_status']) && (ehOperador() || podeEditarEquip())) {
     $equipamentoId = (int)$_POST['equip_id'];
     $novoStatus = $_POST['novo_status'] ?? '';
     if (in_array($novoStatus, ['ativo','inativo','em_falha'])) {
@@ -149,7 +149,7 @@ if ($filtroStatus !== '') {
           <p class="page-subtitle">Cadastre, monitore e controle o funcionamento de cada equipamento</p>
         </div>
       </div>
-      <?php if (ehOperador()): ?>
+      <?php if (podeCriarEquip()): ?>
       <a href="novo-equipamento.php" class="btn btn--primary">➕ Novo Equipamento</a>
       <?php endif; ?>
     </div>
@@ -157,10 +157,6 @@ if ($filtroStatus !== '') {
     <?php if ($msg): ?>
     <div class="alerta alerta--<?php echo $msgTipo; ?>"><?php echo $msg; ?></div>
     <?php endif; ?>
-
-    <a href="novo-equipamento.php" class="btn btn--secondare btn--lg" style="justify-content:center">
-        ➕ Novo Equipamento
-      </a>
 
     <!-- KPIs rápidos -->
     <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:1.25rem">
@@ -232,7 +228,7 @@ if ($filtroStatus !== '') {
       <div class="empty-state__desc">
         <?php if ($busca || $filtroStatus): ?>
           Tente alterar os filtros de busca.
-        <?php elseif (ehOperador()): ?>
+        <?php elseif (podeCriarEquip()): ?>
           <a href="novo-equipamento.php" class="btn btn--primary" style="margin-top:1rem">➕ Cadastrar primeiro equipamento</a>
         <?php else: ?>
           Nenhum equipamento cadastrado ainda.
@@ -307,7 +303,7 @@ if ($filtroStatus !== '') {
             📡 Monitorar
           </a>
 
-          <?php if (ehOperador()): ?>
+          <?php if (ehOperador() || podeEditarEquip()): ?>
           <!-- Dropdown de status -->
           <div style="position:relative">
             <button
@@ -329,16 +325,18 @@ if ($filtroStatus !== '') {
               </form>
               <?php endif; ?>
               <?php endforeach; ?>
+              <?php if (podeExcluirEquip()): ?>
               <hr style="border:none;border-top:1px solid var(--border);margin:.3rem 0">
               <a href="equipamentos.php?excluir=<?php echo $equipamento['id']; ?>"
                  onclick="return confirm('Excluir <?php echo htmlspecialchars(addslashes($equipamento['nome'])); ?>?')"
                  class="btn btn--danger btn--sm"
                  style="width:100%;justify-content:flex-start">🗑️ Excluir</a>
+              <?php endif; ?>
             </div>
           </div>
           <?php endif; ?>
 
-          <?php if (ehOperador()): ?>
+          <?php if (podeEditarEquip()): ?>
           <a href="novo-equipamento.php?editar=<?php echo $equipamento['id']; ?>" class="btn btn--ghost btn--sm">✏️</a>
           <?php endif; ?>
         </div>

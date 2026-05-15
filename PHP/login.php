@@ -33,6 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['usuario_nome'] = $usuario['nome'];
                 $_SESSION['usuario_email']= $usuario['email'];
                 $_SESSION['perfil']       = $usuario['perfil'];
+                $_SESSION['is_operador']  = (bool)($usuario['is_operador'] ?? false);
+                $_SESSION['perm_criar_equip']     = (bool)($usuario['perm_criar_equip'] ?? false);
+                $_SESSION['perm_editar_equip']    = (bool)($usuario['perm_editar_equip'] ?? false);
+                $_SESSION['perm_resolver_alarme'] = (bool)($usuario['perm_resolver_alarme'] ?? false);
 
                 registrarLog('LOGIN', 'usuarios', $usuario['id']);
 
@@ -47,6 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['usuario_nome'] = 'Administrador INDUX';
                     $_SESSION['usuario_email']= 'admin@indux.com.br';
                     $_SESSION['perfil']       = 'admin';
+                    $_SESSION['is_operador']  = false;
+                    $_SESSION['perm_criar_equip']     = false;
+                    $_SESSION['perm_editar_equip']    = false;
+                    $_SESSION['perm_resolver_alarme'] = false;
                     header('Location: dashboard.php');
                     exit;
                 }
@@ -59,6 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['usuario_nome'] = 'Administrador INDUX';
                 $_SESSION['usuario_email']= 'admin@indux.com.br';
                 $_SESSION['perfil']       = 'admin';
+                $_SESSION['is_operador']  = false;
+                $_SESSION['perm_criar_equip']     = false;
+                $_SESSION['perm_editar_equip']    = false;
+                $_SESSION['perm_resolver_alarme'] = false;
                 header('Location: dashboard.php');
                 exit;
             }

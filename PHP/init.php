@@ -33,8 +33,8 @@ function requerStaff(): void { requerLogin(); if (!ehAdmin() && !ehStaff()) { he
 function ehAdmin(): bool      { return ($_SESSION['perfil'] ?? '') === 'admin'; }
 function ehStaff(): bool      { return ($_SESSION['perfil'] ?? '') === 'staff'; }
 function ehFuncionario(): bool{ return ($_SESSION['perfil'] ?? '') === 'funcionario'; }
-function ehOperador(): bool   { return (bool)($_SESSION['is_operador'] ?? false); }
 function ehGestor(): bool     { return ehAdmin() || ehStaff(); }
+function ehOperador(): bool   { return ehGestor() || (bool)($_SESSION['is_operador'] ?? false); }
 
 // Permissões granulares (funcionário)
 function podeCriarEquip(): bool     { return ehGestor() || (bool)($_SESSION['perm_criar_equip']     ?? false); }

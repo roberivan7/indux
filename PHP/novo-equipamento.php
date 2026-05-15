@@ -2,7 +2,17 @@
 require_once 'init.php';
 require_once 'db.php';
 requerLogin();
-if (!isset($_SESSION['is_operador']) || !$_SESSION['is_operador']) { header('Location: equipamentos.php'); exit; }
+
+$editarIdSolicitado = (int)($_GET['editar'] ?? ($_POST['editar_id'] ?? 0));
+if ($editarIdSolicitado > 0) {
+    if (!podeEditarEquip()) {
+        header('Location: equipamentos.php?msg=' . urlencode('Sem permissao para editar equipamentos.') . '&tipo=erro');
+        exit;
+    }
+} elseif (!podeCriarEquip()) {
+    header('Location: equipamentos.php?msg=' . urlencode('Sem permissao para cadastrar equipamentos.') . '&tipo=erro');
+    exit;
+}
 
 $equipamento = null;
 $editando    = false;

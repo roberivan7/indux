@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
   ultimo_acesso DATETIME NULL,
   criado_em    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   -- Permissões granulares para funcionários
+  is_operador          TINYINT(1) DEFAULT 0,
   perm_criar_equip     TINYINT(1) DEFAULT 0,
   perm_editar_equip    TINYINT(1) DEFAULT 0,
   perm_resolver_alarme TINYINT(1) DEFAULT 0
