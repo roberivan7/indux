@@ -158,6 +158,10 @@ if ($filtroStatus !== '') {
     <div class="alerta alerta--<?php echo $msgTipo; ?>"><?php echo $msg; ?></div>
     <?php endif; ?>
 
+    <a href="novo-equipamento.php" class="btn btn--secondare btn--lg" style="justify-content:center">
+        ➕ Novo Equipamento
+      </a>
+
     <!-- KPIs rápidos -->
     <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:1.25rem">
       <div class="kpi-card kpi-card--cyan" style="padding:.9rem 1rem">

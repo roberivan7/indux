@@ -281,7 +281,7 @@ try {
 
     <!-- Acesso rápido -->
     <div style="margin-top:1.75rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem">
-      <a href="novo-equipamento.php" class="btn btn--primary btn--lg" style="justify-content:center">
+      <a href="equipamentos.php" class="btn btn--primary btn--lg" style="justify-content:center">
         ➕ Novo Equipamento
       </a>
       <a href="equipamentos.php" class="btn btn--ghost btn--lg" style="justify-content:center">
