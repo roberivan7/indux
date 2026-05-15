@@ -175,11 +175,11 @@ foreach ($_SESSION['produtos'] as $p) {
             <td class="td-total">R$ <?php echo number_format($valorTotal, 2, ',', '.'); ?></td>
             <td>
               <?php if ($qty === 0): ?>
-                <span class="status status--danger">Esgotado</span>
+                <span class="status status--danger">Inativo</span>
               <?php elseif ($isLow): ?>
-                <span class="status status--warning">⚠️ Crítico</span>
+                <span class="status status--warning">⚠️ Em falha</span>
               <?php else: ?>
-                <span class="status status--ok">✅ Normal</span>
+                <span class="status status--ok">✅ Ativo</span>
               <?php endif; ?>
             </td>
             <td class="td-mov">
