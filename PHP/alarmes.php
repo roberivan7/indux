@@ -253,7 +253,7 @@ try {
 
   </main>
 
-  <?php require_once 'PHP/footer.php'; ?>
+  <?php require_once '../PHP/footer.php'; ?>
 
 </body>
 </html>

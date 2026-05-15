@@ -6,7 +6,7 @@
 
 define('DB_HOST',    'localhost');
 define('DB_NAME',    'db_teste');
-define('DB_USER',    'dev');
+define('DB_USER',    'Karla');
 define('DB_PASS',    '123');
 define('DB_CHARSET', 'utf8mb4');
 
