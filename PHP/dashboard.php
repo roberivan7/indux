@@ -109,42 +109,36 @@ try {
     <!-- KPI Cards -->
     <div class="kpi-grid">
       <div class="kpi-card kpi-card--cyan">
-        <div class="kpi-icon">⚙️</div>
         <div>
           <div class="kpi-label">Total Equipamentos</div>
           <div class="kpi-valor"><?php echo $estatisticasEquipamentos['total']; ?></div>
         </div>
       </div>
       <div class="kpi-card kpi-card--green">
-        <div class="kpi-icon">✅</div>
         <div>
           <div class="kpi-label">Ativos</div>
           <div class="kpi-valor"><?php echo $estatisticasEquipamentos['ativos']; ?></div>
         </div>
       </div>
       <div class="kpi-card kpi-card--blue">
-        <div class="kpi-icon">⏸️</div>
         <div>
           <div class="kpi-label">Inativos</div>
           <div class="kpi-valor"><?php echo $estatisticasEquipamentos['inativos']; ?></div>
         </div>
       </div>
       <div class="kpi-card <?php echo $estatisticasEquipamentos['em_falha'] > 0 ? 'kpi-card--red' : 'kpi-card--purple'; ?>">
-        <div class="kpi-icon">🔴</div>
         <div>
           <div class="kpi-label">Em Falha</div>
           <div class="kpi-valor"><?php echo $estatisticasEquipamentos['em_falha']; ?></div>
         </div>
       </div>
       <div class="kpi-card <?php echo $alarmesCriticos > 0 ? 'kpi-card--yellow' : 'kpi-card--green'; ?>">
-        <div class="kpi-icon"><?= severidadeIcon('critico') ?></div>
         <div>
           <div class="kpi-label">Alarmes Críticos</div>
           <div class="kpi-valor"><?php echo $alarmesCriticos; ?></div>
         </div>
       </div>
       <div class="kpi-card kpi-card--purple">
-        <div class="kpi-icon">📋</div>
         <div>
           <div class="kpi-label">Alarmes Abertos</div>
           <div class="kpi-valor"><?php echo $alarmesTotal; ?></div>
@@ -225,9 +219,7 @@ try {
                 <span><?php echo date('d/m H:i', strtotime($alarme['criado_em'])); ?></span>
               </div>
             </div>
-            <span class="severidade-badge sev--<?php echo $alarme['severidade']; ?>">
-              <?php echo severidadeIcon($alarme['severidade']); ?> <?php echo ucfirst($alarme['severidade']); ?>
-            </span>
+          
           </div>
           <?php endforeach; ?>
           <?php endif; ?>

@@ -100,11 +100,6 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
             </a>
           </li>
           <?php endif; ?>
-          <li>
-            <a href="relatorios.php" class="<?php echo $paginaAtual === 'relatorios' ? 'active' : ''; ?>">
-              <span class="nav-icon">📋</span> Relatórios
-            </a>
-          </li>
         </ul>
       </div>
 

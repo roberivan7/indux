@@ -20,7 +20,7 @@ if (isset($_GET['excluir']) && ehAdmin()) {
         $usuarioExcluir = dbBuscarUsuario($usuarioExcluirId);
         if ($usuarioExcluir && dbExcluirUsuario($usuarioExcluirId)) {
             registrarLog('EXCLUIR_USUARIO','usuarios',$usuarioExcluirId,'Email:'.$usuarioExcluir['email']);
-            $msg = '🗑️ Usuário "'.$usuarioExcluir['nome'].'" excluído.'; $msgTipo = 'aviso';
+            $msg = 'Usuário "'.$usuarioExcluir['nome'].'" excluído.'; $msgTipo = 'aviso';
         } else { $msg = 'Erro ao excluir.'; $msgTipo = 'erro'; }
     }
     header('Location: usuarios.php?msg='.urlencode($msg).'&tipo='.$msgTipo); exit;
@@ -34,7 +34,7 @@ if (isset($_GET['toggle']) && ehAdmin()) {
         $novoAtivo = $usuarioToggle['ativo'] ? 0 : 1;
         getDB()->prepare('UPDATE usuarios SET ativo=? WHERE id=?')->execute([$novoAtivo, $usuarioToggleId]);
         registrarLog('TOGGLE_USUARIO','usuarios',$usuarioToggleId,'Ativo:'.($novoAtivo?'sim':'não'));
-        $msg = $novoAtivo ? '✅ Usuário ativado.' : '⏸️ Usuário desativado.'; $msgTipo = 'sucesso';
+        $msg = $novoAtivo ? 'Usuário ativado.' : 'Usuário desativado.'; $msgTipo = 'sucesso';
     }
     header('Location: usuarios.php?msg='.urlencode($msg).'&tipo='.$msgTipo); exit;
 }
@@ -89,14 +89,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 else {
                     dbAtualizarUsuario($usuarioPostId, $dadosUsuario);
                     registrarLog('EDITAR_USUARIO','usuarios',$usuarioPostId,'Perfil:'.$dadosUsuario['perfil']);
-                    header('Location: usuarios.php?msg='.urlencode('✅ Usuário atualizado!').'&tipo=sucesso'); exit;
+                    header('Location: usuarios.php?msg='.urlencode('Usuário atualizado!').'&tipo=sucesso'); exit;
                 }
             } else {
                 // Criar
                 $novoId = dbCriarUsuario($dadosUsuario);
                 if ($novoId) {
                     registrarLog('CRIAR_USUARIO','usuarios',$novoId,'Perfil:'.$dadosUsuario['perfil']);
-                    header('Location: usuarios.php?msg='.urlencode('✅ Usuário "'.$dadosUsuario['nome'].'" criado!').'&tipo=sucesso'); exit;
+                    header('Location: usuarios.php?msg='.urlencode('Usuário "'.$dadosUsuario['nome'].'" criado!').'&tipo=sucesso'); exit;
                 } else { $erros[] = 'Erro ao salvar no banco de dados.'; }
             }
         }
@@ -166,23 +166,18 @@ foreach ($listaUsuarios as $usuarioItem) {
   <!-- KPIs -->
   <div class="kpi-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:1.25rem">
     <div class="kpi-card kpi-card--cyan" style="padding:.9rem 1rem">
-      <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px">👥</div>
       <div><div class="kpi-label">Total</div><div class="kpi-valor" style="font-size:1.4rem"><?= $contagens['total'] ?></div></div>
     </div>
     <div class="kpi-card kpi-card--purple" style="padding:.9rem 1rem">
-      <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px">👑</div>
       <div><div class="kpi-label">Admins</div><div class="kpi-valor" style="font-size:1.4rem"><?= $contagens['admin'] ?></div></div>
     </div>
     <div class="kpi-card kpi-card--blue" style="padding:.9rem 1rem">
-      <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px">🛡️</div>
       <div><div class="kpi-label">Staff</div><div class="kpi-valor" style="font-size:1.4rem"><?= $contagens['staff'] ?></div></div>
     </div>
     <div class="kpi-card kpi-card--cyan" style="padding:.9rem 1rem">
-      <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px">👤</div>
       <div><div class="kpi-label">Funcionários</div><div class="kpi-valor" style="font-size:1.4rem"><?= $contagens['funcionario'] ?></div></div>
     </div>
     <div class="kpi-card kpi-card--green" style="padding:.9rem 1rem">
-      <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px">✅</div>
       <div><div class="kpi-label">Ativos</div><div class="kpi-valor" style="font-size:1.4rem"><?= $contagens['ativos'] ?></div></div>
     </div>
   </div>
