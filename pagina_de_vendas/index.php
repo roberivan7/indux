@@ -7,26 +7,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header></header>
     <main>
         <section class="inicial">
-            <h1>Controle total da sua operação industrial</h1>
-            <h2>Sentrium unifica SCADA, IIoT e analytics em uma única plataforma. Reduza downtime, eleve OEE e tenha visibilidade em tempo real de toda a sua planta.</h2>    
-            <a href="">Ver Planos</a><a href="">Falar com um especialista</a>
-            <h5>Para empresas industriais · Demonstração técnica gratuita · POC em 30 dias</h5>
+            <div class="container_inicial">
+                <h1 class="titulo_site">Controle total da sua <span class="text_destaque">operação industrial</span></h1>
+                <p class="texto_inicial">Sentrium unifica SCADA, IIoT e analytics em uma única plataforma. Reduza downtime, eleve OEE e tenha visibilidade em tempo real de toda a sua planta.</p>    
+                <a href="#" class="btn_inicial">Ver Planos <img src="img/arrow-right.png" alt="" class="seta"> </a><a href="#" class="btn_inicial btn_especialista">Falar com um especialista</a>
+            <p class="subtitulo_inicial">Para empresas industriais · Demonstração técnica gratuita · POC em 30 dias</p>
+            </div>
+            <img src="img/hero-industrial.jpg" alt="" class="img_principal">
         </section>
+        <hr>
         <section class="secundario">
-            <img src="" alt="">
-            
+            <div><h1>99,99%</h1><p>SLA de Disponibilidade</p></div>
+            <div><h1>200ms</h1><p>Latencia de Elemtrica</p></div>
+            <div><h1>+ 180</h1><p>industrial atendias</p> </div>
+            <div><h1>24/7</h1><p>NOC dedicado</p></div>
         </section>
-        <section>
-            <div>99,99% <h3>SLA de Disponibilidade</h3></div>
-            <div>200ms Latencia de Elemtrica </div>
-            <div>+180 industrial atendias</div>
-            <div>24/7 NOC dedicado</div>
-        </section>
+        <hr>
         <section>
             <h4>CAPACIDADE</h4>
             <h1>Uma plataforma. Toda a planta industrial.</h1>
