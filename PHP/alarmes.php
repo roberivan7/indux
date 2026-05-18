@@ -15,7 +15,7 @@ if (isset($_GET['resolver']) && podeResolverAlarme()) {
             'UPDATE alarmes SET resolvido=1, resolvido_por=?, resolvido_em=NOW() WHERE id=?'
         )->execute([$_SESSION['usuario_id'], $alarmeId]);
         registrarLog('RESOLVER_ALARME','alarmes',$alarmeId);
-        $msg = '✅ Alarme marcado como resolvido.';
+        $msg = 'Alarme marcado como resolvido.';
         $msgTipo = 'sucesso';
     } catch (Throwable $e) {
         $msg = 'Erro ao resolver alarme.'; $msgTipo = 'erro';
@@ -31,7 +31,7 @@ if (isset($_GET['resolver_todos']) && podeResolverAlarme()) {
         $db->prepare(
             'UPDATE alarmes SET resolvido=1, resolvido_por=?, resolvido_em=NOW() WHERE resolvido=0'
         )->execute([$_SESSION['usuario_id']]);
-        $msg = '✅ Todos os alarmes ativos foram resolvidos.';
+        $msg = 'Todos os alarmes ativos foram resolvidos.';
         $msgTipo = 'sucesso';
     } catch (Throwable $e) {
         $msg = 'Erro.'; $msgTipo = 'erro';
@@ -145,7 +145,7 @@ try {
       <a href="alarmes.php?resolver_todos=1"
          onclick="return confirm('Resolver todos os alarmes ativos?')"
          class="btn btn--warning">
-        ✅ Resolver Todos
+        Resolver Todos
       </a>
       <?php endif; ?>
     </div>
@@ -157,25 +157,18 @@ try {
     <!-- KPIs -->
     <div class="kpi-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:1.25rem">
       <div class="kpi-card <?php echo $contagens['total']>0?'kpi-card--yellow':'kpi-card--green'; ?>" style="padding:.9rem 1rem">
-        <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px">🔔</div>
         <div><div class="kpi-label">Ativos</div><div class="kpi-valor" style="font-size:1.4rem"><?php echo $contagens['total']; ?></div></div>
       </div>
       <div class="kpi-card kpi-card--red" style="padding:.9rem 1rem">
-        <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px">
-          <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXRudXl3eWR3bXNlaWticm0xY3Z5amVwa204Mm5xNW9rZHJwaXc4aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/f4z6vCWrGcMw6xRlOA/giphy.gif" alt="Crítico" style="width:22px;height:22px;object-fit:contain;display:inline-block;vertical-align:middle" />
-        </div>
         <div><div class="kpi-label">Críticos</div><div class="kpi-valor" style="font-size:1.4rem"><?php echo $contagens['critico']; ?></div></div>
       </div>
       <div class="kpi-card kpi-card--yellow" style="padding:.9rem 1rem">
-        <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px">⚠️</div>
         <div><div class="kpi-label">Alertas</div><div class="kpi-valor" style="font-size:1.4rem"><?php echo $contagens['alerta']; ?></div></div>
       </div>
       <div class="kpi-card kpi-card--cyan" style="padding:.9rem 1rem">
-        <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px">💡</div>
         <div><div class="kpi-label">Informativos</div><div class="kpi-valor" style="font-size:1.4rem"><?php echo $contagens['informativo']; ?></div></div>
       </div>
       <div class="kpi-card kpi-card--green" style="padding:.9rem 1rem">
-        <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px">✅</div>
         <div><div class="kpi-label">Resolvidos</div><div class="kpi-valor" style="font-size:1.4rem"><?php echo $contagens['resolvidos']; ?></div></div>
       </div>
     </div>
@@ -183,20 +176,19 @@ try {
     <!-- Tabs -->
     <div class="tabs">
       <a href="alarmes.php?res=0" class="tab-btn <?php echo $filtroResolvido==='0'&&$filtroSeveridade==='' ? 'ativo' : ''; ?>">
-        🔔 Pendentes <span class="tab-badge tab-badge--red"><?php echo $contagens['total']; ?></span>
+         Pendentes <span class="tab-badge tab-badge--red"><?php echo $contagens['total']; ?></span>
       </a>
       <a href="alarmes.php?res=0&sev=critico" class="tab-btn <?php echo $filtroSeveridade==='critico' ? 'ativo' : ''; ?>">
-        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXRudXl3eWR3bXNlaWticm0xY3Z5amVwa204Mm5xNW9rZHJwaXc4aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/f4z6vCWrGcMw6xRlOA/giphy.gif" alt="Crítico" style="width:18px;height:18px;object-fit:contain;display:inline-block;vertical-align:middle;margin-right:.35rem" />
         Críticos <span class="tab-badge tab-badge--red"><?php echo $contagens['critico']; ?></span>
       </a>
       <a href="alarmes.php?res=0&sev=alerta" class="tab-btn <?php echo $filtroSeveridade==='alerta' ? 'ativo' : ''; ?>">
-        ⚠️ Alertas <span class="tab-badge tab-badge--yellow"><?php echo $contagens['alerta']; ?></span>
+        Alertas <span class="tab-badge tab-badge--yellow"><?php echo $contagens['alerta']; ?></span>
       </a>
       <a href="alarmes.php?res=1" class="tab-btn <?php echo $filtroResolvido==='1' ? 'ativo' : ''; ?>">
-        ✅ Resolvidos <span class="tab-badge"><?php echo $contagens['resolvidos']; ?></span>
+        Resolvidos <span class="tab-badge"><?php echo $contagens['resolvidos']; ?></span>
       </a>
       <a href="alarmes.php" class="tab-btn <?php echo $filtroResolvido==='' ? 'ativo' : ''; ?>">
-        📋 Todos
+        Todos
       </a>
     </div>
 
@@ -221,7 +213,7 @@ try {
         <div class="alarme-body">
           <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.3rem">
             <span class="severidade-badge sev--<?php echo $alarme['severidade']; ?>">
-              <?php echo severidadeIcon($alarme['severidade']); ?> <?php echo ucfirst($alarme['severidade']); ?>
+              <?php echo ucfirst($alarme['severidade']); ?>
             </span>
             <span class="tag-chip"><?php echo htmlspecialchars($alarme['equip_tag']); ?></span>
             <span style="font-size:.78rem;font-weight:600;color:var(--text-dim)"><?php echo htmlspecialchars($alarme['equip_nome']); ?></span>
@@ -245,7 +237,7 @@ try {
         <a href="alarmes.php?resolver=<?php echo $alarme['id']; ?>&res=0"
            class="btn btn--success btn--sm"
            onclick="return confirm('Marcar alarme como resolvido?')">
-          ✅ Resolver
+           Resolver
         </a>
         <?php endif; ?>
 
