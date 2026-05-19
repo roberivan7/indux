@@ -1,4 +1,5 @@
 <?php
+    require_once 'header.php';
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +13,9 @@
 <body>
     <header></header>
     <main>
+        <?php 
+            echo $header;
+        ?>
         <section class="inicial">
             <div class="container_inicial">
                 <h1 class="titulo_site">Controle total da sua <span class="text_destaque">operação industrial</span></h1>
