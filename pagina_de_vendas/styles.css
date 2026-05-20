@@ -6,12 +6,6 @@
     --font-titulo-pequeno: "Manrope", system-ui, sans-serif;
     --font-titulo: "Sora", system-ui, sans-serif;
     --font-texto: "JetBrains Mono", monospace;
-<<<<<<< HEAD
-}
-
-:root {
-=======
->>>>>>> 3c34ad8c2d4fb36f329192d2fa223ae1f37f27d1
     --azul-escuro:   #0a1628;
     --azul-medio:    #0d2244;
     --azul-card:     #0f2a52;
@@ -43,7 +37,6 @@ body {
 a { text-decoration: none; color: inherit; }
 
 .navbar {
-    /* position: fixed; */
     top: 0; left: 0; right: 0;
     z-index: 1000;
     background: rgba(10, 22, 40, 0.95);
@@ -117,8 +110,6 @@ a { text-decoration: none; color: inherit; }
     color: var(--azul-escuro) !important;
 }
 
-<<<<<<< HEAD
-=======
 h1{
     font-family: var(--font-titulo);
 }
@@ -215,8 +206,6 @@ p {
     font-size: 12px;
 }
 
-/* ===== HERO SOLUÇÕES ===== */
->>>>>>> 3c34ad8c2d4fb36f329192d2fa223ae1f37f27d1
 .hero-solucoes {
     padding: 140px 2rem 80px;
     text-align: center;
@@ -890,16 +879,3 @@ font-weight: 600;
 color: var(--text-muted);
 font-size: 14px;
 }
-=======
-/* ===== RESPONSIVO ===== */
-@media (max-width: 768px) {
-    .navbar-links { display: none; }
-    .hero-solucoes { padding: 100px 1.25rem 60px; }
-    .secao { padding: 60px 1.25rem; }
-    .grid-solucoes { grid-template-columns: 1fr; }
-    .footer-inner { flex-direction: column; text-align: center; }
-}
-
-
->>>>>>> 3c34ad8c2d4fb36f329192d2fa223ae1f37f27d1
-
