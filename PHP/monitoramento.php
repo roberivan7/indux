@@ -210,10 +210,10 @@ if ($equipFiltro > 0) {
   </div>
 
   <?php if ($msg === 'leitura_ok'): ?>
-  <div class="alerta alerta--sucesso">✅ Leitura registrada com sucesso. Alarmes verificados automaticamente.</div>
+  <div class="alerta alerta--sucesso">Leitura registrada com sucesso. Alarmes verificados automaticamente.</div>
   <?php endif; ?>
   <?php if (isset($erroForm)): ?>
-  <div class="alerta alerta--erro">⚠️ <?= htmlspecialchars($erroForm) ?></div>
+  <div class="alerta alerta--erro"><?= htmlspecialchars($erroForm) ?></div>
   <?php endif; ?>
 
   <?php if (!$equipFiltro): ?>
@@ -283,7 +283,7 @@ if ($equipFiltro > 0) {
 
       <div class="equip-card__actions" style="margin-top:.75rem">
         <a href="monitoramento.php?equip=<?= $equipamento['id'] ?>" class="btn btn--primary btn--sm" style="flex:1;justify-content:center">
-          📊 Detalhar
+          Detalhar
         </a>
         <?php if ($equipamento['qtd_alarmes'] > 0): ?>
         <a href="alarmes.php" class="btn btn--danger btn--sm">🔔 <?= $equipamento['qtd_alarmes'] ?></a>

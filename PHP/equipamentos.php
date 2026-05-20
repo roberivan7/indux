@@ -161,19 +161,15 @@ if ($filtroStatus !== '') {
     <!-- KPIs rápidos -->
     <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:1.25rem">
       <div class="kpi-card kpi-card--cyan" style="padding:.9rem 1rem">
-        <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px">⚙️</div>
         <div><div class="kpi-label">Total</div><div class="kpi-valor" style="font-size:1.4rem"><?php echo $contagens['total']; ?></div></div>
       </div>
       <div class="kpi-card kpi-card--green" style="padding:.9rem 1rem">
-        <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px">✅</div>
         <div><div class="kpi-label">Ativos</div><div class="kpi-valor" style="font-size:1.4rem"><?php echo $contagens['ativo']; ?></div></div>
       </div>
       <div class="kpi-card kpi-card--blue" style="padding:.9rem 1rem">
-        <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px">⏸️</div>
         <div><div class="kpi-label">Inativos</div><div class="kpi-valor" style="font-size:1.4rem"><?php echo $contagens['inativo']; ?></div></div>
       </div>
       <div class="kpi-card <?php echo $contagens['em_falha'] > 0 ? 'kpi-card--red' : 'kpi-card--purple'; ?>" style="padding:.9rem 1rem">
-        <div class="kpi-icon" style="font-size:1.2rem;width:36px;height:36px"><?= severidadeIcon('critico') ?></div>
         <div><div class="kpi-label">Em Falha</div><div class="kpi-valor" style="font-size:1.4rem"><?php echo $contagens['em_falha']; ?></div></div>
       </div>
     </div>
@@ -208,15 +204,15 @@ if ($filtroStatus !== '') {
       </a>
       <a href="equipamentos.php?status=ativo<?php echo $busca ? '&busca='.urlencode($busca) : ''; ?>"
          class="tab-btn <?php echo $filtroStatus === 'ativo' ? 'ativo' : ''; ?>">
-        ✅ Ativos <span class="tab-badge tab-badge--green"><?php echo $contagens['ativo']; ?></span>
+        Ativos <span class="tab-badge tab-badge--green"><?php echo $contagens['ativo']; ?></span>
       </a>
       <a href="equipamentos.php?status=inativo<?php echo $busca ? '&busca='.urlencode($busca) : ''; ?>"
          class="tab-btn <?php echo $filtroStatus === 'inativo' ? 'ativo' : ''; ?>">
-        ⏸️ Inativos <span class="tab-badge"><?php echo $contagens['inativo']; ?></span>
+        Inativos <span class="tab-badge"><?php echo $contagens['inativo']; ?></span>
       </a>
       <a href="equipamentos.php?status=em_falha<?php echo $busca ? '&busca='.urlencode($busca) : ''; ?>"
          class="tab-btn <?php echo $filtroStatus === 'em_falha' ? 'ativo' : ''; ?>">
-        🔴 Em Falha <span class="tab-badge tab-badge--red"><?php echo $contagens['em_falha']; ?></span>
+        Em Falha <span class="tab-badge tab-badge--red"><?php echo $contagens['em_falha']; ?></span>
       </a>
     </div>
 
@@ -300,7 +296,7 @@ if ($filtroStatus !== '') {
         <!-- Ações -->
         <div class="equip-card__actions">
           <a href="monitoramento.php?equip=<?php echo $equipamento['id']; ?>" class="btn btn--ghost btn--sm" style="flex:1;justify-content:center">
-            📡 Monitorar
+            Monitorar
           </a>
 
           <?php if (ehOperador() || podeEditarEquip()): ?>
@@ -310,9 +306,9 @@ if ($filtroStatus !== '') {
               class="btn btn--ghost btn--sm"
               onclick="this.nextElementSibling.classList.toggle('open')"
               type="button"
-            >⚡ Status ▾</button>
+            >Status ▾</button>
             <div style="position:absolute;bottom:calc(100% + 4px);right:0;background:var(--card);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:.4rem;min-width:150px;z-index:10;display:none" class="status-dropdown">
-              <?php foreach (['ativo'=>'✅ Ativo','inativo'=>'⏸️ Inativo','em_falha'=>'🔴 Em Falha'] as $statusValor => $statusTexto): ?>
+              <?php foreach (['ativo'=>'Ativo','inativo'=>'Inativo','em_falha'=>'Em Falha'] as $statusValor => $statusTexto): ?>
               <?php if ($statusValor !== $equipamento['status']): ?>
               <form method="POST">
                 <input type="hidden" name="equip_id" value="<?php echo $equipamento['id']; ?>">
@@ -330,7 +326,7 @@ if ($filtroStatus !== '') {
               <a href="equipamentos.php?excluir=<?php echo $equipamento['id']; ?>"
                  onclick="return confirm('Excluir <?php echo htmlspecialchars(addslashes($equipamento['nome'])); ?>?')"
                  class="btn btn--danger btn--sm"
-                 style="width:100%;justify-content:flex-start">🗑️ Excluir</a>
+                 style="width:100%;justify-content:flex-start">Excluir</a>
               <?php endif; ?>
             </div>
           </div>

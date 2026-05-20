@@ -4,7 +4,7 @@
 // Conexão centralizada e funções de acesso ao banco de dados
 // ============================================================
 
-define('DB_HOST',    'localhost');
+define('DB_HOST',    '127.0.0.1');
 define('DB_NAME',    'db_teste');
 define('DB_USER',    'Karla');
 define('DB_PASS',    '123');
