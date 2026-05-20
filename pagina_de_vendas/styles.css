@@ -6,10 +6,6 @@
     --font-titulo-pequeno: "Manrope", system-ui, sans-serif;
     --font-titulo: "Sora", system-ui, sans-serif;
     --font-texto: "JetBrains Mono", monospace;
-}
-/* ===== RESET E BASE ===== */
-
-:root {
     --azul-escuro:   #0a1628;
     --azul-medio:    #0d2244;
     --azul-card:     #0f2a52;
@@ -30,7 +26,7 @@ html { scroll-behavior: smooth; }
 body {
     height: 100%;
     width: 100vw;
-    background: #090522;
+    background: var(--azul-escuro);
     font-family: 'Inter', sans-serif;
     background-color: var(--azul-escuro);
     color: var(--texto-claro);
@@ -42,7 +38,7 @@ a { text-decoration: none; color: inherit; }
 
 /* ===== NAVBAR ===== */
 .navbar {
-    position: fixed;
+    /* position: fixed; */
     top: 0; left: 0; right: 0;
     z-index: 1000;
     background: rgba(10, 22, 40, 0.95);
@@ -94,16 +90,12 @@ a { text-decoration: none; color: inherit; }
     transition: all 0.2s;
 }
 
-.navbar-links a:hover,
-.navbar-links a.ativo {
+.navbar-links a:hover {
     color: var(--ciano);
     background: rgba(0, 200, 255, 0.08);
+    border-bottom: 2px solid var(--ciano);
 }
 
-.navbar-links a.ativo {
-    border-bottom: 2px solid var(--ciano);
-    border-radius: 0;
-}
 
 .btn-demo {
     padding: 0.5rem 1.25rem;
@@ -118,6 +110,102 @@ a { text-decoration: none; color: inherit; }
 .btn-demo:hover {
     background: var(--ciano-hover) !important;
     color: var(--azul-escuro) !important;
+}
+
+h1{
+    font-family: var(--font-titulo);
+}
+
+p {
+    font-family: var(--font-titulo-pequeno);
+}
+
+.inicial {
+    background: var(--gradiente);
+    padding: 80px 0px;
+    display: flex;
+    gap: 75px;
+    justify-content: center;
+}
+
+.container_inicial {
+    width: 34%;
+}
+
+.img_principal {
+    height: 400px;
+    border: 1px solid #6f6969;
+    border-radius: 8px;
+    box-shadow:
+        0 0 5px #ffffff42,
+        0 0 10px #ffffff42,
+        0 0 20px #ffffff42,
+        0 0 40px #ffffff42;
+}
+
+.texto_inicial {
+    margin: 30px 0px;
+    font-family: var(--font-titulo-pequeno);
+    font-size: 22px;
+    font-weight: 300;
+}
+
+.text_destaque {
+    color: rgb(115, 98, 207);
+}
+
+.titulo_site {
+    line-height: 75px;
+    font-size: 70px;
+    font-weight: 800;
+}
+
+.btn_inicial {
+    margin: 15px 0px;
+    padding: 8px 8px;
+    background-color: rgb(110, 110, 244);
+    color: white;
+    font-family: var(--font-titulo-pequeno);
+    font-weight: 700;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.btn_especialista {
+    background: none;
+    margin-left: 20px;
+}
+
+.btn_especialista:hover {
+    background: #060271;
+}
+
+.seta {
+    height: 15px;
+}
+
+.subtitulo_inicial {
+    margin: 15px 0px;
+    font-size: 10px;
+    font-family: var(--font-titulo-pequeno);
+}
+
+.secundario { 
+    padding: 45px 0px;
+    background: #151228;
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+}
+
+.secundario p{
+    font-family: var(--font-titulo-pequeno);    
+    font-size: 12px;
 }
 
 /* ===== HERO SOLUÇÕES ===== */

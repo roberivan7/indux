@@ -20,9 +20,7 @@ $paginaAtiva = 'solucoes';
 
 </head>
 <body>
-    <?php 
-        echo $header;
-    ?>
+<header><?php echo $header;?></header>
 
 <!-- ===== HERO ===== -->
 <section class="hero-solucoes">
