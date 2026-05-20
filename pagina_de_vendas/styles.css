@@ -160,9 +160,14 @@ p {
     font-weight: 800;
 }
 
+.container_btn {
+    display: flex;
+    flex-direction: row;
+}
+
 .btn_inicial {
-    margin: 15px 0px;
-    padding: 8px 8px;
+    margin: 15px 25px;
+    padding: 8px 40px;
     background-color: rgb(110, 110, 244);
     color: white;
     font-family: var(--font-titulo-pequeno);
@@ -172,8 +177,9 @@ p {
     text-decoration: none;
     font-size: 15px;
     display: flex;
-    align-items: center;
     flex-direction: row;
+    align-items: center;
+    gap: 5px;
 }
 
 .btn_especialista {
@@ -186,7 +192,7 @@ p {
 }
 
 .seta {
-    height: 15px;
+    height: 20px;
 }
 
 .subtitulo_inicial {
@@ -207,6 +213,35 @@ p {
     font-family: var(--font-titulo-pequeno);    
     font-size: 12px;
 }
+
+.secundario h1{
+    font-size: 35px;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: var(--azul-card) ;
+}
+
+.terciario {
+    margin: 75px 0px;
+}
+
+.subtitulo_terciario {
+    font-family: var(--font-texto);
+    color: var(--ciano);
+}
+
+.titulo_terciario {
+    font-size: 45px;
+}
+
+.conainer_cards {
+    display: grid;
+    grid-template-columns: 350px 350px;
+}
+
 
 /* ===== HERO SOLUÇÕES ===== */
 .hero-solucoes {

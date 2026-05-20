@@ -15,7 +15,7 @@
             <div class="container_inicial">
                 <h1 class="titulo_site">Controle total da sua <span class="text_destaque">operação industrial</span></h1>
                 <p class="texto_inicial">Sentrium unifica SCADA, IIoT e analytics em uma única plataforma. Reduza downtime, eleve OEE e tenha visibilidade em tempo real de toda a sua planta.</p>    
-                <a href="#" class="btn_inicial">Ver Planos <img src="img/arrow-right.png" alt="" class="seta"> </a><a href="#" class="btn_inicial btn_especialista">Falar com um especialista</a>
+                <div class="container_btn"><a href="#" class="btn_inicial">Ver Planos <img src="img/arrow-right.png" alt="" class="seta"></a><a href="#" class="btn_inicial btn_especialista">Falar com um especialista</a></div>
             <p class="subtitulo_inicial">Para empresas industriais · Demonstração técnica gratuita · POC em 30 dias</p>
             </div>
             <img src="img/hero-industrial.jpg" alt="" class="img_principal">
@@ -28,27 +28,27 @@
             <div><h1>24/7</h1><p>NOC dedicado</p></div>
         </section>
         <hr>
-        <section>
-            <h4>CAPACIDADE</h4>
-            <h1>Uma plataforma. Toda a planta industrial.</h1>
+        <section class="terciario">
+            <h4 class="subtitulo_terciario">CAPACIDADE</h4>
+            <h1 class="titulo_terciario">Uma plataforma. Toda a planta industrial.</h1>
             <p>Da aquisição de dados de campo até dashboards executivos, com governança e segurança industrial.</p>
-            <div>
+            <div class="container_cards">
                 <div>
-                    <div>
+                    <div class="cards">
                         <div>
                             <img src="" alt="">
                         </div>
                         <h2>Telemetria em tempo real</h2><p>Coleta de dados de PLCs, CLPs e sensores com latência sub-segundo.</p>
                     </div>
                     
-                    <div>
+                    <div class="cards">
                         <div>
                             <img src="" alt="">
                         </div>
                         <h2>Automação por regras</h2><p>Acione atuadores, alertas e workflows com base em condições da planta.</p>
                     </div>
                     
-                    <div>
+                    <div class="cards">
                         <div>
                             <img src="" alt="">
                         </div>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div>
-                    <div>
+                    <div class="cards">
                         <div>
                             <img src="" alt="">
                         </div>
@@ -64,14 +64,14 @@
                         <p>Segurança OT/IT em conformidade com normas internacionais de cibersegurança industrial.</p>
                     </div>
                     
-                    <div>
+                    <div class="cards">
                         <div>
                             <img src="" alt="">
                         </div>
                         <h2>Edge computing</h2><p>Processamento na borda com gateway certificado para ambientes industriais.</p>
                     </div>
                     
-                    <div>
+                    <div class="cards">
                         <div>
                             <img src="" alt="">
                         </div>
