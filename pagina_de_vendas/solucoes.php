@@ -13,14 +13,14 @@ $paginaAtiva = 'solucoes';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soluções | INDUX - Monitoramento Industrial</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="styles.css">    
 </head>
 <body>
+<<<<<<< HEAD
     <?php echo $header; ?>
+=======
+<header><?php echo $header;?></header>
+>>>>>>> 3c34ad8c2d4fb36f329192d2fa223ae1f37f27d1
 
 <section class="hero-solucoes">
     <div class="badge">

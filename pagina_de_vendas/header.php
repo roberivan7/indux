@@ -1,11 +1,9 @@
-
 <!-- ===== NAVBAR ===== -->
 <?php $header = '<nav class="navbar">
     <a href="index.php" class="navbar-logo">
         <img src="../IMG/logo.png" alt="INDUX Logo" onerror="this.style.display=\'none\'">
         <span class="marca">IND<span>UX</span></span>
     </a>
-
     <ul class="navbar-links">
         <li><a href="index.php">Início</a></li>
         <li><a href="solucoes.php" class="ativo">Soluções</a></li>
