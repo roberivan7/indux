@@ -613,11 +613,6 @@ p {
 }
 
 
-
-
-
-
-
 /* Sobre nós CSS */
 
 :root {
@@ -686,7 +681,6 @@ max-width: 600px;
 margin: 0 auto;
 }
 
-/* History Section */
 .history-section {
 background-color: var(--bg-secondary);
 padding: 80px 40px;
@@ -742,7 +736,6 @@ font-size: 14px;
 line-height: 1.7;
 }
 
-/* Pillars Section */
 .pillars-section {
 padding: 80px 40px;
 text-align: center;

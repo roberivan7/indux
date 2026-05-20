@@ -37,7 +37,6 @@ $paginaAtiva = 'solucoes';
     <span class="status-online">Sistema operacional 24/7</span>
 </section>
 
-<!-- ===== CARDS DE SOLUÇÕES ===== -->
 <section style="padding: 80px 2rem; background: var(--azul-escuro);">
     <div style="max-width:1200px; margin:0 auto;">
 
@@ -49,7 +48,6 @@ $paginaAtiva = 'solucoes';
 
         <div class="grid-solucoes">
 
-            <!-- MONITORAMENTO EM TEMPO REAL -->
             <div class="card-solucao">
                 <div class="card-icone">📡</div>
                 <h3>Monitoramento em Tempo Real</h3>
@@ -65,7 +63,6 @@ $paginaAtiva = 'solucoes';
                 </div>
             </div>
 
-            <!-- GESTÃO DE ALARMES -->
             <div class="card-solucao amarelo">
                 <div class="card-icone">🔔</div>
                 <h3>Gestão de Alarmes</h3>
@@ -81,7 +78,6 @@ $paginaAtiva = 'solucoes';
                 </div>
             </div>
 
-            <!-- CADASTRO DE EQUIPAMENTOS -->
             <div class="card-solucao verde">
                 <div class="card-icone">🏭</div>
                 <h3>Cadastro de Equipamentos</h3>
@@ -97,7 +93,6 @@ $paginaAtiva = 'solucoes';
                 </div>
             </div>
 
-            <!-- DASHBOARD ANALÍTICO -->
             <div class="card-solucao roxo">
                 <div class="card-icone">📊</div>
                 <h3>Dashboard Analítico</h3>
@@ -113,7 +108,6 @@ $paginaAtiva = 'solucoes';
                 </div>
             </div>
 
-            <!-- CONTROLE DE ACESSO -->
             <div class="card-solucao laranja">
                 <div class="card-icone">🔐</div>
                 <h3>Controle de Acesso e Usuários</h3>
@@ -129,7 +123,6 @@ $paginaAtiva = 'solucoes';
                 </div>
             </div>
 
-            <!-- LOGS DO SISTEMA -->
             <div class="card-solucao">
                 <div class="card-icone">📋</div>
                 <h3>Log e Rastreabilidade</h3>
@@ -149,7 +142,6 @@ $paginaAtiva = 'solucoes';
     </div>
 </section>
 
-<!-- ===== COMO FUNCIONA ===== -->
 <section class="secao-processo">
     <div class="inner">
         <div class="secao-titulo">
@@ -188,7 +180,6 @@ $paginaAtiva = 'solucoes';
     </div>
 </section>
 
-<!-- ===== MÉTRICAS ===== -->
 <section class="secao-metricas">
     <div class="secao-titulo">
         <span class="label">Por que escolher o INDUX</span>
@@ -214,7 +205,6 @@ $paginaAtiva = 'solucoes';
     </div>
 </section>
 
-<!-- ===== CTA ===== -->
 <section class="secao-cta">
     <h2>Pronto para monitorar sua indústria?</h2>
     <p>
