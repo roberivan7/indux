@@ -1,4 +1,8 @@
-<?php require_once 'header.php';?>
+<?php 
+require_once 'header.php';
+require_once 'footer.php';
+require_once 'icon.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
+    <?php echo $icon; ?>
 </head>
 <body>
     <header><?php echo $header;?></header>
@@ -31,85 +36,55 @@
         <section class="terciario">
             <h4 class="subtitulo_terciario">CAPACIDADE</h4>
             <h1 class="titulo_terciario">Uma plataforma. Toda a planta industrial.</h1>
-            <p>Da aquisição de dados de campo até dashboards executivos, com governança e segurança industrial.</p>
+            <p class="texto_teciario">Da aquisição de dados de campo até dashboards executivos, com governança e segurança industrial.</p>
             <div class="container_cards">
-                <div>
-                    <div class="cards">
-                        <div>
-                            <img src="" alt="">
-                        </div>
-                        <h2>Telemetria em tempo real</h2><p>Coleta de dados de PLCs, CLPs e sensores com latência sub-segundo.</p>
+                <div class="cards">
+                    <div class="img_card">
+                        <img src="img/gauge.png" class="img_icon_card" alt="">
                     </div>
-                    
-                    <div class="cards">
-                        <div>
-                            <img src="" alt="">
-                        </div>
-                        <h2>Automação por regras</h2><p>Acione atuadores, alertas e workflows com base em condições da planta.</p>
-                    </div>
-                    
-                    <div class="cards">
-                        <div>
-                            <img src="" alt="">
-                        </div>
-                        <h2>Analytics Preditivo</h2><p>Modelos de manutenção preditiva e detecção de anomalias com IA.</p>
-                    </div>
+                    <h2>Telemetria em tempo real</h2><p>Coleta de dados de PLCs, CLPs e sensores com latência sub-segundo.</p>
                 </div>
-                <div>
-                    <div class="cards">
-                        <div>
-                            <img src="" alt="">
-                        </div>
-                        <h2>Conformidade IEC 62443</h2>
-                        <p>Segurança OT/IT em conformidade com normas internacionais de cibersegurança industrial.</p>
+                <div class="cards">
+                    <div class="img_card">
+                        <img src="img/zap.png" class="img_icon_card" alt="">
                     </div>
-                    
-                    <div class="cards">
-                        <div>
-                            <img src="" alt="">
-                        </div>
-                        <h2>Edge computing</h2><p>Processamento na borda com gateway certificado para ambientes industriais.</p>
+                    <h2>Automação por regras</h2><p>Acione atuadores, alertas e workflows com base em condições da planta.</p>
+                </div>
+                <div class="cards">
+                    <div class="img_card">
+                        <img src="img/chart-line.png" class="img_icon_card" alt="">
                     </div>
-                    
-                    <div class="cards">
-                        <div>
-                            <img src="" alt="">
-                        </div>
-                        <h2>Multi Planta</h2><p>Gerencie múltiplas unidades fabris em um único painel consolidado.</p>
+                    <h2>Analytics Preditivo</h2><p>Modelos de manutenção preditiva e detecção de anomalias com IA.</p>
+                </div>            
+                <div class="cards">
+                    <div class="img_card">
+                        <img src="img/shield-check.png" class="img_icon_card" alt="">
                     </div>
+                    <h2>Conformidade IEC 62443</h2>
+                    <p>Segurança OT/IT em conformidade com normas internacionais de cibersegurança industrial.</p>
+                </div>
+                <div class="cards">
+                    <div class="img_card">
+                        <img src="img/cpu.png" class="img_icon_card" alt="">
+                    </div>
+                    <h2>Edge computing</h2><p>Processamento na borda com gateway certificado para ambientes industriais.</p>
+                </div>
+                <div class="cards">
+                    <div class="img_card">
+                        <img src="img/factory.png" class="img_icon_card" alt="">
+                    </div>
+                    <h2>Multi Planta</h2><p>Gerencie múltiplas unidades fabris em um único painel consolidado.</p>
                 </div>
         </section>
-        <section>
-            <div>
-                <h1>Pronto para industrializar seus dados?</h1>
-                <p>Agende uma sessão técnica com nossos engenheiros e veja a plataforma rodando com dados da sua operação.</p>
-                <div><a href="">Solicitação Demonstração</a><p>Sem compromisso · Pessoa jurídica</p></div>
-            </div> 
+        <section class="quaternario">
+            <div class="container_quaternario">
+                <h1 class="titulo_quaternario">Pronto para industrializar seus dados?</h1>
+                <p class="texto_quaternario">Agende uma sessão técnica com nossos engenheiros e veja a plataforma rodando com dados da sua operação.</p>
+            </div>
+            <div class="items_quaternario"><a href="#" class="btn_quaternario">Solicitação Demonstração</a><p><img src="img/circle-check.png" alt=""> Sem compromisso · Pessoa jurídica</p></div>
         </section>
         <hr>
-        <section>
-            <div><a href=""></a>Indux</div>
-            <p>Plataforma de monitoramento e controle industrial para operações 24/7. Visibilidade em tempo real, automação e conformidade.</p>
-            <div>
-                <p>Plataforma</p>
-                <ul>
-                    <li><p>Soluções</p></li>
-                    <li><p>Planos</p></li>
-                    <li><p>Casos de Uso</p></li>
-                </ul>
-            </div>
-            <div>
-                <p>Plataforma</p>
-                <ul>
-                    <li>Sobre</li>
-                    <li>Contato Comercial</li>
-                </ul>
-            </div>
-        </section>
-        <footer>
-            <p>© 2026 Sentrium Industrial Systems. Todos os direitos reservados.</p>    
-            <p>CNPJ 00.000.000/0001-00 · ISO 27001 · IEC 62443</p>
-        </footer>
+        <footer><?php echo $footer; ?></footer>
 </main>
 </body>
 </html>

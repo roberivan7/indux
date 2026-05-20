@@ -16,12 +16,7 @@ $paginaAtiva = 'solucoes';
     <link rel="stylesheet" href="styles.css">    
 </head>
 <body>
-<<<<<<< HEAD
-    <?php echo $header; ?>
-=======
 <header><?php echo $header;?></header>
->>>>>>> 3c34ad8c2d4fb36f329192d2fa223ae1f37f27d1
-
 <section class="hero-solucoes">
     <div class="badge">
         ⚡ Monitoramento Industrial
