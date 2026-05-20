@@ -1,6 +1,10 @@
 <?php
+require_once 'header.php';
+
 // Página de Soluções - INDUX Monitoramento Industrial
 $paginaAtiva = 'solucoes';
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -12,24 +16,13 @@ $paginaAtiva = 'solucoes';
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
 
 </head>
 <body>
-
-<!-- ===== NAVBAR ===== -->
-<nav class="navbar">
-    <a href="index.php" class="navbar-logo">
-        <img src="../IMG/logo.png" alt="INDUX Logo" onerror="this.style.display='none'">
-        <span class="marca">IND<span>UX</span></span>
-    </a>
-
-    <ul class="navbar-links">
-        <li><a href="index.php">Início</a></li>
-        <li><a href="solucoes.php" class="ativo">Soluções</a></li>
-        <li><a href="sobre.php">Sobre</a></li>
-        <li><a href="../PHP/login.php" class="btn-demo">Acessar Sistema</a></li>
-    </ul>
-</nav>
+    <?php 
+        echo $header;
+    ?>
 
 <!-- ===== HERO ===== -->
 <section class="hero-solucoes">
