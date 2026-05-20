@@ -7,7 +7,6 @@
     --font-titulo: "Sora", system-ui, sans-serif;
     --font-texto: "JetBrains Mono", monospace;
 }
-/* ===== RESET E BASE ===== */
 
 :root {
     --azul-escuro:   #0a1628;
@@ -40,7 +39,6 @@ body {
 
 a { text-decoration: none; color: inherit; }
 
-/* ===== NAVBAR ===== */
 .navbar {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -120,7 +118,6 @@ a { text-decoration: none; color: inherit; }
     color: var(--azul-escuro) !important;
 }
 
-/* ===== HERO SOLUÇÕES ===== */
 .hero-solucoes {
     padding: 140px 2rem 80px;
     text-align: center;
@@ -176,7 +173,6 @@ a { text-decoration: none; color: inherit; }
     margin: 0 auto 2rem;
 }
 
-/* ===== SEÇÃO: GRID DE SOLUÇÕES ===== */
 .secao {
     padding: 80px 2rem;
     max-width: 1200px;
@@ -212,7 +208,6 @@ a { text-decoration: none; color: inherit; }
     margin: 0 auto;
 }
 
-/* ===== CARDS DE SOLUÇÃO ===== */
 .grid-solucoes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -292,7 +287,6 @@ a { text-decoration: none; color: inherit; }
     border: 1px solid rgba(0, 200, 255, 0.2);
 }
 
-/* Variações de cor por card */
 .card-solucao.verde  { --cor-acento: var(--verde); }
 .card-solucao.verde  .card-icone { background: rgba(0,230,118,0.1); border-color: rgba(0,230,118,0.15); }
 .card-solucao.verde  .tag { background: rgba(0,230,118,0.1); color: var(--verde); border-color: rgba(0,230,118,0.2); }
@@ -309,7 +303,6 @@ a { text-decoration: none; color: inherit; }
 .card-solucao.laranja .card-icone { background: rgba(255,145,0,0.1); border-color: rgba(255,145,0,0.15); }
 .card-solucao.laranja .tag { background: rgba(255,145,0,0.1); color: #ff9100; border-color: rgba(255,145,0,0.2); }
 
-/* ===== SEÇÃO: COMO FUNCIONA ===== */
 .secao-processo {
     padding: 80px 2rem;
     background: rgba(13, 34, 68, 0.5);
@@ -365,7 +358,6 @@ a { text-decoration: none; color: inherit; }
     color: var(--texto-muted);
 }
 
-/* ===== SEÇÃO: MÉTRICAS ===== */
 .secao-metricas {
     padding: 80px 2rem;
     max-width: 1200px;
@@ -399,7 +391,6 @@ a { text-decoration: none; color: inherit; }
     color: var(--texto-muted);
 }
 
-/* ===== CTA FINAL ===== */
 .secao-cta {
     padding: 80px 2rem;
     background: linear-gradient(135deg, rgba(0,200,255,0.06) 0%, rgba(13,34,68,0.8) 100%);
@@ -466,7 +457,6 @@ a { text-decoration: none; color: inherit; }
     transform: translateY(-2px);
 }
 
-/* ===== FOOTER ===== */
 .footer {
     background: rgba(5, 12, 22, 0.95);
     border-top: 1px solid var(--azul-borda);
@@ -510,7 +500,6 @@ a { text-decoration: none; color: inherit; }
 
 .footer-links a:hover { color: var(--ciano); }
 
-/* ===== STATUS BADGE ===== */
 .status-online {
     display: inline-flex;
     align-items: center;
@@ -533,17 +522,6 @@ a { text-decoration: none; color: inherit; }
     0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,230,118,0.4); }
     50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(0,230,118,0); }
 }
-
-/* ===== RESPONSIVO ===== */
-@media (max-width: 768px) {
-    .navbar-links { display: none; }
-    .hero-solucoes { padding: 100px 1.25rem 60px; }
-    .secao { padding: 60px 1.25rem; }
-    .grid-solucoes { grid-template-columns: 1fr; }
-    .footer-inner { flex-direction: column; text-align: center; }
-}
-
-
 
 h1{
     font-family: var(--font-titulo);
@@ -633,3 +611,190 @@ p {
     font-family: var(--font-titulo-pequeno);    
     font-size: 12px;
 }
+
+
+
+
+
+
+
+/* Sobre nós CSS */
+
+:root {
+--bg-primary: #0a1128;
+--bg-secondary: #101f42;
+--bg-card: #142850;
+--text-main: #ffffff;
+--text-muted: #94a3b8;
+--accent-blue: #00b4d8;
+--accent-green: #00f5d4;
+}
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    height: 100%;
+    width: 100vw;
+    background: #090522;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--azul-escuro);
+    color: var(--texto-claro);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.hero-section {
+padding: 80px 20px;
+text-align: center;
+background-color: var(--bg-primary);
+}
+
+.badge {
+display: inline-block;
+font-size: 11px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 2px;
+color: var(--accent-green);
+border: 1px solid var(--accent-green);
+padding: 6px 16px;
+border-radius: 50px;
+margin-bottom: 24px;
+}
+
+.hero-title {
+font-size: 42px;
+font-weight: 800;
+max-width: 800px;
+margin: 0 auto 20px auto;
+line-height: 1.2;
+}
+
+.hero-title span {
+color: var(--accent-blue);
+}
+
+.hero-subtitle {
+font-size: 16px;
+color: var(--text-muted);
+max-width: 600px;
+margin: 0 auto;
+}
+
+/* History Section */
+.history-section {
+background-color: var(--bg-secondary);
+padding: 80px 40px;
+}
+
+.container-grid {
+max-width: 1100px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: 1fr;
+gap: 50px;
+}
+
+@media (min-width: 768px) {
+.container-grid {
+grid-template-columns: 1.2fr 0.8fr;
+}
+}
+
+.history-content h2 {
+font-size: 28px;
+color: var(--accent-blue);
+margin-bottom: 20px;
+font-weight: 700;
+}
+
+.history-content p {
+color: var(--text-muted);
+font-size: 15px;
+margin-bottom: 20px;
+}
+
+.history-content p strong {
+color: var(--text-main);
+}
+
+.mission-box {
+background-color: var(--bg-card);
+padding: 35px;
+border-radius: 12px;
+border-left: 4px solid var(--accent-green);
+}
+
+.mission-box h3 {
+font-size: 20px;
+margin-bottom: 15px;
+font-weight: 600;
+}
+
+.mission-box p {
+color: var(--text-muted);
+font-size: 14px;
+line-height: 1.7;
+}
+
+/* Pillars Section */
+.pillars-section {
+padding: 80px 40px;
+text-align: center;
+}
+
+.section-tag {
+font-size: 12px;
+font-weight: 700;
+text-transform: uppercase;
+color: var(--accent-green);
+letter-spacing: 2px;
+margin-bottom: 40px;
+display: block;
+}
+
+.pillars-grid {
+max-width: 1100px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: 1fr;
+gap: 25px;
+}
+
+
+.pillar-card {
+background-color: var(--bg-secondary);
+padding: 30px;
+border-radius: 8px;
+text-align: left;
+transition: transform 0.3s, border-color 0.3s;
+border: 1px solid transparent;
+}
+
+.pillar-card:hover {
+transform: translateY(-5px);
+border-color: var(--accent-blue);
+}
+
+.pillar-icon {
+font-size: 24px;
+color: var(--accent-blue);
+margin-bottom: 15px;
+}
+
+.pillar-card h4 {
+font-size: 18px;
+margin-bottom: 12px;
+font-weight: 600;
+}
+
+.pillar-card p {
+color: var(--text-muted);
+font-size: 14px;
+}
+
