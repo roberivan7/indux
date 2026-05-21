@@ -19,7 +19,7 @@ require_once 'icon.php';
         <section class="inicial">
             <div class="container_inicial">
                 <h1 class="titulo_site">Controle total da sua <span class="text_destaque">operação industrial</span></h1>
-                <p class="texto_inicial">Sentrium unifica SCADA, IIoT e analytics em uma única plataforma. Reduza downtime, eleve OEE e tenha visibilidade em tempo real de toda a sua planta.</p>    
+                <p class="texto_inicial">Controle toda a fábrica com monitoramento em tempo real, análise de equipamentos e sensores industriais integrados.</p>    
                 <div class="container_btn"><a href="#" class="btn_inicial">Ver Planos <img src="img/arrow-right.png" alt="" class="seta"></a><a href="#" class="btn_inicial btn_especialista">Falar com um especialista</a></div>
             <p class="subtitulo_inicial">Para empresas industriais · Demonstração técnica gratuita · POC em 30 dias</p>
             </div>
@@ -27,10 +27,10 @@ require_once 'icon.php';
         </section>
         <hr>
         <section class="secundario">
-            <div><h1>99,99%</h1><p>SLA de Disponibilidade</p></div>
-            <div><h1>200ms</h1><p>Latencia de Elemtrica</p></div>
-            <div><h1>+ 180</h1><p>industrial atendias</p> </div>
-            <div><h1>24/7</h1><p>NOC dedicado</p></div>
+            <div><h1>100%</h1><p>SLA de Disponibilidade</p></div><!-- Atendimento ao cliente -->
+            <div><h1>87%</h1><p>Eficiência Operacional</p></div>
+            <div><h1>+ 180</h1><p>Previsão de Empresas atendias</p> </div>
+            <div><h1>24/7</h1><p>Suporte dedicado</p></div>
         </section>
         <hr>
         <section class="terciario">
@@ -73,7 +73,7 @@ require_once 'icon.php';
                     <div class="img_card">
                         <img src="img/factory.png" class="img_icon_card" alt="">
                     </div>
-                    <h2>Multi Planta</h2><p>Gerencie múltiplas unidades fabris em um único painel consolidado.</p>
+                    <h2>Multi Setores</h2><p>Gerencie múltiplas setores fabris em um único painel consolidado.</p>
                 </div>
         </section>
         <section class="quaternario">
