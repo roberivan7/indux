@@ -1,16 +1,10 @@
 <?php
-// ============================================================
-// INDUX — db.php  v2.0
-// Conexão centralizada e funções de acesso ao banco de dados
-// ============================================================
-
 define('DB_HOST',    '127.0.0.1');
 define('DB_NAME',    'db_teste');
 define('DB_USER',    'dev');
 define('DB_PASS',    '123');
 define('DB_CHARSET', 'utf8mb4');
 
-// ── Conexão PDO (singleton) ──────────────────────────────
 function getDB(): PDO {
     static $pdo = null;
     if ($pdo === null) {
@@ -34,7 +28,6 @@ function getDB(): PDO {
     return $pdo;
 }
 
-// ── Log de sistema ───────────────────────────────────────
 function registrarLog(string $acao, ?string $tabela = null, ?int $registroId = null, ?string $detalhes = null): void {
     try {
         $db = getDB();
@@ -42,10 +35,6 @@ function registrarLog(string $acao, ?string $tabela = null, ?int $registroId = n
            ->execute([$_SESSION['usuario_id'] ?? null, $acao, $tabela, $registroId, $detalhes, $_SERVER['REMOTE_ADDR'] ?? null]);
     } catch (Throwable $e) {}
 }
-
-// ══════════════════════════════════════════════════════════
-// QUERIES — USUÁRIOS
-// ══════════════════════════════════════════════════════════
 
 function dbListarUsuarios(string $busca = '', string $perfil = ''): array {
     try {
@@ -103,10 +92,6 @@ function dbEmailExiste(string $email, int $excluirId = 0): bool {
     } catch (Throwable $e) { return false; }
 }
 
-// ══════════════════════════════════════════════════════════
-// QUERIES — EQUIPAMENTOS
-// ══════════════════════════════════════════════════════════
-
 function dbListarEquipamentos(): array {
     try {
         return getDB()->query(
@@ -142,10 +127,6 @@ function dbEstatisticasEquipamentos(): array {
     return $estatisticas;
 }
 
-// ══════════════════════════════════════════════════════════
-// QUERIES — ALARMES
-// ══════════════════════════════════════════════════════════
-
 function dbContarAlarmes(): array {
     $contagem = ['total'=>0,'critico'=>0,'alerta'=>0,'informativo'=>0,'resolvidos'=>0];
     try {
@@ -156,10 +137,6 @@ function dbContarAlarmes(): array {
     } catch (Throwable $e) {}
     return $contagem;
 }
-
-// ══════════════════════════════════════════════════════════
-// QUERIES — RELATÓRIOS
-// ══════════════════════════════════════════════════════════
 
 function dbRelatorioAlarmesPorEquip(): array {
     try {
@@ -228,7 +205,7 @@ function dbRelatorioEquipSemLeitura(): array {
         )->fetchAll();
     } catch (Throwable $e) { return []; }
 }
-// ── Funções adicionais ────────────────────────────────────
+
 if (!function_exists('acoesLog')) {
     function acoesLog(string $acao): string {
         $m = [

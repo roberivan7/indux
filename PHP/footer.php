@@ -1,5 +1,4 @@
 <?php
-// Estatísticas resumidas para o rodapé
 $totalEquipamentos = 0;
 $totalAtivos       = 0;
 $totalFalhas       = 0;
@@ -20,7 +19,7 @@ try {
     $consultaAlarmesCriticos = $db->query("SELECT COUNT(*) FROM alarmes WHERE resolvido = 0 AND severidade = 'critico'");
     $alarmesCriticos = (int)$consultaAlarmesCriticos->fetchColumn();
 } catch (Throwable $e) {
-    // silencia
+
 }
 ?>
 <!DOCTYPE html>

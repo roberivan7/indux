@@ -4,7 +4,6 @@ require_once 'init.php';
 require_once 'db.php';
 requerLogin();
 
-// ── Registrar nova leitura manual (POST) ──────────────────
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['registrar_leitura']) && ehGestor()) {
     $equipamentoId = (int)$_POST['equip_id'];
     $temperatura   = (float)str_replace(',', '.', $_POST['temperatura'] ?? 0);
@@ -60,12 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['registrar_leitura']) 
     }
 }
 
-// ────────────────────────────────────────────────────────────
-// BLOCO 1: Lista de todos os equipamentos (independente)
-// ────────────────────────────────────────────────────────────
 $equipamentos = dbListarEquipamentos();
 
-// Fallback demo se banco vazio/falhar
 if (empty($equipamentos)) {
     $equipamentos = [
         ['id'=>1,'tag'=>'CLD-001','nome'=>'Caldeira Principal','status'=>'ativo',
@@ -87,9 +82,7 @@ if (empty($equipamentos)) {
     ];
 }
 
-// ────────────────────────────────────────────────────────────
-// BLOCO 2: Detalhe do equipamento selecionado (independente)
-// ────────────────────────────────────────────────────────────
+
 $equipFiltro      = (int)($_GET['equip'] ?? 0);
 $msg              = $_GET['msg'] ?? '';
 $equipSelecionado = null;
@@ -98,7 +91,6 @@ $historicoHoras   = [];
 
 if ($equipFiltro > 0) {
 
-    // ── 2a: Busca equipamento selecionado com última leitura ──
     try {
         $db = getDB();
         $stmtEquip = $db->prepare(
@@ -123,7 +115,6 @@ if ($equipFiltro > 0) {
         }
     }
 
-    // ── 2b: Últimas 20 leituras ──────────────────────────────
     try {
         $stmtLeituras = getDB()->prepare(
             'SELECT * FROM leituras_sensor WHERE equipamento_id = ?
@@ -149,7 +140,6 @@ if ($equipFiltro > 0) {
         }
     }
 
-    // ── 2c: Histórico por hora (últimas 24h) ─────────────────
     try {
         $stmtHist = getDB()->prepare(
             "SELECT DATE_FORMAT(registrado_em,'%H:00') as hora,
@@ -217,9 +207,7 @@ if ($equipFiltro > 0) {
   <?php endif; ?>
 
   <?php if (!$equipFiltro): ?>
-  <!-- ═══════════════════════════════════════════════
-       VISÃO GERAL — grid de cards
-  ═══════════════════════════════════════════════ -->
+
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem">
     <?php foreach ($equipamentos as $equipamento):
       $cT  = $equipamento['ultima_temp']    !== null ? avaliarTemp($equipamento['ultima_temp'],    $equipamento['temp_min'],    $equipamento['temp_max'])    : null;
@@ -304,9 +292,7 @@ if ($equipFiltro > 0) {
   </div>
 
   <?php else: ?>
-  <!-- ═══════════════════════════════════════════════
-       DETALHE DO EQUIPAMENTO SELECIONADO
-  ═══════════════════════════════════════════════ -->
+
 
   <?php if (!$equipSelecionado): ?>
     <div class="alerta alerta--erro">⚠️ Equipamento não encontrado (ID: <?= $equipFiltro ?>).</div>
@@ -319,7 +305,6 @@ if ($equipFiltro > 0) {
     $pPA      = $eq['ultima_pressao'] !== null ? pctBar($eq['ultima_pressao'], $eq['pressao_min'], $eq['pressao_max']) : 0;
   ?>
 
-  <!-- Cabeçalho do equipamento -->
   <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.5rem;margin-bottom:1.25rem;display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap">
     <div style="flex:1;min-width:200px">
       <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem">
@@ -334,7 +319,7 @@ if ($equipFiltro > 0) {
         <?php if ($eq['localizacao']): ?>📍 <?= htmlspecialchars($eq['localizacao']) ?><?php endif; ?>
       </div>
     </div>
-    <!-- KPIs rápidos -->
+
     <div style="display:flex;gap:1rem;flex-wrap:wrap">
       <?php foreach ([
         ['Temperatura', $eq['ultima_temp']!==null ? number_format($eq['ultima_temp'],1).'°C' : '—', $cTA, 'Lim: '.$eq['temp_max'].'°C'],
@@ -358,7 +343,6 @@ if ($equipFiltro > 0) {
     </div>
   </div>
 
-  <!-- Gauges circulares -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem">
     <?php foreach ([
       ['🌡️ TEMPERATURA','°C',$pTA,$cTA,$eq['ultima_temp'],$eq['temp_min'],$eq['temp_max']],
@@ -415,7 +399,6 @@ if ($equipFiltro > 0) {
     <?php endforeach; ?>
   </div>
 
-  <!-- Form de nova leitura + Histórico -->
   <div class="monitor-grid">
 
     <?php if (ehGestor()): ?>
@@ -454,7 +437,6 @@ if ($equipFiltro > 0) {
     </div>
     <?php endif; ?>
 
-    <!-- Histórico de leituras -->
     <div class="panel-card">
       <div class="panel-header">
         <div class="panel-title">📋 Histórico de Leituras</div>

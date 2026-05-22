@@ -1,9 +1,4 @@
 <?php
-// ============================================================
-// INDUX — init.php  v2.0
-// Hierarquia: admin > staff > funcionario
-// ============================================================
-
 session_start();
 
 define('SISTEMA_NOME',    'INDUX');
@@ -21,7 +16,6 @@ $tipoAlarmeLabels = ['temperatura'=>'Temperatura','pressao'=>'Pressão','falha'=
 $severidadeLabels = ['critico'=>'Crítico','alerta'=>'Alerta','informativo'=>'Informativo'];
 $perfilLabels     = ['admin'=>'👑 Admin','staff'=>'🛡️ Staff','funcionario'=>'👤 Funcionário'];
 
-// ── Auth ─────────────────────────────────────────────────
 function requerLogin(): void {
     if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
         header('Location: login.php'); exit;
@@ -49,7 +43,6 @@ function podeGerenciarPerfil(string $alvo): bool {
     return false;
 }
 
-// ── Utilitários ──────────────────────────────────────────
 function inicialNome(string $nome): string {
     $partesNome = explode(' ', trim($nome));
     $iniciais = strtoupper(substr($partesNome[0], 0, 1));

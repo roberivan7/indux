@@ -6,7 +6,6 @@ requerLogin();
 $msg     = '';
 $msgTipo = 'info';
 
-// ── RESOLVER ALARME ────────────────────────────────────────
 if (isset($_GET['resolver']) && podeResolverAlarme()) {
     $alarmeId = (int)$_GET['resolver'];
     try {
@@ -24,7 +23,6 @@ if (isset($_GET['resolver']) && podeResolverAlarme()) {
     exit;
 }
 
-// ── RESOLVER TODOS CRÍTICOS ────────────────────────────────
 if (isset($_GET['resolver_todos']) && podeResolverAlarme()) {
     try {
         $db = getDB();
@@ -45,19 +43,16 @@ if (isset($_GET['msg'])) {
     $msgTipo = $_GET['tipo'] ?? 'info';
 }
 
-// ── FILTROS ────────────────────────────────────────────────
 $filtroSeveridade = $_GET['sev']    ?? '';
-$filtroResolvido= $_GET['res']      ?? '0';   // 0 = pendentes, 1 = resolvidos, '' = todos
+$filtroResolvido= $_GET['res']      ?? '0';   
 $filtroTipo     = $_GET['tipo_al']  ?? '';
 
-// ── BUSCAR ALARMES ─────────────────────────────────────────
 $alarmes  = [];
 $contagens = ['total'=>0,'critico'=>0,'alerta'=>0,'informativo'=>0,'resolvidos'=>0];
 
 try {
     $db = getDB();
 
-    // Contagens
     $linhasSeveridade = $db->query(
         "SELECT severidade, COUNT(*) as qtd FROM alarmes WHERE resolvido=0 GROUP BY severidade"
     )->fetchAll();
@@ -65,7 +60,6 @@ try {
     $totalResolvidos = $db->query("SELECT COUNT(*) FROM alarmes WHERE resolvido=1")->fetchColumn();
     $contagens['resolvidos'] = (int)$totalResolvidos;
 
-    // Query principal
     $filtrosSql = [];
     $parametros = [];
 
@@ -154,7 +148,6 @@ try {
     <div class="alerta alerta--<?php echo $msgTipo; ?>"><?php echo $msg; ?></div>
     <?php endif; ?>
 
-    <!-- KPIs -->
     <div class="kpi-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:1.25rem">
       <div class="kpi-card <?php echo $contagens['total']>0?'kpi-card--yellow':'kpi-card--green'; ?>" style="padding:.9rem 1rem">
         <div><div class="kpi-label">Ativos</div><div class="kpi-valor" style="font-size:1.4rem"><?php echo $contagens['total']; ?></div></div>
@@ -173,7 +166,6 @@ try {
       </div>
     </div>
 
-    <!-- Tabs -->
     <div class="tabs">
       <a href="alarmes.php?res=0" class="tab-btn <?php echo $filtroResolvido==='0'&&$filtroSeveridade==='' ? 'ativo' : ''; ?>">
          Pendentes <span class="tab-badge tab-badge--red"><?php echo $contagens['total']; ?></span>
@@ -192,7 +184,6 @@ try {
       </a>
     </div>
 
-    <!-- Lista de alarmes -->
     <?php if (empty($alarmes)): ?>
     <div class="empty-state">
       <div class="empty-state__icon"><?php echo $filtroResolvido==='0' ? '✅' : '📋'; ?></div>

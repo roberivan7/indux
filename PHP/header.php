@@ -1,5 +1,5 @@
 <?php
-// Determina a página atual para destacar link ativo
+
 $paginaAtual = basename($_SERVER['PHP_SELF'], '.php');
 $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
 ?>
@@ -14,19 +14,18 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
 <header class="site-header">
   <div class="site-header__inner">
 
-    <!-- Logo -->
     <a class="logo" href="dashboard.php">
       <div class="logo-icon">
         <img src="../IMG/logo.png">
           <rect width="42" height="42" rx="10" fill="rgba(0,200,255,0.08)"/>
-          <!-- Hexágono industrial -->
+
           <polygon points="21,4 34,11.5 34,26.5 21,34 8,26.5 8,11.5" fill="none" stroke="#00c8ff" stroke-width="1.5" stroke-linejoin="round"/>
-          <!-- Cruz central -->
+
           <line x1="21" y1="11" x2="21" y2="27" stroke="#00c8ff" stroke-width="1.5" stroke-linecap="round"/>
           <line x1="13" y1="19" x2="29" y2="19" stroke="#00c8ff" stroke-width="1.5" stroke-linecap="round"/>
           <!-- Círculo central -->
           <circle cx="21" cy="19" r="3" fill="#00c8ff" opacity=".9"/>
-          <!-- Pontos nos cantos do hex -->
+
           <circle cx="21" cy="5.5" r="1.5" fill="#f59e0b"/>
           <circle cx="32.5" cy="12" r="1.5" fill="#f59e0b" opacity=".6"/>
           <circle cx="32.5" cy="26" r="1.5" fill="#f59e0b" opacity=".6"/>
@@ -38,13 +37,11 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
       </div>
     </a>
 
-    <!-- Status do sistema -->
     <div class="system-status">
       <div class="status-dot"></div>
       SISTEMA ONLINE — v1.0
     </div>
 
-    <!-- Navegação principal -->
     <nav class="nav-principal" aria-label="Principal">
 
       <div>
@@ -75,7 +72,6 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
             <a href="alarmes.php" class="<?php echo $paginaAtual === 'alarmes' ? 'active' : ''; ?>">
               <span class="nav-icon">🔔</span> Alarmes
               <?php
-              // Badge de alarmes não resolvidos
               try {
                   require_once 'db.php';
                   $consultaCriticos = getDB()->query("SELECT COUNT(*) FROM alarmes WHERE resolvido = 0 AND severidade = 'critico'");
@@ -105,7 +101,6 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
 
     </nav>
 
-    <!-- Footer do sidebar -->
     <div class="sidebar-footer">
       <?php if (isset($_SESSION['logado']) && $_SESSION['logado']): ?>
       <div class="sidebar-user">

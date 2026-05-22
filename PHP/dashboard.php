@@ -3,7 +3,6 @@ require_once 'init.php';
 require_once 'db.php';
 requerLogin();
 
-// ── Coleta dados para o dashboard ────────────────────────
 $estatisticasEquipamentos = [
     'total'     => 0,
     'ativos'    => 0,
@@ -20,7 +19,6 @@ $ultimosEquip     = [];
 try {
     $db = getDB();
 
-    // Status dos equipamentos
     $linhasStatus = $db->query(
         "SELECT status, COUNT(*) as qtd FROM equipamentos GROUP BY status"
     )->fetchAll();
@@ -29,13 +27,11 @@ try {
         $estatisticasEquipamentos['total'] += (int)$linhaStatus['qtd'];
     }
 
-    // Alarmes
     $consultaAlarmesAbertos = $db->query("SELECT COUNT(*) FROM alarmes WHERE resolvido = 0");
     $alarmesTotal = (int)$consultaAlarmesAbertos->fetchColumn();
     $consultaAlarmesCriticos = $db->query("SELECT COUNT(*) FROM alarmes WHERE resolvido = 0 AND severidade = 'critico'");
     $alarmesCriticos = (int)$consultaAlarmesCriticos->fetchColumn();
 
-    // Últimos alarmes (5)
     $ultimosAlarmes = $db->query(
         "SELECT a.*, e.nome as equip_nome, e.tag as equip_tag
          FROM alarmes a
@@ -44,7 +40,6 @@ try {
          ORDER BY a.criado_em DESC LIMIT 5"
     )->fetchAll();
 
-    // Últimas leituras por equipamento
     $ultimasLeituras = $db->query(
         "SELECT ls.*, e.nome, e.tag, e.status, e.temp_max, e.pressao_max
          FROM leituras_sensor ls
@@ -55,13 +50,11 @@ try {
          ORDER BY ls.registrado_em DESC LIMIT 6"
     )->fetchAll();
 
-    // Últimos equipamentos cadastrados
     $ultimosEquip = $db->query(
         "SELECT * FROM equipamentos ORDER BY criado_em DESC LIMIT 4"
     )->fetchAll();
 
 } catch (Throwable $e) {
-    // sem banco: dados de exemplo
     $estatisticasEquipamentos = ['total' => 8, 'ativos' => 5, 'inativos' => 2, 'em_falha' => 1];
     $alarmesCriticos = 2;
     $alarmesTotal    = 4;
@@ -82,7 +75,6 @@ try {
 
   <main class="site-main">
 
-    <!-- Page header -->
     <div class="page-header">
       <div class="page-header-left">
         <div class="page-icon">📊</div>
@@ -146,10 +138,8 @@ try {
       </div>
     </div>
 
-    <!-- Grid: Leituras + Alarmes -->
     <div class="monitor-grid">
 
-      <!-- Últimas leituras -->
       <div class="panel-card">
         <div class="panel-header">
           <div class="panel-title">📡 Últimas Leituras dos Sensores</div>
@@ -195,7 +185,6 @@ try {
         </div>
       </div>
 
-      <!-- Últimos alarmes -->
       <div class="panel-card">
         <div class="panel-header">
           <div class="panel-title">🔔 Alarmes Ativos</div>
@@ -228,7 +217,6 @@ try {
 
     </div>
 
-    <!-- Últimos Equipamentos -->
     <?php if (!empty($ultimosEquip)): ?>
     <div class="panel-card" style="margin-top:1.25rem">
       <div class="panel-header">
@@ -271,7 +259,6 @@ try {
     </div>
     <?php endif; ?>
 
-    <!-- Acesso rápido -->
     <div style="margin-top:1.75rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem">
       <?php if (podeCriarEquip()): ?>
       <a href="novo-equipamento.php" class="btn btn--primary btn--lg" style="justify-content:center">
