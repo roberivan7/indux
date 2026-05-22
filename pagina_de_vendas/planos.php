@@ -18,8 +18,7 @@
     <p class="subtitle">Monitore equipamentos, leituras de sensores e alarmes com total controle. Sem surpresas na fatura.</p>
   </div>
 
-  <div class="plans-grid">
-    <!-- STARTER -->
+  <div class="plans-grid">9 
     <div class="plan-card">
       <div class="plan-name">Starter</div>
       <div class="plan-price">
@@ -41,7 +40,6 @@
       <button class="plan-btn outline" onclick="goToPayment('Starter','97','77')">Começar agora</button>
     </div>
 
-    <!-- PRO (featured) -->
     <div class="plan-card featured">
       <div class="plan-name featured">Pro</div>
       <div class="plan-price">
@@ -63,7 +61,6 @@
       <button class="plan-btn primary" onclick="goToPayment('Pro','247','197')">Assinar Pro</button>
     </div>
 
-    <!-- ENTERPRISE -->
     <div class="plan-card">
       <div class="plan-name">Enterprise</div>
       <div class="plan-price">
@@ -94,7 +91,6 @@
   </div>
 </div>
 
-<!-- PAYMENT PAGE -->
 <div class="payment-page" id="paymentPage">
   <div class="pay-header">
     <button class="back-btn" onclick="goBack()">
@@ -109,7 +105,6 @@
   </div>
 
   <div class="pay-wrap">
-    <!-- Order summary -->
     <div class="order-card">
       <div class="order-title">Resumo do pedido</div>
       <div class="order-plan">
@@ -130,7 +125,6 @@
       </div>
     </div>
 
-    <!-- Payment form -->
     <div class="form-card">
       <div class="form-section">
         <div class="form-section-title">
@@ -183,7 +177,6 @@
   </div>
 </div>
 
-<!-- SUCCESS -->
 <div class="success-overlay" id="successOverlay">
   <div class="success-circle"><svg viewBox="0 0 36 36" fill="none" stroke-width="2.5"><polyline points="8,18 15,25 28,11"/></svg></div>
   <div class="success-title">Assinatura confirmada! 🎉</div>

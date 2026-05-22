@@ -2,7 +2,6 @@
 require_once 'init.php';
 require_once 'db.php';
 
-// Se já logado, redireciona
 if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
     header('Location: dashboard.php');
     exit;
@@ -24,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $usuario = $consultaUsuario->fetch();
 
             if ($usuario && password_verify($senha, $usuario['senha'])) {
-                // Atualiza último acesso
+
                 $db->prepare('UPDATE usuarios SET ultimo_acesso = NOW() WHERE id = ?')
                    ->execute([$usuario['id']]);
 
@@ -60,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
         } catch (Throwable $e) {
-            // Fallback demo sem banco
+
             if ($email === 'admin@indux.com.br' && $senha === 'admin123') {
                 $_SESSION['logado']       = true;
                 $_SESSION['usuario_id']   = 1;
@@ -89,16 +88,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="login-body">
 
-  <!-- Padrão de grade no fundo -->
   <div class="login-bg-pattern"></div>
 
-  <!-- Elementos decorativos flutuantes -->
   <div style="position:fixed;top:10%;left:5%;opacity:.06;font-size:8rem;pointer-events:none;color:var(--accent);font-family:var(--font-mono)">01010</div>
   <div style="position:fixed;bottom:10%;right:5%;opacity:.06;font-size:6rem;pointer-events:none;color:var(--accent2);font-family:var(--font-mono)">SCADA</div>
 
   <main class="login-container">
 
-    <!-- Brand -->
     <div class="login-brand">
       <svg width="52" height="52" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="42" height="42" rx="10" fill="rgba(0,200,255,0.1)" stroke="rgba(0,200,255,0.3)" stroke-width="1"/>

@@ -6,7 +6,6 @@ requerLogin();
 $msg     = '';
 $msgTipo = 'info';
 
-// ── EXCLUIR ──────────────────────────────────────────────
 if (isset($_GET['excluir']) && podeExcluirEquip()) {
     $equipamentoId = (int)$_GET['excluir'];
     try {
@@ -28,7 +27,6 @@ if (isset($_GET['excluir']) && podeExcluirEquip()) {
     exit;
 }
 
-// ── ALTERAR STATUS ────────────────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['alterar_status']) && (ehOperador() || podeEditarEquip())) {
     $equipamentoId = (int)$_POST['equip_id'];
     $novoStatus = $_POST['novo_status'] ?? '';
@@ -54,25 +52,21 @@ if (isset($_GET['msg'])) {
     $msgTipo = $_GET['tipo'] ?? 'info';
 }
 
-// ── FILTRO DE STATUS ──────────────────────────────────────
 $filtroStatus = $_GET['status'] ?? '';
 $busca        = trim($_GET['busca'] ?? '');
 
-// ── BUSCAR EQUIPAMENTOS ───────────────────────────────────
 $equipamentos = [];
 $contagens    = ['total' => 0, 'ativo' => 0, 'inativo' => 0, 'em_falha' => 0];
 
 try {
     $db = getDB();
 
-    // Contagens para as tabs
     $linhasStatus = $db->query("SELECT status, COUNT(*) as qtd FROM equipamentos GROUP BY status")->fetchAll();
     foreach ($linhasStatus as $linhaStatus) {
         $contagens[$linhaStatus['status']] = (int)$linhaStatus['qtd'];
         $contagens['total'] += (int)$linhaStatus['qtd'];
     }
 
-    // Query principal
     $filtrosSql = [];
     $parametros = [];
 
@@ -105,7 +99,7 @@ try {
     $equipamentos = $consultaEquipamentos->fetchAll();
 
 } catch (Throwable $e) {
-    // Dados demo
+
     $equipamentos = [
         ['id'=>1,'tag'=>'CLD-001','nome'=>'Caldeira Principal','modelo'=>'CBR-5000','fabricante'=>'ThermoTec','localizacao'=>'Sala 01','status'=>'ativo','temp_min'=>20,'temp_max'=>95,'pressao_min'=>0,'pressao_max'=>15,'ultima_temp'=>72.4,'ultima_pressao'=>8.1,'ultima_leitura'=>date('Y-m-d H:i:s',time()-120),'qtd_alarmes'=>0,'criado_em'=>date('Y-m-d'),'descricao'=>''],
         ['id'=>2,'tag'=>'CMP-002','nome'=>'Compressor Industrial','modelo'=>'AIR-2400','fabricante'=>'PneumaCorp','localizacao'=>'Área B','status'=>'em_falha','temp_min'=>15,'temp_max'=>70,'pressao_min'=>0,'pressao_max'=>12,'ultima_temp'=>88.9,'ultima_pressao'=>13.2,'ultima_leitura'=>date('Y-m-d H:i:s',time()-60),'qtd_alarmes'=>2,'criado_em'=>date('Y-m-d'),'descricao'=>''],
@@ -115,7 +109,6 @@ try {
     $contagens = ['total'=>4,'ativo'=>2,'inativo'=>1,'em_falha'=>1];
 }
 
-// Filtra demo local se necessário
 if (!empty($busca) && isset($equipamentos[0]['tag'])) {
     $equipamentos = array_filter($equipamentos, fn($equipamento) =>
         stripos($equipamento['nome'],$busca)!==false || stripos($equipamento['tag'],$busca)!==false
@@ -139,7 +132,6 @@ if ($filtroStatus !== '') {
 
   <main class="site-main">
 
-    <!-- Page header -->
     <div class="page-header">
       <div class="page-header-left">
         <div class="page-icon">⚙️</div>
@@ -158,7 +150,6 @@ if ($filtroStatus !== '') {
     <div class="alerta alerta--<?php echo $msgTipo; ?>"><?php echo $msg; ?></div>
     <?php endif; ?>
 
-    <!-- KPIs rápidos -->
     <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:1.25rem">
       <div class="kpi-card kpi-card--cyan" style="padding:.9rem 1rem">
         <div><div class="kpi-label">Total</div><div class="kpi-valor" style="font-size:1.4rem"><?php echo $contagens['total']; ?></div></div>
@@ -174,7 +165,6 @@ if ($filtroStatus !== '') {
       </div>
     </div>
 
-    <!-- Busca -->
     <form method="GET" action="equipamentos.php" style="display:flex;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap">
       <?php if ($filtroStatus): ?>
       <input type="hidden" name="status" value="<?php echo htmlspecialchars($filtroStatus); ?>">
@@ -196,7 +186,6 @@ if ($filtroStatus !== '') {
       <?php endif; ?>
     </form>
 
-    <!-- Tabs de status (como no Lovable) -->
     <div class="tabs">
       <a href="equipamentos.php<?php echo $busca ? '?busca='.urlencode($busca) : ''; ?>"
          class="tab-btn <?php echo $filtroStatus === '' ? 'ativo' : ''; ?>">
@@ -216,7 +205,6 @@ if ($filtroStatus !== '') {
       </a>
     </div>
 
-    <!-- Lista de equipamentos em cards (estilo Lovable) -->
     <?php if (empty($equipamentos)): ?>
     <div class="empty-state">
       <div class="empty-state__icon">⚙️</div>
@@ -254,7 +242,6 @@ if ($filtroStatus !== '') {
           <span class="status-badge <?php echo statusClass($equipamento['status']); ?>"><?php echo statusLabel($equipamento['status']); ?></span>
         </div>
 
-        <!-- Métricas -->
         <?php if ($equipamento['ultima_temp'] !== null): ?>
         <div class="equip-card__metrics">
           <div class="metric-item">
@@ -267,7 +254,6 @@ if ($filtroStatus !== '') {
           </div>
         </div>
 
-        <!-- Gauges -->
         <div class="gauge-wrap">
           <div class="gauge-label"><span>Temperatura</span><span><?php echo number_format($percentualTemp,0); ?>%</span></div>
           <div class="gauge-bar"><div class="gauge-fill <?php echo $classeTemperatura; ?>" style="width:<?php echo $percentualTemp; ?>%"></div></div>
@@ -282,7 +268,6 @@ if ($filtroStatus !== '') {
         </div>
         <?php endif; ?>
 
-        <!-- Info adicional -->
         <div style="display:flex;gap:.75rem;font-size:.72rem;color:var(--text-muted);font-family:var(--font-mono);margin-top:.5rem">
           <?php if ($equipamento['modelo']): ?><span>📦 <?php echo htmlspecialchars($equipamento['modelo']); ?></span><?php endif; ?>
           <?php if ($equipamento['qtd_alarmes'] > 0): ?>
@@ -293,14 +278,13 @@ if ($filtroStatus !== '') {
           <?php endif; ?>
         </div>
 
-        <!-- Ações -->
         <div class="equip-card__actions">
           <a href="monitoramento.php?equip=<?php echo $equipamento['id']; ?>" class="btn btn--ghost btn--sm" style="flex:1;justify-content:center">
             Monitorar
           </a>
 
           <?php if (ehOperador() || podeEditarEquip()): ?>
-          <!-- Dropdown de status -->
+
           <div style="position:relative">
             <button
               class="btn btn--ghost btn--sm"
@@ -347,13 +331,13 @@ if ($filtroStatus !== '') {
   <?php require_once 'footer.php'; ?>
 
   <script>
-  // Fecha dropdowns ao clicar fora
+
   document.addEventListener('click', function(e) {
     if (!e.target.closest('[onclick]')) {
       document.querySelectorAll('.status-dropdown.open').forEach(d => d.classList.remove('open'));
     }
   });
-  // CSS para .open
+
   document.head.insertAdjacentHTML('beforeend', '<style>.status-dropdown.open{display:block!important}</style>');
   </script>
 
