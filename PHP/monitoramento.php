@@ -173,7 +173,6 @@ if ($equipFiltro > 0) {
 <?php require_once 'header.php'; ?>
 
 <main class="site-main">
-
   <div class="page-header">
     <div class="page-header-left">
       <div class="page-icon">📡</div>

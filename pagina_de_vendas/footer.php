@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__ . '/../PHP/support-widget.php';
-
 $footer = '<footer class="footer">
     <div class="footer-inner">
         <img src="img/Monitoramento industrial (2).png" alt="" class="img_footer img_header">
@@ -15,5 +13,4 @@ $footer = '<footer class="footer">
     </div>
 </footer>';
 
-$footer .= renderSupportWidget();
 ?>

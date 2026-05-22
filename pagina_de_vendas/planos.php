@@ -18,7 +18,7 @@
     <p class="subtitle">Monitore equipamentos, leituras de sensores e alarmes com total controle. Sem surpresas na fatura.</p>
   </div>
 
-  <div class="plans-grid">9 
+  <div class="plans-grid">
     <div class="plan-card">
       <div class="plan-name">Starter</div>
       <div class="plan-price">

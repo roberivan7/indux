@@ -22,9 +22,6 @@ $paginaAtiva = 'solucoes';
 <body>
 <header><?php echo $header;?></header>
 <section class="hero-solucoes">
-    <div class="badge">
-        ⚡ Monitoramento Industrial
-    </div>
     <h1>
         Soluções completas para<br>
         <span class="destaque">indústrias inteligentes</span>

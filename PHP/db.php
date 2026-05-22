@@ -1,6 +1,6 @@
 <?php
 define('DB_HOST',    '127.0.0.1');
-define('DB_NAME',    'db_teste');
+define('DB_NAME',    'indux');
 define('DB_USER',    'dev');
 define('DB_PASS',    '123');
 define('DB_CHARSET', 'utf8mb4');

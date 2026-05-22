@@ -16,24 +16,7 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
 
     <a class="logo" href="dashboard.php">
       <div class="logo-icon">
-        <img src="../IMG/logo.png">
-          <rect width="42" height="42" rx="10" fill="rgba(0,200,255,0.08)"/>
-
-          <polygon points="21,4 34,11.5 34,26.5 21,34 8,26.5 8,11.5" fill="none" stroke="#00c8ff" stroke-width="1.5" stroke-linejoin="round"/>
-
-          <line x1="21" y1="11" x2="21" y2="27" stroke="#00c8ff" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="13" y1="19" x2="29" y2="19" stroke="#00c8ff" stroke-width="1.5" stroke-linecap="round"/>
-          <!-- Círculo central -->
-          <circle cx="21" cy="19" r="3" fill="#00c8ff" opacity=".9"/>
-
-          <circle cx="21" cy="5.5" r="1.5" fill="#f59e0b"/>
-          <circle cx="32.5" cy="12" r="1.5" fill="#f59e0b" opacity=".6"/>
-          <circle cx="32.5" cy="26" r="1.5" fill="#f59e0b" opacity=".6"/>
-        </svg>
-      </div>
-      <div class="logo-text">
-        <!-- <span class="logo-name">INDUX</span> -->
-        <!-- <span class="logo-tagline">Monitoramento Industrial</span> -->
+        <img src="IMG/Monitoramento industrial (2).png">
       </div>
     </a>
 
@@ -103,6 +86,9 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
 
     <div class="sidebar-footer">
       <?php if (isset($_SESSION['logado']) && $_SESSION['logado']): ?>
+      <a href="planos.php" class="btn-upgrade">
+        <span>UP</span> Upgrade de plano
+      </a>
       <div class="sidebar-user">
         <div class="user-avatar"><?php echo inicialNome($_SESSION['usuario_nome'] ?? 'U'); ?></div>
         <div class="user-info">
@@ -110,11 +96,8 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
           <div class="user-role"><?php echo $_SESSION['perfil'] ?? 'visualizador'; ?></div>
         </div>
       </div>
-      <a href="../pagina_de_vendas/planos.php" class="btn-upgrade">
-        <span>UP</span> Upgrade de plano
-      </a>
       <a href="logout.php" class="btn-logout">
-        <span>⏻</span> Sair do Sistema
+        <span><img src="IMG/trash-2.png" alt=""></span> Sair do Sistema
       </a>
       <?php else: ?>
       <a href="login.php" class="btn-logout" style="color:var(--green);border-color:rgba(16,185,129,.3)">
@@ -125,8 +108,4 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
 
   </div>
 </header>
-<?php
-require_once __DIR__ . '/support-widget.php';
-echo renderSupportWidget();
-?>
 </html>
