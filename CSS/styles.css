@@ -325,6 +325,38 @@ img { max-width: 100%; display: block; }
   text-decoration: none;
 }
 
+.btn-upgrade {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .65rem 1rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #050b18;
+  border: 1px solid rgba(0,200,255,.45);
+  border-radius: var(--radius);
+  font-size: .8rem;
+  font-weight: 800;
+  transition: all .2s;
+  text-decoration: none;
+  box-shadow: 0 0 18px rgba(0,200,255,.18);
+}
+
+.btn-upgrade span {
+  font-size: .65rem;
+  font-family: var(--font-mono);
+  border: 1px solid rgba(5,11,24,.25);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+.btn-upgrade:hover {
+  color: #050b18;
+  transform: translateY(-1px);
+  box-shadow: 0 0 28px rgba(0,200,255,.35);
+  text-decoration: none;
+}
+
 /* ═══════════════════════════════════════════════════
    MAIN
 ═══════════════════════════════════════════════════ */

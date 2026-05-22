@@ -115,6 +115,9 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
           <div class="user-role"><?php echo $_SESSION['perfil'] ?? 'visualizador'; ?></div>
         </div>
       </div>
+      <a href="../pagina_de_vendas/planos.php" class="btn-upgrade">
+        <span>UP</span> Upgrade de plano
+      </a>
       <a href="logout.php" class="btn-logout">
         <span>⏻</span> Sair do Sistema
       </a>
@@ -127,4 +130,8 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
 
   </div>
 </header>
+<?php
+require_once __DIR__ . '/support-widget.php';
+echo renderSupportWidget();
+?>
 </html>

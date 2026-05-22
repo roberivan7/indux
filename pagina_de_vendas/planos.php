@@ -7,32 +7,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css"
+  <link rel="stylesheet" href="styles.css">
   <title>Planos --- Indux</title>
 </head>
-<body>
-  
-</body>
-</html>
 <body>
   <header><?php echo $header;?></header>
 <div class="plans-page" id="plansPage">
   <div class="page-header">
-    <div class="logo-bar">
-      <div class="logo-icon">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h7v7H3zm11 0h7v7h-7zM3 14h7v7H3zm11 3h2v-2h2v2h2v2h-2v2h-2v-2h-2z"/></svg>
-      </div>
-      <span class="logo-text">INDUX</span>
-    </div>
-    <div class="badge-top">Monitoramento Industrial</div>
     <h1 class="main-title">Escolha o plano<br>ideal para sua <span>operação</span></h1>
     <p class="subtitle">Monitore equipamentos, leituras de sensores e alarmes com total controle. Sem surpresas na fatura.</p>
-    <div class="toggle-wrap">
-      <span class="toggle-label active" id="lbl-mensal">Mensal</span>
-      <button class="toggle" id="billing-toggle" onclick="toggleBilling(this)"></button>
-      <span class="toggle-label" id="lbl-anual">Anual</span>
-      <span class="save-badge">Economize 20%</span>
-    </div>
   </div>
 
   <div class="plans-grid">

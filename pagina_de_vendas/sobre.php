@@ -15,7 +15,6 @@ require_once 'footer.php';
     <?php echo $header;?>
 
     <section class="hero-section">
-        <div class="badge">Monitoramento Industrial</div>
         <h1 class="hero-title">Transformando o caos do chão de fábrica em <span>clareza absoluta</span>.</h1>
         <p class="hero-subtitle"> Do sensor ao dashboard — conheça a história por trás da plataforma inteligente que unifica a sua operação.</p>
     </section>
