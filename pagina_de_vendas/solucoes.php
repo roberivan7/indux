@@ -1,4 +1,5 @@
 <?php
+require_once 'icon.php';
 require_once 'header.php';
 require_once 'footer.php';
 
@@ -11,7 +12,8 @@ $paginaAtiva = 'solucoes';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soluções | INDUX - Monitoramento Industrial</title>
+      <?php echo $icon; ?>
+<title>Indux | Soluções</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

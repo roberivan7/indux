@@ -1,4 +1,5 @@
 <?php
+require_once 'icon.php';
 session_start();
 
 define('SISTEMA_NOME',    'INDUX');

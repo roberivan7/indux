@@ -1,4 +1,5 @@
 <?php
+require_once 'icon.php';
 $totalEquipamentos = 0;
 $totalAtivos       = 0;
 $totalFalhas       = 0;
@@ -27,7 +28,8 @@ try {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login — INDUX Monitoramento Industrial</title>
+    <?php echo $icon; ?>
+<title>Indux | Footer</title>
   <link rel="stylesheet" href="../CSS/styles.css">
 </head>
 <footer class="site-footer">

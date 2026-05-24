@@ -1,4 +1,5 @@
 <?php
+require_once 'icon.php';
 require_once 'init.php';
 require_once 'db.php';
 requerLogin();
@@ -8,7 +9,8 @@ requerLogin();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Planos - <?php echo SISTEMA_NOME; ?></title>
+    <?php echo $icon; ?>
+<title>Indux | Planos</title>
   <link rel="stylesheet" href="../CSS/styles.css">
   <link rel="shortcut icon" type="png" href="../IMG/logo.png">
 </head>

@@ -1,4 +1,5 @@
 <?php
+require_once 'icon.php';
 require_once 'init.php';
 require_once 'db.php';
 if (isset($_SESSION['usuario_id'])) {

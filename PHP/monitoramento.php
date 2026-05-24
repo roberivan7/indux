@@ -1,5 +1,5 @@
-
 <?php
+require_once 'icon.php';
 require_once 'init.php';
 require_once 'db.php';
 requerLogin();
@@ -163,7 +163,8 @@ if ($equipFiltro > 0) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Monitoramento — <?= SISTEMA_NOME ?></title>
+    <?php echo $icon; ?>
+<title>Indux | Monitoramento</title>
   <link rel="stylesheet" href="../CSS/styles.css">
   <?php if ($equipFiltro): ?>
   <meta http-equiv="refresh" content="30">

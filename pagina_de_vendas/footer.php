@@ -1,4 +1,5 @@
 <?php
+require_once 'icon.php';
 $footer = '<footer class="footer">
     <div class="footer-inner">
         <img src="img/Monitoramento industrial (2).png" alt="" class="img_footer img_header">

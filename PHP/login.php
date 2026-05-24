@@ -1,4 +1,5 @@
 <?php
+require_once 'icon.php';
 require_once 'init.php';
 require_once 'db.php';
 
@@ -83,7 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login — INDUX Monitoramento Industrial</title>
+    <?php echo $icon; ?>
+<title>Indux | Login</title>
   <link rel="stylesheet" href="../CSS/styles.css">
 </head>
 <body class="login-body">

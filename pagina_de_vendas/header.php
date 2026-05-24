@@ -1,4 +1,6 @@
-<?php $header = '<nav class="navbar">
+<?php
+require_once 'icon.php';
+$header = '<nav class="navbar">
     <a href="index.php" class="navbar-logo">
         <img src="img/Monitoramento industrial (2).png" alt="INDUX Logo" onerror="this.style.display=\'none\'">
          <!-- <span class="marca">IND<span>UX</span></span> -->

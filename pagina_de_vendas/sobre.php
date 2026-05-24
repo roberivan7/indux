@@ -1,4 +1,5 @@
 <?php
+require_once 'icon.php';
 require_once 'header.php';
 require_once 'footer.php';
 ?>
@@ -7,7 +8,8 @@ require_once 'footer.php';
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre Nós - INDUX</title>
+      <?php echo $icon; ?>
+<title>Indux | Sobre</title>
     <link rel="stylesheet" href="styles.css">
     </head>
 
