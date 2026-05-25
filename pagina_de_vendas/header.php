@@ -10,6 +10,7 @@ $header = '<nav class="navbar">
         <li><a href="solucoes.php" class="ativo">Soluções</a></li>
         <li><a href="sobre.php">Sobre</a></li>
         <li><a href="planos.php">Planos</a></li>
+        <li><a href="../PHP/suporte.php">Suporte</a></li>
         <li><a href="../PHP/login.php" class="btn-demo">Acessar Sistema</a></li>
     </ul>
 </nav>';

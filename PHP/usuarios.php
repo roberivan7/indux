@@ -12,7 +12,6 @@ $modo    = $_GET['acao'] ?? 'listar'; // listar | novo | editar
 $editId  = (int)($_GET['id'] ?? 0);
 $usuario = null;
 
-// ── EXCLUIR ─────────────────────────────────────────────
 if (isset($_GET['excluir']) && ehAdmin()) {
     $usuarioExcluirId = (int)$_GET['excluir'];
     if ($usuarioExcluirId === ($_SESSION['usuario_id'] ?? 0)) {
@@ -27,7 +26,6 @@ if (isset($_GET['excluir']) && ehAdmin()) {
     header('Location: usuarios.php?msg='.urlencode($msg).'&tipo='.$msgTipo); exit;
 }
 
-// ── TOGGLE ATIVO ─────────────────────────────────────────
 if (isset($_GET['toggle']) && ehAdmin()) {
     $usuarioToggleId = (int)$_GET['toggle'];
     $usuarioToggle   = dbBuscarUsuario($usuarioToggleId);
@@ -40,7 +38,6 @@ if (isset($_GET['toggle']) && ehAdmin()) {
     header('Location: usuarios.php?msg='.urlencode($msg).'&tipo='.$msgTipo); exit;
 }
 
-// ── CARREGAR PARA EDIÇÃO ─────────────────────────────────
 if ($modo === 'editar' && $editId) {
     $usuario = dbBuscarUsuario($editId);
     if (!$usuario) { header('Location: usuarios.php'); exit; }
@@ -50,17 +47,14 @@ if ($modo === 'editar' && $editId) {
     }
 }
 
-// ── SALVAR (POST) ────────────────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuarioPostId = (int)($_POST['usuario_id'] ?? 0);
     $perfil = $_POST['perfil'] ?? 'funcionario';
 
-    // Staff só pode criar/editar funcionários
     if (!ehAdmin() && $perfil !== 'funcionario') {
         $erros[] = 'Você só pode gerenciar usuários do perfil Funcionário.';
     }
 
-    // Dados vindos do formulario de usuario.
     $dadosUsuario = [
         'nome'                 => trim($_POST['nome'] ?? ''),
         'email'                => strtolower(trim($_POST['email'] ?? '')),
@@ -73,7 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'perm_resolver_alarme' => isset($_POST['perm_resolver_alarme']) ? 1 : 0,
     ];
 
-    // Validações
     if ($dadosUsuario['nome'] === '')  $erros[] = 'Nome é obrigatório.';
     if ($dadosUsuario['email'] === '' || !filter_var($dadosUsuario['email'], FILTER_VALIDATE_EMAIL)) $erros[] = 'E-mail inválido.';
     if (!in_array($dadosUsuario['perfil'], ['admin','staff','funcionario'])) $erros[] = 'Perfil inválido.';
@@ -85,7 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $erros[] = 'Este e-mail já está cadastrado.';
         } else {
             if ($usuarioPostId) {
-                // Editar
                 if (!podeGerenciarPerfil($usuario['perfil'] ?? 'funcionario')) { $erros[] = 'Sem permissão.'; }
                 else {
                     dbAtualizarUsuario($usuarioPostId, $dadosUsuario);
@@ -93,7 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header('Location: usuarios.php?msg='.urlencode('Usuário atualizado!').'&tipo=sucesso'); exit;
                 }
             } else {
-                // Criar
                 $novoId = dbCriarUsuario($dadosUsuario);
                 if ($novoId) {
                     registrarLog('CRIAR_USUARIO','usuarios',$novoId,'Perfil:'.$dadosUsuario['perfil']);
@@ -102,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     }
-    // repopula form
+
     $usuario = $dadosUsuario;
     if ($usuarioPostId) { $usuario['id'] = $usuarioPostId; $modo = 'editar'; $editId = $usuarioPostId; }
     else { $modo = 'novo'; }
@@ -110,12 +101,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 if (isset($_GET['msg'])) { $msg = htmlspecialchars($_GET['msg']); $msgTipo = $_GET['tipo'] ?? 'info'; }
 
-// ── LISTAR ───────────────────────────────────────────────
 $busca      = trim($_GET['busca'] ?? '');
 $filtroPerfil = $_GET['perfil_f'] ?? '';
 $listaUsuarios = ($modo === 'listar') ? dbListarUsuarios($busca, $filtroPerfil) : [];
 
-// Contagens
 $contagens = ['total'=>0,'admin'=>0,'staff'=>0,'funcionario'=>0,'ativos'=>0];
 foreach ($listaUsuarios as $usuarioItem) {
     $contagens['total']++;
@@ -163,9 +152,7 @@ foreach ($listaUsuarios as $usuarioItem) {
   <?php endif; ?>
 
   <?php if ($modo === 'listar'): ?>
-  <!-- ═══ LISTAGEM ═══ -->
 
-  <!-- KPIs -->
   <div class="kpi-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:1.25rem">
     <div class="kpi-card kpi-card--cyan" style="padding:.9rem 1rem">
       <div><div class="kpi-label">Total</div><div class="kpi-valor" style="font-size:1.4rem"><?= $contagens['total'] ?></div></div>
@@ -184,7 +171,6 @@ foreach ($listaUsuarios as $usuarioItem) {
     </div>
   </div>
 
-  <!-- Busca + Filtro -->
   <form method="GET" action="usuarios.php" style="display:flex;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap">
     <div style="flex:1;min-width:220px;position:relative">
       <span style="position:absolute;left:.8rem;top:50%;transform:translateY(-50%);font-size:.9rem">🔍</span>
@@ -201,7 +187,6 @@ foreach ($listaUsuarios as $usuarioItem) {
     <?php if ($busca || $filtroPerfil): ?><a href="usuarios.php" class="btn btn--ghost">✕ Limpar</a><?php endif; ?>
   </form>
 
-  <!-- Tabela -->
   <div class="panel-card">
     <div class="panel-body" style="padding:0">
       <?php if (empty($listaUsuarios)): ?>
@@ -284,7 +269,6 @@ foreach ($listaUsuarios as $usuarioItem) {
     </div>
   </div>
 
-  <!-- Info de hierarquia -->
   <div style="margin-top:1.25rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.25rem">
     <div style="font-family:var(--font-display);font-size:.82rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem">📖 Hierarquia de Acesso</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
@@ -304,7 +288,6 @@ foreach ($listaUsuarios as $usuarioItem) {
   </div>
 
   <?php else: ?>
-  <!-- ═══ FORMULÁRIO NOVO/EDITAR ═══ -->
 
   <?php
     $formUsuario = $usuario ?? [];
@@ -365,7 +348,6 @@ foreach ($listaUsuarios as $usuarioItem) {
 
       </div>
 
-      <!-- Permissões Granulares (visível para funcionários) -->
       <div class="form-section" id="secao-permissoes">
         <div class="form-section-title">🔑 Permissões Adicionais <span style="font-weight:400;color:var(--text-muted);font-size:.78rem">(para perfil Funcionário)</span></div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.75rem">
@@ -419,7 +401,6 @@ foreach ($listaUsuarios as $usuarioItem) {
 <?php require_once 'footer.php'; ?>
 
 <script>
-// Mostrar/ocultar seção de permissões baseado no perfil
 const perfSel = document.getElementById('perfil');
 const secPerm = document.getElementById('secao-permissoes');
 function togglePerms() {

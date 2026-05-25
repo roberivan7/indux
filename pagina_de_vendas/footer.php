@@ -9,6 +9,7 @@ $footer = '<footer class="footer">
             <li><a href="solucoes.php">Soluções</a></li>
             <li><a href="sobre.php">Sobre</a></li>
             <li><a href="planos.php">Planos</a></li>
+            <li><a href="../PHP/suporte.php">Suporte</a></li>
             <li><a href="../PHP/login.php">Login</a></li>
         </ul>
     </div>

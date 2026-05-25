@@ -21,7 +21,6 @@ $msg         = '';
 $msgTipo     = 'info';
 $erros       = [];
 
-// ── Carregar para edição ───────────────────────────────────
 if (isset($_GET['editar'])) {
     $equipamentoId = (int)$_GET['editar'];
     $editando = true;
@@ -32,9 +31,8 @@ if (isset($_GET['editar'])) {
     } catch (Throwable $e) {}
 }
 
-// ── SALVAR ────────────────────────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Dados vindos do formulario, ja tratados antes de salvar.
+
     $dadosEquipamento = [
         'tag'          => strtoupper(trim($_POST['tag'] ?? '')),
         'nome'         => trim($_POST['nome'] ?? ''),
@@ -49,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'status'       => $_POST['status'] ?? 'ativo',
     ];
 
-    // Validações
     if ($dadosEquipamento['tag'] === '')  $erros[] = 'TAG é obrigatória.';
     if ($dadosEquipamento['nome'] === '') $erros[] = 'Nome é obrigatório.';
     if (!in_array($dadosEquipamento['status'], ['ativo','inativo','em_falha'])) $erros[] = 'Status inválido.';
@@ -62,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $equipamentoId = (int)($_POST['editar_id'] ?? 0);
 
             if ($equipamentoId) {
-                // Verificar TAG duplicada (exceto o próprio)
                 $consultaDuplicada = $db->prepare('SELECT id FROM equipamentos WHERE tag = ? AND id != ?');
                 $consultaDuplicada->execute([$dadosEquipamento['tag'], $equipamentoId]);
                 if ($consultaDuplicada->fetch()) { $erros[] = 'TAG já cadastrada para outro equipamento.'; }
@@ -95,7 +91,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Repopula form em caso de erro
     $equipamento = $dadosEquipamento;
     $equipamentoId = (int)($_POST['editar_id'] ?? 0);
     if ($equipamentoId) { $equipamento['id'] = $equipamentoId; $editando = true; }
@@ -148,7 +143,6 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
 
       <div class="form-card">
 
-        <!-- Identificação -->
         <div class="form-title">📋 Identificação do Equipamento</div>
         <div class="form-grid">
           <div class="form-group">
@@ -206,7 +200,6 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
           </div>
         </div>
 
-        <!-- Limites de operação -->
         <div class="form-section">
           <div class="form-section-title">🌡️ Limites de Temperatura (°C)</div>
           <div class="form-grid">
@@ -260,7 +253,6 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
   <?php require_once 'footer.php'; ?>
 
   <script>
-  // Auto-maiúsculo na TAG
   document.getElementById('tag').addEventListener('input', function() {
     let valorTag = this.value.toUpperCase().replace(/[^A-Z0-9\-_]/g,'');
     this.value = valorTag;
