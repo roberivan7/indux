@@ -83,18 +83,6 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
           <?php endif; ?>
         </ul>
       </div>
-
-      <div>
-        <div class="nav-label">Links</div>
-        <ul>
-          <li>
-            <a href="../pagina_de_vendas/index.php">
-              <span class="nav-icon">🌐</span> Página de vendas
-            </a>
-          </li>
-        </ul>
-      </div>
-
     </nav>
 
     <div class="sidebar-footer">

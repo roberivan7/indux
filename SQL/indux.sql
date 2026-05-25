@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 25/05/2026 às 17:53
+-- Tempo de geração: 25/05/2026 às 23:50
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -46,9 +46,12 @@ CREATE TABLE `alarmes` (
 --
 
 INSERT INTO `alarmes` (`id`, `equipamento_id`, `tipo`, `severidade`, `mensagem`, `valor_registrado`, `valor_limite`, `resolvido`, `resolvido_por`, `resolvido_em`, `criado_em`) VALUES
-(1, 2, 'temperatura', 'critico', 'Temperatura acima do limite: 88.9°C (máx: 70°C)', 88.9, 70, 0, NULL, NULL, '2026-05-25 12:37:51'),
-(2, 2, 'pressao', 'critico', 'Pressão acima do limite crítico: 13.2 bar (máx: 12 bar)', 13.2, 12, 0, NULL, NULL, '2026-05-25 12:37:51'),
-(3, 1, 'manutencao', 'alerta', 'Manutenção preventiva programada para esta semana', NULL, NULL, 0, NULL, NULL, '2026-05-25 12:37:51');
+(1, 2, 'temperatura', 'critico', 'Temperatura acima do limite: 88.9°C (máx: 70°C)', 88.9, 70, 1, 2, '2026-05-25 18:25:02', '2026-05-25 12:37:51'),
+(2, 2, 'pressao', 'critico', 'Pressão acima do limite crítico: 13.2 bar (máx: 12 bar)', 13.2, 12, 1, 1, '2026-05-25 14:52:57', '2026-05-25 12:37:51'),
+(3, 1, 'manutencao', 'alerta', 'Manutenção preventiva programada para esta semana', NULL, NULL, 1, 2, '2026-05-25 18:27:22', '2026-05-25 12:37:51'),
+(4, 5, 'pressao', 'alerta', 'Pressão em zona de alerta: 9.5 bar', 9.5, 10, 1, 2, '2026-05-25 18:27:20', '2026-05-25 14:57:27'),
+(5, 5, 'pressao', 'alerta', 'Pressão em zona de alerta: 8.7 bar', 8.7, 10, 1, 2, '2026-05-25 18:27:17', '2026-05-25 14:59:08'),
+(6, 2, 'temperatura', 'alerta', 'Temperatura em zona de alerta: 70°C', 70, 70, 0, NULL, NULL, '2026-05-25 18:35:51');
 
 -- --------------------------------------------------------
 
@@ -77,10 +80,11 @@ CREATE TABLE `equipamentos` (
 --
 
 INSERT INTO `equipamentos` (`id`, `tag`, `nome`, `modelo`, `fabricante`, `localizacao`, `descricao`, `status`, `temp_min`, `temp_max`, `pressao_min`, `pressao_max`, `criado_em`) VALUES
-(1, 'CLD-001', 'Caldeira Principal', 'CBR-5000', 'ThermoTec', 'Sala 01', NULL, 'ativo', 20, 95, 0, 15, '2026-05-25 12:37:51'),
-(2, 'CMP-002', 'Compressor Industrial', 'AIR-2400', 'PneumaCorp', 'Área B', NULL, 'em_falha', 15, 70, 0, 12, '2026-05-25 12:37:51'),
-(3, 'BBA-003', 'Bomba Hidráulica', 'HYD-800', 'FluidTech', 'Subsolo', NULL, 'ativo', 10, 65, 1, 10, '2026-05-25 12:37:51'),
-(4, 'TRF-004', 'Transformador Elétrico', 'TRF-500KVA', 'ElectraInd', 'Subestação', NULL, 'inativo', 0, 85, 0, 5, '2026-05-25 12:37:51');
+(1, 'CLD-001', 'Caldeira Principal', 'CBR-5000', 'ThermoTec', 'Sala 01', '', 'ativo', 20, 95, 0, 15, '2026-05-25 12:37:51'),
+(2, 'CMP-002', 'Compressor Industrial', 'AIR-2400', 'PneumaCorp', 'Área B', '', 'ativo', 15, 70, 0.01, 12, '2026-05-25 12:37:51'),
+(3, 'BBA-003', 'Bomba Hidráulica', 'HYD-800', 'FluidTech', 'Subsolo', '', 'ativo', 10, 65, 1, 10, '2026-05-25 12:37:51'),
+(4, 'TRF-004', 'Transformador Elétrico', 'TRF-500KVA', 'ElectraInd', 'Subestação', NULL, 'inativo', 0, 85, 0, 5, '2026-05-25 12:37:51'),
+(5, 'ALK-540', 'Sensor Termico', 'JLK-1200', 'NIKE Ind.', 'Sala 01', '', 'ativo', 12, 95, 7.2, 10, '2026-05-25 14:56:47');
 
 -- --------------------------------------------------------
 
@@ -108,7 +112,10 @@ INSERT INTO `leituras_sensor` (`id`, `equipamento_id`, `temperatura`, `pressao`,
 (4, 2, 88.9, 13.2, NULL, '2026-05-25 12:36:51'),
 (5, 2, 85.2, 12.8, NULL, '2026-05-25 12:31:51'),
 (6, 3, 45, 6.5, NULL, '2026-05-25 12:32:51'),
-(7, 3, 44.2, 6.3, NULL, '2026-05-25 12:27:51');
+(7, 3, 44.2, 6.3, NULL, '2026-05-25 12:27:51'),
+(8, 5, 75.1, 9.5, NULL, '2026-05-25 14:57:27'),
+(9, 5, 55, 8.7, NULL, '2026-05-25 14:59:08'),
+(10, 2, 70, 8, NULL, '2026-05-25 18:35:51');
 
 -- --------------------------------------------------------
 
@@ -135,7 +142,31 @@ INSERT INTO `log_sistema` (`id`, `usuario_id`, `acao`, `tabela_afetada`, `regist
 (1, 1, 'CRIAR_USUARIO', 'usuarios', 2, 'Perfil:funcionario', '::1', '2026-05-25 12:40:35'),
 (2, 1, 'LOGOUT', 'usuarios', 1, NULL, '::1', '2026-05-25 12:41:26'),
 (3, 2, 'LOGIN', 'usuarios', 2, NULL, '::1', '2026-05-25 12:41:38'),
-(4, 2, 'LOGOUT', 'usuarios', 2, NULL, '::1', '2026-05-25 12:44:13');
+(4, 2, 'LOGOUT', 'usuarios', 2, NULL, '::1', '2026-05-25 12:44:13'),
+(5, 1, 'LOGOUT', 'usuarios', 1, NULL, '::1', '2026-05-25 14:35:23'),
+(6, 1, 'RESOLVER_ALARME', 'alarmes', 2, NULL, '::1', '2026-05-25 14:52:57'),
+(7, 1, 'EDITAR_EQUIPAMENTO', 'equipamentos', 3, 'TAG:BBA-003', '::1', '2026-05-25 14:55:29'),
+(8, 1, 'CRIAR_EQUIPAMENTO', 'equipamentos', 5, 'TAG:ALK-540', '::1', '2026-05-25 14:56:47'),
+(9, 1, 'REGISTRAR_LEITURA', 'leituras_sensor', 5, 'T:75.1°C P:9.5bar', '::1', '2026-05-25 14:57:27'),
+(10, 1, 'REGISTRAR_LEITURA', 'leituras_sensor', 5, 'T:55°C P:8.7bar', '::1', '2026-05-25 14:59:08'),
+(11, 1, 'LOGOUT', 'usuarios', 1, NULL, '::1', '2026-05-25 18:22:03'),
+(12, 2, 'LOGIN', 'usuarios', 2, NULL, '::1', '2026-05-25 18:22:17'),
+(13, 2, 'EDITAR_EQUIPAMENTO', 'equipamentos', 2, 'TAG:CMP-002', '::1', '2026-05-25 18:24:14'),
+(14, 2, 'RESOLVER_ALARME', 'alarmes', 1, NULL, '::1', '2026-05-25 18:25:02'),
+(15, 2, 'EDITAR_EQUIPAMENTO', 'equipamentos', 2, 'TAG:CMP-002', '::1', '2026-05-25 18:26:22'),
+(16, 2, 'EDITAR_EQUIPAMENTO', 'equipamentos', 2, 'TAG:CMP-002', '::1', '2026-05-25 18:27:04'),
+(17, 2, 'RESOLVER_ALARME', 'alarmes', 5, NULL, '::1', '2026-05-25 18:27:17'),
+(18, 2, 'RESOLVER_ALARME', 'alarmes', 4, NULL, '::1', '2026-05-25 18:27:20'),
+(19, 2, 'RESOLVER_ALARME', 'alarmes', 3, NULL, '::1', '2026-05-25 18:27:22'),
+(20, 2, 'EDITAR_EQUIPAMENTO', 'equipamentos', 2, 'TAG:CMP-002', '::1', '2026-05-25 18:27:48'),
+(21, 2, 'EDITAR_EQUIPAMENTO', 'equipamentos', 2, 'TAG:CMP-002', '::1', '2026-05-25 18:29:11'),
+(22, 2, 'ALTERAR_STATUS', 'equipamentos', 1, 'Novo status: em_falha', '::1', '2026-05-25 18:29:22'),
+(23, 2, 'EDITAR_EQUIPAMENTO', 'equipamentos', 1, 'TAG:CLD-001', '::1', '2026-05-25 18:29:46'),
+(24, 2, 'EDITAR_EQUIPAMENTO', 'equipamentos', 1, 'TAG:CLD-001', '::1', '2026-05-25 18:29:53'),
+(25, 2, 'ALTERAR_STATUS', 'equipamentos', 1, 'Novo status: ativo', '::1', '2026-05-25 18:33:26'),
+(26, 2, 'LOGOUT', 'usuarios', 2, NULL, '::1', '2026-05-25 18:34:25'),
+(27, 1, 'REGISTRAR_LEITURA', 'leituras_sensor', 2, 'T:70°C P:8bar', '::1', '2026-05-25 18:35:51'),
+(28, 1, 'EDITAR_USUARIO', 'usuarios', 2, 'Perfil:funcionario', '::1', '2026-05-25 18:48:48');
 
 -- --------------------------------------------------------
 
@@ -155,16 +186,17 @@ CREATE TABLE `usuarios` (
   `is_operador` tinyint(1) DEFAULT 0,
   `perm_criar_equip` tinyint(1) DEFAULT 0,
   `perm_editar_equip` tinyint(1) DEFAULT 0,
-  `perm_resolver_alarme` tinyint(1) DEFAULT 0
+  `perm_resolver_alarme` tinyint(1) DEFAULT 0,
+  `tipo_plano` enum('starter','pro','enterprise') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `perfil`, `ativo`, `ultimo_acesso`, `criado_em`, `is_operador`, `perm_criar_equip`, `perm_editar_equip`, `perm_resolver_alarme`) VALUES
-(1, 'Administrador INDUX', 'admin@indux.com.br', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', 1, NULL, '2026-05-25 12:37:51', 0, 0, 0, 0),
-(2, 'Roberivan Santo', 'roberivan@indux.com.br', '$2y$10$D9jPdlm5N6FxTQF8jfBeCOVH8AVW0jRZAlPBElM6gRTh03qivWQs2', 'funcionario', 1, '2026-05-25 12:41:38', '2026-05-25 12:40:35', 1, 1, 1, 1);
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `perfil`, `ativo`, `ultimo_acesso`, `criado_em`, `is_operador`, `perm_criar_equip`, `perm_editar_equip`, `perm_resolver_alarme`, `tipo_plano`) VALUES
+(1, 'Administrador INDUX', 'admin@indux.com.br', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', 1, NULL, '2026-05-25 12:37:51', 0, 0, 0, 0, 'enterprise'),
+(2, 'Roberivan Santos', 'roberivan@indux.com.br', '$2y$10$D9jPdlm5N6FxTQF8jfBeCOVH8AVW0jRZAlPBElM6gRTh03qivWQs2', 'funcionario', 1, '2026-05-25 18:22:17', '2026-05-25 12:40:35', 1, 1, 1, 1, 'enterprise');
 
 --
 -- Índices para tabelas despejadas
@@ -217,25 +249,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `alarmes`
 --
 ALTER TABLE `alarmes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `equipamentos`
 --
 ALTER TABLE `equipamentos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `leituras_sensor`
 --
 ALTER TABLE `leituras_sensor`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `log_sistema`
 --
 ALTER TABLE `log_sistema`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
