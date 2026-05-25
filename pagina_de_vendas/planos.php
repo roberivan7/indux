@@ -58,7 +58,7 @@
                 <line x1="9" y1="3" x2="3" y2="9" />
               </svg></span>Suporte prioritário</li>
         </ul>
-        <button class="plan-btn outline" onclick="goToPayment('Starter','97','77')">Começar agora</button>
+        <button class="plan-btn ghost" onclick="goToPayment('Starter','97','77')">Assinar agora</button>
       </div>
 
       <div class="plan-card featured">
@@ -129,7 +129,7 @@
                 <polyline points="2,6 5,9 10,3" />
               </svg></span>SLA 99,9% garantido</li>
         </ul>
-        <button class="plan-btn ghost" onclick="goToPayment('Enterprise','597','477')">Falar com vendas</button>
+        <button class="plan-btn ghost" onclick="goToPayment('Enterprise','597','477')">Assinar agora</button>
       </div>
     </div>
 
@@ -220,18 +220,8 @@
           Assinar agora — <span id="btn-price">R$ 247/mês</span>
         </button>
 
-        <div class="secure-note">
-          <svg viewBox="0 0 16 16" fill="none" stroke-width="1.8">
-            <path d="M8 1L3 4v4c0 3 2.5 5.5 5 7 2.5-1.5 5-4 5-7V4z" />
-          </svg>
-          Ambiente 100% seguro · SSL 256-bit
-        </div>
-
         <div class="or-divider">ou pague com</div>
-        <button class="pix-btn" onclick="processPayment()">
-          <span class="pix-logo" style="color:var(--indux-green)">PIX</span>
-          Pagar com PIX — receba acesso imediato
-        </button>
+        <button class="pix-btn" onclick="processPayment()">Pagar com PIX — receba acesso imediato</button>
       </div>
     </div>
   </div>
@@ -317,8 +307,6 @@
 
   function processPayment() {
     const btn = document.querySelector('.pay-submit');
-    btn.textContent = 'Processando...';
-    btn.style.opacity = '0.7';
     setTimeout(() => {
       document.getElementById('successOverlay').classList.add('show');
       btn.innerHTML = '<svg viewBox="0 0 18 18" fill="none"><rect x="2" y="5" width="14" height="10" rx="2"/><path d="M2 8h14"/><circle cx="5.5" cy="12" r="1" fill="currentColor" stroke="none"/></svg> Assinar agora — <span id="btn-price">R$ ' + (isYearly ? currentPlan.yearly : currentPlan.monthly) + '/mês</span>';

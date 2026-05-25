@@ -522,21 +522,53 @@ hr {
     border: 1px solid rgba(0, 200, 255, 0.2);
 }
 
-.card-solucao.verde  { --cor-acento: var(--verde); }
-.card-solucao.verde  .card-icone { background: rgba(0,230,118,0.1); border-color: rgba(0,230,118,0.15); }
-.card-solucao.verde  .tag { background: rgba(0,230,118,0.1); color: var(--verde); border-color: rgba(0,230,118,0.2); }
+.card-solucao.verde { 
+    --cor-acento: var(--verde); 
+}
 
-.card-solucao.amarelo .card-icone { background: rgba(255,214,0,0.1); border-color: rgba(255,214,0,0.15); }
-.card-solucao.amarelo { --cor-acento: var(--amarelo); }
-.card-solucao.amarelo .tag { background: rgba(255,214,0,0.1); color: var(--amarelo); border-color: rgba(255,214,0,0.2); }
+.card-solucao.verde .card-icone {
+     background: rgba(0,230,118,0.1); border-color: rgba(0,230,118,0.15); 
+    }
+    
+.card-solucao.verde .tag { 
+    background: rgba(0,230,118,0.1); color: var(--verde); border-color: rgba(0,230,118,0.2); 
+}
 
-.card-solucao.roxo   { --cor-acento: #b388ff; }
-.card-solucao.roxo   .card-icone { background: rgba(179,136,255,0.1); border-color: rgba(179,136,255,0.15); }
-.card-solucao.roxo   .tag { background: rgba(179,136,255,0.1); color: #b388ff; border-color: rgba(179,136,255,0.2); }
+.card-solucao.amarelo .card-icone {
+     background: rgba(255,214,0,0.1); border-color: rgba(255,214,0,0.15); 
+    }
 
-.card-solucao.laranja { --cor-acento: #ff9100; }
-.card-solucao.laranja .card-icone { background: rgba(255,145,0,0.1); border-color: rgba(255,145,0,0.15); }
-.card-solucao.laranja .tag { background: rgba(255,145,0,0.1); color: #ff9100; border-color: rgba(255,145,0,0.2); }
+.card-solucao.amarelo { 
+    --cor-acento: var(--amarelo); 
+}
+
+.card-solucao.amarelo .tag { 
+    background: rgba(255,214,0,0.1); color: var(--amarelo); border-color: rgba(255,214,0,0.2); 
+}
+
+.card-solucao.roxo { 
+    --cor-acento: #b388ff; 
+}
+
+.card-solucao.roxo .card-icone {
+     background: rgba(179,136,255,0.1); border-color: rgba(179,136,255,0.15); 
+    }
+
+.card-solucao.roxo .tag {
+     background: rgba(179,136,255,0.1); color: #b388ff; border-color: rgba(179,136,255,0.2); 
+    }
+
+.card-solucao.laranja {
+     --cor-acento: #ff9100; 
+    }
+
+.card-solucao.laranja .card-icone { 
+    background: rgba(255,145,0,0.1); border-color: rgba(255,145,0,0.15); 
+}
+
+.card-solucao.laranja .tag { 
+    background: rgba(255,145,0,0.1); color: #ff9100; border-color: rgba(255,145,0,0.2);
+ }
 
 .secao-processo {
     padding: 80px 2rem;
@@ -834,7 +866,7 @@ color: var(--text-main);
 background-color: var(--bg-card);
 padding: 35px;
 border-radius: 12px;
-border-left: 4px solid var(--accent-green);
+border-left: 4px solid var(--ciano);
 }
 
 .mission-box h3 {
@@ -858,7 +890,7 @@ text-align: center;
 font-size: 12px;
 font-weight: 700;
 text-transform: uppercase;
-color: var(--accent-green);
+color: var(--ciano);
 letter-spacing: 2px;
 margin-bottom: 40px;
 display: block;
@@ -1098,7 +1130,7 @@ border: 1px solid transparent;
     }
 
     .price-value{
-        font-family: var(--font-titulo);
+        font-family: Arial, Helvetica, sans-serif;
         font-size:42px;
         font-weight:800;
         color:#f8fafc;
@@ -1179,17 +1211,6 @@ border: 1px solid transparent;
         transition:all 0.2s;
         border:none;
         letter-spacing:0.3px
-    }
-
-    .plan-btn.outline{
-        background:transparent;
-        border:1px solid var(--indux-border);
-        color:var(--indux-text)
-    }
-
-    .plan-btn.outline:hover{
-        border-color:var(--indux-accent);
-        color:var(--indux-accent)
     }
 
     .plan-btn.primary{
@@ -1321,7 +1342,7 @@ border: 1px solid transparent;
     }
 
     .order-plan-price .big{
-        font-family:'Syne',sans-serif;
+        font-family: Arial, Helvetica, sans-serif;
         font-size:22px;
         font-weight:800;
         color:var(--indux-accent)
@@ -1386,7 +1407,7 @@ border: 1px solid transparent;
 
     .total-row.main span:last-child{
         color:var(--indux-accent);
-        font-family:'Syne',sans-serif;
+        font-family: Arial, Helvetica, sans-serif;
         font-weight:700;
         font-size:17px
     }
@@ -1490,7 +1511,7 @@ border: 1px solid transparent;
         padding:14px;
         background:linear-gradient(135deg,var(--indux-accent),var(--indux-accent2));
         color:#0a0e1a;
-        font-family:'Syne',sans-serif;
+        font-family: Arial, Helvetica, sans-serif;
         font-size:15px;
         font-weight:700;
         border:none;
@@ -1583,12 +1604,6 @@ border: 1px solid transparent;
 
     .pix-btn:hover{
         background:rgba(6,214,160,0.12)
-    }
-
-    .pix-logo{
-        font-family:'Syne',sans-serif;
-        font-weight:800;
-        font-size:13px
     }
 
     .success-overlay{

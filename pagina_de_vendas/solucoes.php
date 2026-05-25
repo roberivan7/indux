@@ -122,17 +122,13 @@ $paginaAtiva = 'solucoes';
             </div>
 
             <div class="card-solucao">
-                <div class="card-icone">📋</div>
-                <h3>Log e Rastreabilidade</h3>
-                <p>
-                    Cada ação relevante é registrada no log do sistema: quem resolveu
-                    um alarme, quando um equipamento foi alterado, novas leituras
-                    inseridas. Auditoria completa para conformidade industrial.
-                </p>
+                <div class="card-icone">🕒</div>
+                <h3>Suporte 24 horas</h3>
+                <p>Atendimento contínuo para monitoramento, suporte técnico e resposta rápida a falhas industriais, garantindo estabilidade e segurança operacional da planta.</p>
                 <div class="card-tags">
-                    <span class="tag">Log de eventos</span>
-                    <span class="tag">Auditoria</span>
-                    <span class="tag">Conformidade</span>
+                    <span class="tag">Atendimento contínuo</span>
+                    <span class="tag">Resposta rápida a falhas</span>
+                    <span class="tag">Monitoramento 24/7</span>
                 </div>
             </div>
 
