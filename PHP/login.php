@@ -90,6 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="login-body">
 
+  <a href="../pagina_de_vendas/index.php" class="btn-voltar-login">← Voltar para página inicial</a>
+
   <div class="login-bg-pattern"></div>
 
   <div style="position:fixed;top:10%;left:5%;opacity:.06;font-size:8rem;pointer-events:none;color:var(--accent);font-family:var(--font-mono)">01010</div>

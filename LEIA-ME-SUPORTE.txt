@@ -1,0 +1,26 @@
+ALTERAÇÕES DO SUPORTE INDUX
+
+1. O botão "Suporte INDUX" continua no menu lateral acima do botão "Upgrade de plano".
+2. A página de suporte fica em: PHP/suporte.php.
+3. Removi completamente o card explicativo "Como funciona" da página de suporte.
+4. Removi qualquer tela ou layout de login do suporte.
+5. Removi qualquer função visual de conversa entre usuário e administrador.
+6. O usuário apenas preenche o formulário de suporte.
+7. O usuário escolhe uma opção em "Escolha o tipo de suporte":
+   - Erros diversos
+   - Bugs
+   - Suporte geral
+   - Outros
+8. Depois que o usuário envia, aparece apenas a mensagem automática:
+   "Obrigado! mensagem enviada, aguarde resposta pelo Email."
+9. As solicitações continuam sendo registradas no arquivo PHP/suporte_mensagens.json, mas não existe área de resposta pelo sistema.
+
+ARQUIVOS ALTERADOS
+
+- PHP/suporte.php
+- PHP/suporte_api.php
+- CSS/styles.css
+- PHP/header.php
+- PHP/login.php
+- pagina_de_vendas/header.php
+- pagina_de_vendas/footer.php

@@ -84,10 +84,28 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
         </ul>
       </div>
 
+      <div>
+        <div class="nav-label">Links</div>
+        <ul>
+          <li>
+            <a href="../pagina_de_vendas/index.php">
+              <span class="nav-icon">🌐</span> Página de vendas
+            </a>
+          </li>
+        </ul>
+      </div>
+
     </nav>
 
     <div class="sidebar-footer">
       <?php if (isset($_SESSION['logado']) && $_SESSION['logado']): ?>
+      <a href="suporte.php" class="btn-suporte-sidebar <?php echo $paginaAtual === 'suporte' ? 'active' : ''; ?>">
+        <span class="btn-suporte-sidebar__icone">💬</span>
+        <span>
+          <strong>Suporte INDUX</strong>
+          <small>Abrir chamado</small>
+        </span>
+      </a>
       <a href="planos.php" class="btn-upgrade">
         <span>UP</span> Upgrade de plano
       </a>
