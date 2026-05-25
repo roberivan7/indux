@@ -20,14 +20,15 @@ require_once 'icon.php';
             <div class="container_inicial">
                 <h1 class="titulo_site">Controle total da sua <span class="text_destaque">operação industrial</span></h1>
                 <p class="texto_inicial">Controle toda a fábrica com monitoramento em tempo real, análise de equipamentos e sensores industriais integrados.</p>    
-                <div class="container_btn"><a href="#" class="btn_inicial">Ver Planos <img src="img/arrow-right.png" alt="" class="seta"></a><a href="#" class="btn_inicial btn_especialista">Falar com um especialista</a></div>
-            <p class="subtitulo_inicial">Para empresas industriais · Demonstração técnica gratuita · POC em 30 dias</p>
+                <div class="container_btn">
+                    <a href="planos.php" class="btn_inicial">Ver Planos <img src="img/arrow-right.png" alt="" class="seta"></a>
+                    <a href="contato.php" class="btn_inicial btn_especialista">Falar com um especialista</a></div>
             </div>
             <img src="img/hero-industrial.jpg" alt="" class="img_principal">
         </section>
         <hr>
         <section class="secundario">
-            <div><h1>100%</h1><p>SLA de Disponibilidade</p></div><!-- Atendimento ao cliente -->
+            <div><h1>100%</h1><p>SLA de Disponibilidade</p></div>
             <div><h1>87%</h1><p>Eficiência Operacional</p></div>
             <div><h1>+ 180</h1><p>Previsão de Empresas atendias</p> </div>
             <div><h1>24/7</h1><p>Suporte dedicado</p></div>
@@ -81,7 +82,7 @@ require_once 'icon.php';
                 <h1 class="titulo_quaternario">Pronto para industrializar seus dados?</h1>
                 <p class="texto_quaternario">Agende uma sessão técnica com nossos engenheiros e veja a plataforma rodando com dados da sua operação.</p>
             </div>
-            <div class="items_quaternario"><a href="#" class="btn_quaternario">Solicitação Demonstração</a><p><img src="img/circle-check.png" alt=""> Sem compromisso · Pessoa jurídica</p></div>
+            <div class="items_quaternario"><a href="contato.php" class="btn_quaternario">Solicitação Demonstração</a></div>
         </section>
         <hr>
         <footer><?php echo $footer; ?></footer>
