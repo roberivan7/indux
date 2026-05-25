@@ -4,11 +4,11 @@
 -- Execute: mysql -u root -p < banco.sql
 -- ============================================================
 
-CREATE DATABASE IF NOT EXISTS db_teste
+CREATE DATABASE IF NOT EXISTS indux
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 
-USE db_teste;
+USE indux;
 
 -- ── Usuários ─────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS usuarios (

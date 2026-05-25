@@ -278,6 +278,8 @@ hr {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    transition: 0.7s;
+    opacity: 80%;
 }
 
 .cards p {
@@ -292,6 +294,8 @@ hr {
         0 0 60px var(--azul-borda);
 
     border: 1px solid #1521c0;
+    opacity: 100%;
+    transform:translateY(-5px);
 }
 
 .img_card {
