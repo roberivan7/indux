@@ -144,11 +144,7 @@ try {
         </div>
       </div>
       <?php if (ehOperador() && $contagens['total'] > 0): ?>
-        <a href="alarmes.php?resolver_todos=1"
-          onclick="return confirm('Resolver todos os alarmes ativos?')"
-          class="btn btn--warning">
-          Resolver Todos
-        </a>
+        
       <?php endif; ?>
     </div>
 
@@ -248,11 +244,8 @@ try {
             </div>
 
             <?php if (!$alarme['resolvido'] && ehOperador()): ?>
-              <a href="alarmes.php?resolver=<?php echo $alarme['id']; ?>&res=0"
-                class="btn btn--success btn--sm"
-                onclick="return confirm('Marcar alarme como resolvido?')">
-                Resolver
-              </a>
+              <a href="monitoramento.php?resolver=<?php echo $alarme['id']; ?>&res=0"
+                class="btn btn--success btn--sm">Resolver</a>
             <?php endif; ?>
 
           </div>
