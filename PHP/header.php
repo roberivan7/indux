@@ -94,7 +94,7 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
           <small>Abrir chamado</small>
         </span>
       </a>
-      <?php if (ehAdmin() || ehStaff()): ?>
+      <?php if (ehAdmin()): ?>
       <a href="planos.php" class="btn-upgrade">
         <span>UP</span> Upgrade de plano
       </a>

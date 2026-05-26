@@ -48,10 +48,6 @@
           <li class="feature-item dim"><span class="fi no"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke-width="2.5">
                 <line x1="3" y1="3" x2="9" y2="9" />
                 <line x1="9" y1="3" x2="3" y2="9" />
-              </svg></span>Relatórios avançados</li>
-          <li class="feature-item dim"><span class="fi no"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke-width="2.5">
-                <line x1="3" y1="3" x2="9" y2="9" />
-                <line x1="9" y1="3" x2="3" y2="9" />
               </svg></span>API de integração</li>
           <li class="feature-item dim"><span class="fi no"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke-width="2.5">
                 <line x1="3" y1="3" x2="9" y2="9" />
@@ -80,9 +76,6 @@
           <li class="feature-item"><span class="fi yes"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke-width="2.5">
                 <polyline points="2,6 5,9 10,3" />
               </svg></span>Alarmes + notif. e-mail</li>
-          <li class="feature-item"><span class="fi yes"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke-width="2.5">
-                <polyline points="2,6 5,9 10,3" />
-              </svg></span>Relatórios avançados</li>
           <li class="feature-item"><span class="fi yes"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke-width="2.5">
                 <polyline points="2,6 5,9 10,3" />
               </svg></span>API de integração</li>
@@ -116,9 +109,6 @@
           <li class="feature-item"><span class="fi yes"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke-width="2.5">
                 <polyline points="2,6 5,9 10,3" />
               </svg></span>Alarmes + SMS + WhatsApp</li>
-          <li class="feature-item"><span class="fi yes"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke-width="2.5">
-                <polyline points="2,6 5,9 10,3" />
-              </svg></span>Relatórios + exportação</li>
           <li class="feature-item"><span class="fi yes"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke-width="2.5">
                 <polyline points="2,6 5,9 10,3" />
               </svg></span>API avançada + webhooks</li>
@@ -246,8 +236,8 @@
 
   const planFeatures = {
     'Starter': ['10 equipamentos', '50 leituras/dia', 'Alarmes básicos', 'Dashboard padrão'],
-    'Pro': ['50 equipamentos', 'Leituras ilimitadas', 'Alarmes + notificações', 'Relatórios avançados', 'API de integração'],
-    'Enterprise': ['Equipamentos ilimitados', 'Leituras ilimitadas', 'SMS + WhatsApp', 'Relatórios + exportação', 'Usuários ilimitados', 'SLA 99,9%']
+    'Pro': ['50 equipamentos', 'Leituras ilimitadas', 'Alarmes + notificações', 'API de integração'],
+    'Enterprise': ['Equipamentos ilimitados', 'Leituras ilimitadas', 'SMS + WhatsApp', 'Usuários ilimitados', 'SLA 99,9%']
   };
 
   function toggleBilling(btn) {

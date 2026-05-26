@@ -179,7 +179,7 @@ CREATE TABLE `usuarios` (
   `nome` varchar(150) NOT NULL,
   `email` varchar(200) NOT NULL,
   `senha` varchar(255) NOT NULL,
-  `perfil` enum('admin','staff','funcionario') NOT NULL DEFAULT 'funcionario',
+  `perfil` enum('admin','funcionario') NOT NULL DEFAULT 'funcionario',
   `ativo` tinyint(1) NOT NULL DEFAULT 1,
   `ultimo_acesso` datetime DEFAULT NULL,
   `criado_em` datetime NOT NULL DEFAULT current_timestamp(),

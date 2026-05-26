@@ -41,7 +41,6 @@ if (isset($_GET['toggle']) && ehAdmin()) {
 if ($modo === 'editar' && $editId) {
     $usuario = dbBuscarUsuario($editId);
     if (!$usuario) { header('Location: usuarios.php'); exit; }
-    // Staff só pode editar funcionários
     if (!ehAdmin() && $usuario['perfil'] !== 'funcionario') {
         header('Location: usuarios.php'); exit;
     }
@@ -69,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($dadosUsuario['nome'] === '')  $erros[] = 'Nome é obrigatório.';
     if ($dadosUsuario['email'] === '' || !filter_var($dadosUsuario['email'], FILTER_VALIDATE_EMAIL)) $erros[] = 'E-mail inválido.';
-    if (!in_array($dadosUsuario['perfil'], ['admin','staff','funcionario'])) $erros[] = 'Perfil inválido.';
+    if (!in_array($dadosUsuario['perfil'], ['admin','funcionario'])) $erros[] = 'Perfil inválido.';
     if (!$usuarioPostId && $dadosUsuario['senha'] === '') $erros[] = 'Senha é obrigatória para novo usuário.';
     if ($dadosUsuario['senha'] !== '' && strlen($dadosUsuario['senha']) < 6) $erros[] = 'Senha deve ter ao menos 6 caracteres.';
 
@@ -103,9 +102,10 @@ if (isset($_GET['msg'])) { $msg = htmlspecialchars($_GET['msg']); $msgTipo = $_G
 
 $busca      = trim($_GET['busca'] ?? '');
 $filtroPerfil = $_GET['perfil_f'] ?? '';
+if (!in_array($filtroPerfil, ['', 'admin', 'funcionario'], true)) $filtroPerfil = '';
 $listaUsuarios = ($modo === 'listar') ? dbListarUsuarios($busca, $filtroPerfil) : [];
 
-$contagens = ['total'=>0,'admin'=>0,'staff'=>0,'funcionario'=>0,'ativos'=>0];
+$contagens = ['total'=>0,'admin'=>0,'funcionario'=>0,'ativos'=>0];
 foreach ($listaUsuarios as $usuarioItem) {
     $contagens['total']++;
     $contagens[$usuarioItem['perfil']] = ($contagens[$usuarioItem['perfil']] ?? 0) + 1;
@@ -153,15 +153,12 @@ foreach ($listaUsuarios as $usuarioItem) {
 
   <?php if ($modo === 'listar'): ?>
 
-  <div class="kpi-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:1.25rem">
+  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:1.25rem">
     <div class="kpi-card kpi-card--cyan" style="padding:.9rem 1rem">
       <div><div class="kpi-label">Total</div><div class="kpi-valor" style="font-size:1.4rem"><?= $contagens['total'] ?></div></div>
     </div>
     <div class="kpi-card kpi-card--purple" style="padding:.9rem 1rem">
       <div><div class="kpi-label">Admins</div><div class="kpi-valor" style="font-size:1.4rem"><?= $contagens['admin'] ?></div></div>
-    </div>
-    <div class="kpi-card kpi-card--blue" style="padding:.9rem 1rem">
-      <div><div class="kpi-label">Staff</div><div class="kpi-valor" style="font-size:1.4rem"><?= $contagens['staff'] ?></div></div>
     </div>
     <div class="kpi-card kpi-card--cyan" style="padding:.9rem 1rem">
       <div><div class="kpi-label">Funcionários</div><div class="kpi-valor" style="font-size:1.4rem"><?= $contagens['funcionario'] ?></div></div>
@@ -180,7 +177,6 @@ foreach ($listaUsuarios as $usuarioItem) {
     <select name="perfil_f" class="form-control" style="width:auto">
       <option value="">Todos os perfis</option>
       <option value="admin"       <?= $filtroPerfil==='admin'       ?'selected':'' ?>>👑 Admin</option>
-      <option value="staff"       <?= $filtroPerfil==='staff'       ?'selected':'' ?>>🛡️ Staff</option>
       <option value="funcionario" <?= $filtroPerfil==='funcionario' ?'selected':'' ?>>👤 Funcionário</option>
     </select>
     <button type="submit" class="btn btn--primary">Buscar</button>
@@ -274,11 +270,7 @@ foreach ($listaUsuarios as $usuarioItem) {
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
       <div>
         <?= perfilBadgeHtml('admin') ?>
-        <p style="font-size:.78rem;color:var(--text-muted);margin-top:.5rem;line-height:1.5">Acesso total ao sistema. Gerencia todos os usuários, relatórios e configurações.</p>
-      </div>
-      <div>
-        <?= perfilBadgeHtml('staff') ?>
-        <p style="font-size:.78rem;color:var(--text-muted);margin-top:.5rem;line-height:1.5">Pode gerenciar funcionários, visualizar relatórios e operar equipamentos.</p>
+        <p style="font-size:.78rem;color:var(--text-muted);margin-top:.5rem;line-height:1.5">Acesso total ao sistema. Gerencia todos os usuários e configurações.</p>
       </div>
       <div>
         <?= perfilBadgeHtml('funcionario') ?>
@@ -331,7 +323,6 @@ foreach ($listaUsuarios as $usuarioItem) {
           <select id="perfil" name="perfil" class="form-control" <?= !ehAdmin()?'disabled':'' ?>>
             <?php if (ehAdmin()): ?>
             <option value="admin"       <?= ($formUsuario['perfil']??'')==='admin'       ?'selected':'' ?>>👑 Admin — Acesso Total</option>
-            <option value="staff"       <?= ($formUsuario['perfil']??'')==='staff'       ?'selected':'' ?>>🛡️ Staff — Gerenciamento</option>
             <?php endif; ?>
             <option value="funcionario" <?= ($formUsuario['perfil']??'funcionario')==='funcionario' ?'selected':'' ?>>👤 Funcionário — Acesso Limitado</option>
           </select>

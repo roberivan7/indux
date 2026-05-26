@@ -2,6 +2,10 @@
 require_once 'icon.php';
 session_start();
 
+if (isset($_SESSION['perfil']) && !in_array($_SESSION['perfil'], ['admin','funcionario'], true)) {
+    $_SESSION['perfil'] = 'funcionario';
+}
+
 define('SISTEMA_NOME',    'INDUX');
 define('SISTEMA_VERSAO',  '2.0');
 define('SISTEMA_TAGLINE', 'Monitoramento Industrial Inteligente');
@@ -15,7 +19,7 @@ define('PRESSAO_ALERTA_MAX',   9.0);
 $statusLabels = ['ativo'=>'Ativo','inativo'=>'Inativo','em_falha'=>'Em Falha'];
 $tipoAlarmeLabels = ['temperatura'=>'Temperatura','pressao'=>'Pressão','falha'=>'Falha','conexao'=>'Conexão','manutencao'=>'Manutenção'];
 $severidadeLabels = ['critico'=>'Crítico','alerta'=>'Alerta','informativo'=>'Informativo'];
-$perfilLabels     = ['admin'=>'👑 Admin','staff'=>'🛡️ Staff','funcionario'=>'👤 Funcionário'];
+$perfilLabels     = ['admin'=>'👑 Admin','funcionario'=>'👤 Funcionário'];
 
 function requerLogin(): void {
     if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
@@ -23,12 +27,9 @@ function requerLogin(): void {
     }
 }
 function requerAdmin(): void { requerLogin(); if (!ehAdmin()) { header('Location: dashboard.php?erro=acesso_negado'); exit; } }
-function requerStaff(): void { requerLogin(); if (!ehAdmin() && !ehStaff()) { header('Location: dashboard.php?erro=acesso_negado'); exit; } }
-
 function ehAdmin(): bool      { return ($_SESSION['perfil'] ?? '') === 'admin'; }
-function ehStaff(): bool      { return ($_SESSION['perfil'] ?? '') === 'staff'; }
 function ehFuncionario(): bool{ return ($_SESSION['perfil'] ?? '') === 'funcionario'; }
-function ehGestor(): bool     { return ehAdmin() || ehStaff(); }
+function ehGestor(): bool     { return ehAdmin(); }
 function ehOperador(): bool   { return ehGestor() || (bool)($_SESSION['is_operador'] ?? false); }
 
 // Permissões granulares (funcionário)
@@ -36,11 +37,9 @@ function podeCriarEquip(): bool     { return ehGestor() || (bool)($_SESSION['per
 function podeEditarEquip(): bool    { return ehGestor() || (bool)($_SESSION['perm_editar_equip']    ?? false); }
 function podeExcluirEquip(): bool   { return ehAdmin(); }
 function podeResolverAlarme(): bool { return ehGestor() || (bool)($_SESSION['perm_resolver_alarme'] ?? false); }
-function podeVerRelatorios(): bool  { return ehAdmin() || ehStaff(); }
-function podeVerUsuarios(): bool    { return ehAdmin() || ehStaff(); }
+function podeVerUsuarios(): bool    { return ehAdmin(); }
 function podeGerenciarPerfil(string $alvo): bool {
     if (ehAdmin()) return true;
-    if (ehStaff() && $alvo === 'funcionario') return true;
     return false;
 }
 
@@ -66,7 +65,8 @@ function avaliarTemp(float $valor, float $minimo, float $maximo): string { if($v
 function avaliarPressao(float $valor, float $minimo, float $maximo): string { if($valor>$maximo||$valor<$minimo)return'danger'; if($valor>($maximo*0.85))return'warning'; return'ok'; }
 function pctBar(float $valor, float $minimo, float $maximo): float { if($maximo<=$minimo)return 0; return min(100,max(0,(($valor-$minimo)/($maximo-$minimo))*100)); }
 function perfilBadgeHtml(string $perfil): string {
-    $perfilTexto=['admin'=>'👑 Admin','staff'=>'🛡️ Staff','funcionario'=>'👤 Funcionário'];
-    $perfilClasse=['admin'=>'perfil--admin','staff'=>'perfil--staff','funcionario'=>'perfil--funcionario'];
+    $perfil = $perfil === 'admin' ? 'admin' : 'funcionario';
+    $perfilTexto=['admin'=>'👑 Admin','funcionario'=>'👤 Funcionário'];
+    $perfilClasse=['admin'=>'perfil--admin','funcionario'=>'perfil--funcionario'];
     return '<span class="perfil-badge '.($perfilClasse[$perfil]??'').'">'.($perfilTexto[$perfil]??$perfil).'</span>';
 }

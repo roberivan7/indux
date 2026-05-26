@@ -45,7 +45,12 @@ function dbListarUsuarios(string $busca = '', string $perfil = ''): array {
         $sql = 'SELECT * FROM usuarios' . ($filtrosSql ? ' WHERE '.implode(' AND ',$filtrosSql) : '') . ' ORDER BY perfil, nome';
         $consultaUsuarios = getDB()->prepare($sql);
         $consultaUsuarios->execute($parametros);
-        return $consultaUsuarios->fetchAll();
+        $usuarios = $consultaUsuarios->fetchAll();
+        foreach ($usuarios as &$usuario) {
+            $usuario['perfil'] = ($usuario['perfil'] ?? '') === 'admin' ? 'admin' : 'funcionario';
+        }
+        unset($usuario);
+        return $usuarios;
     } catch (Throwable $e) { return []; }
 }
 
@@ -53,15 +58,20 @@ function dbBuscarUsuario(int $id): ?array {
     try {
         $consultaUsuario = getDB()->prepare('SELECT * FROM usuarios WHERE id = ?');
         $consultaUsuario->execute([$id]);
-        return $consultaUsuario->fetch() ?: null;
+        $usuario = $consultaUsuario->fetch() ?: null;
+        if ($usuario) {
+            $usuario['perfil'] = ($usuario['perfil'] ?? '') === 'admin' ? 'admin' : 'funcionario';
+        }
+        return $usuario;
     } catch (Throwable $e) { return null; }
 }
 
 function dbCriarUsuario(array $dados): int|false {
     try {
         $db = getDB();
+        $perfil = ($dados['perfil'] ?? '') === 'admin' ? 'admin' : 'funcionario';
         $db->prepare('INSERT INTO usuarios (nome,email,senha,perfil,ativo,perm_criar_equip,perm_editar_equip,perm_resolver_alarme,is_operador) VALUES (?,?,?,?,?,?,?,?,?)')
-           ->execute([$dados['nome'],$dados['email'],password_hash($dados['senha'],PASSWORD_DEFAULT),$dados['perfil'],$dados['ativo'],$dados['perm_criar_equip']??0,$dados['perm_editar_equip']??0,$dados['perm_resolver_alarme']??0,$dados['is_operador']??0]);
+           ->execute([$dados['nome'],$dados['email'],password_hash($dados['senha'],PASSWORD_DEFAULT),$perfil,$dados['ativo'],$dados['perm_criar_equip']??0,$dados['perm_editar_equip']??0,$dados['perm_resolver_alarme']??0,$dados['is_operador']??0]);
         return (int)$db->lastInsertId();
     } catch (Throwable $e) { return false; }
 }
@@ -69,12 +79,13 @@ function dbCriarUsuario(array $dados): int|false {
 function dbAtualizarUsuario(int $id, array $dados): bool {
     try {
         $db = getDB();
+        $perfil = ($dados['perfil'] ?? '') === 'admin' ? 'admin' : 'funcionario';
         if (!empty($dados['senha'])) {
             $db->prepare('UPDATE usuarios SET nome=?,email=?,senha=?,perfil=?,ativo=?,perm_criar_equip=?,perm_editar_equip=?,perm_resolver_alarme=?,is_operador=? WHERE id=?')
-               ->execute([$dados['nome'],$dados['email'],password_hash($dados['senha'],PASSWORD_DEFAULT),$dados['perfil'],$dados['ativo'],$dados['perm_criar_equip']??0,$dados['perm_editar_equip']??0,$dados['perm_resolver_alarme']??0,$dados['is_operador']??0,$id]);
+               ->execute([$dados['nome'],$dados['email'],password_hash($dados['senha'],PASSWORD_DEFAULT),$perfil,$dados['ativo'],$dados['perm_criar_equip']??0,$dados['perm_editar_equip']??0,$dados['perm_resolver_alarme']??0,$dados['is_operador']??0,$id]);
         } else {
             $db->prepare('UPDATE usuarios SET nome=?,email=?,perfil=?,ativo=?,perm_criar_equip=?,perm_editar_equip=?,perm_resolver_alarme=?,is_operador=? WHERE id=?')
-               ->execute([$dados['nome'],$dados['email'],$dados['perfil'],$dados['ativo'],$dados['perm_criar_equip']??0,$dados['perm_editar_equip']??0,$dados['perm_resolver_alarme']??0,$dados['is_operador']??0,$id]);
+               ->execute([$dados['nome'],$dados['email'],$perfil,$dados['ativo'],$dados['perm_criar_equip']??0,$dados['perm_editar_equip']??0,$dados['perm_resolver_alarme']??0,$dados['is_operador']??0,$id]);
         }
         return true;
     } catch (Throwable $e) { return false; }
@@ -139,91 +150,11 @@ function dbContarAlarmes(): array {
     return $contagem;
 }
 
-function dbRelatorioAlarmesPorEquip(): array {
-    try {
-        return getDB()->query(
-            "SELECT e.nome, e.tag, e.status,
-                    COUNT(a.id) as total_alarmes,
-                    SUM(CASE WHEN a.severidade='critico' THEN 1 ELSE 0 END) as criticos,
-                    SUM(CASE WHEN a.severidade='alerta'  THEN 1 ELSE 0 END) as alertas,
-                    SUM(CASE WHEN a.resolvido=0          THEN 1 ELSE 0 END) as pendentes
-             FROM equipamentos e
-             LEFT JOIN alarmes a ON a.equipamento_id = e.id
-             GROUP BY e.id, e.nome, e.tag, e.status
-             ORDER BY total_alarmes DESC"
-        )->fetchAll();
-    } catch (Throwable $e) { return []; }
-}
-
-function dbRelatorioLeiturasPorDia(int $dias = 7): array {
-    try {
-        return getDB()->query(
-            "SELECT DATE(registrado_em) as data,
-                    COUNT(*) as total_leituras,
-                    ROUND(AVG(temperatura),2) as avg_temp,
-                    ROUND(AVG(pressao),2)     as avg_pres,
-                    ROUND(MAX(temperatura),2) as max_temp,
-                    ROUND(MAX(pressao),2)     as max_pres
-             FROM leituras_sensor
-             WHERE registrado_em >= NOW() - INTERVAL {$dias} DAY
-             GROUP BY DATE(registrado_em)
-             ORDER BY data DESC"
-        )->fetchAll();
-    } catch (Throwable $e) { return []; }
-}
-
-function dbRelatorioLogSistema(int $limite = 50): array {
-    try {
-        return getDB()->query(
-            "SELECT ls.*, u.nome as usuario_nome
-             FROM log_sistema ls
-             LEFT JOIN usuarios u ON u.id = ls.usuario_id
-             ORDER BY ls.criado_em DESC
-             LIMIT {$limite}"
-        )->fetchAll();
-    } catch (Throwable $e) { return []; }
-}
-
-function dbRelatorioUsuariosAtivos(): array {
-    try {
-        return getDB()->query(
-            "SELECT perfil, COUNT(*) as total,
-                    SUM(CASE WHEN ativo=1 THEN 1 ELSE 0 END) as ativos
-             FROM usuarios GROUP BY perfil"
-        )->fetchAll();
-    } catch (Throwable $e) { return []; }
-}
-
-function dbRelatorioEquipSemLeitura(): array {
-    try {
-        return getDB()->query(
-            "SELECT e.*, MAX(ls.registrado_em) as ultima_leitura
-             FROM equipamentos e
-             LEFT JOIN leituras_sensor ls ON ls.equipamento_id = e.id
-             GROUP BY e.id
-             HAVING ultima_leitura IS NULL OR ultima_leitura < NOW() - INTERVAL 24 HOUR
-             ORDER BY ultima_leitura ASC"
-        )->fetchAll();
-    } catch (Throwable $e) { return []; }
-}
-
-if (!function_exists('acoesLog')) {
-    function acoesLog(string $acao): string {
-        $m = [
-            'LOGIN'               =>'🔑','LOGOUT'              =>'🚪',
-            'REGISTRAR_LEITURA'   =>'📊','CRIAR_EQUIPAMENTO'   =>'➕',
-            'EDITAR_EQUIPAMENTO'  =>'✏️','EXCLUIR_EQUIPAMENTO' =>'🗑️',
-            'ALTERAR_STATUS'      =>'🔄','RESOLVER_ALARME'     =>'✅',
-            'CRIAR_USUARIO'       =>'👤','EDITAR_USUARIO'      =>'✏️',
-            'TOGGLE_USUARIO'      =>'🔄','EXCLUIR_USUARIO'     =>'🗑️',
-        ];
-        return ($m[$acao]??'📝').' '.ucwords(strtolower(str_replace('_',' ',$acao)));
-    }
-}
 if (!function_exists('perfilBadgeHtml')) {
     function perfilBadgeHtml(string $perfil): string {
-        $t=['admin'=>'👑 Admin','staff'=>'🛡️ Staff','funcionario'=>'👤 Funcionário'];
-        $c=['admin'=>'perfil--admin','staff'=>'perfil--staff','funcionario'=>'perfil--funcionario'];
+        $perfil = $perfil === 'admin' ? 'admin' : 'funcionario';
+        $t=['admin'=>'👑 Admin','funcionario'=>'👤 Funcionário'];
+        $c=['admin'=>'perfil--admin','funcionario'=>'perfil--funcionario'];
         return '<span class="perfil-badge '.($c[$perfil]??'').'">'.(htmlspecialchars($t[$perfil]??$perfil)).'</span>';
     }
 }

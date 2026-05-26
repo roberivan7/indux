@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap');
 
 
 :root {
@@ -1637,6 +1638,331 @@ body.login-body {
 .success-sub {
   color: var(--text-muted);
   max-width: 360px;
+}
+
+/* Upgrade de plano: espelha a pagina publica de planos */
+.site-main--upgrade {
+  max-width: none;
+  padding-top: 2rem;
+}
+
+.upgrade-plans,
+.upgrade-payment {
+  --upgrade-dark: #0a0e1a;
+  --upgrade-card: #111827;
+  --upgrade-border: #1e2d47;
+  --upgrade-accent: #00b4d8;
+  --upgrade-green: #06d6a0;
+  --upgrade-text: #e2e8f0;
+  --upgrade-muted: #64748b;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--upgrade-text);
+}
+
+.upgrade-plans {
+  display: block;
+}
+
+.upgrade-page-header {
+  text-align: center;
+  padding: 2.75rem 1.5rem 1rem;
+}
+
+.upgrade-plans .main-title {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: clamp(2.6rem, 5vw, 4.05rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  color: #f8fafc;
+}
+
+.upgrade-plans .main-title span {
+  color: var(--upgrade-accent);
+}
+
+.upgrade-plans .subtitle {
+  color: var(--upgrade-muted);
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 15px;
+  max-width: 520px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+}
+
+.upgrade-plans .plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+}
+
+.upgrade-plans .plan-card {
+  background: var(--upgrade-card);
+  border: 1px solid var(--upgrade-border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  position: relative;
+  transition: border-color .2s, transform .2s;
+  box-shadow: none;
+  cursor: default;
+}
+
+.upgrade-plans .plan-card:hover {
+  border-color: rgba(0,180,216,.4);
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+.upgrade-plans .plan-card.featured {
+  border-color: var(--upgrade-accent);
+  border-width: 1.5px;
+}
+
+.upgrade-plans .plan-card.featured::before {
+  content: 'Mais Popular';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--upgrade-accent);
+  color: #0a0e1a;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 16px;
+  border-radius: 0 0 8px 8px;
+  letter-spacing: .5px;
+  white-space: nowrap;
+}
+
+.upgrade-plans .plan-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--upgrade-muted);
+  margin-bottom: .75rem;
+}
+
+.upgrade-plans .plan-name.featured {
+  color: var(--upgrade-accent);
+}
+
+.upgrade-plans .plan-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: .35rem;
+}
+
+.upgrade-plans .price-currency {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--upgrade-muted);
+  margin-top: 6px;
+}
+
+.upgrade-plans .price-value {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  color: #f8fafc;
+  line-height: 1;
+}
+
+.upgrade-plans .price-period {
+  font-size: 14px;
+  color: var(--upgrade-muted);
+}
+
+.upgrade-plans .plan-desc {
+  font-size: 13px;
+  color: var(--upgrade-muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  min-height: 36px;
+}
+
+.upgrade-plans .divider {
+  border: 0;
+  border-top: 1px solid var(--upgrade-border);
+  margin: 1.25rem 0;
+}
+
+.upgrade-plans .feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 1.75rem;
+}
+
+.upgrade-plans .feature-item,
+.upgrade-payment .of-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  color: #cbd5e1;
+}
+
+.upgrade-plans .feature-item.dim {
+  color: var(--upgrade-muted);
+}
+
+.upgrade-plans .fi,
+.upgrade-payment .fi {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.upgrade-plans .fi.yes,
+.upgrade-payment .fi.yes {
+  background: rgba(6,214,160,.15);
+}
+
+.upgrade-plans .fi.yes svg,
+.upgrade-payment .fi.yes svg {
+  stroke: var(--upgrade-green);
+}
+
+.upgrade-plans .fi.no {
+  background: rgba(100,116,139,.1);
+}
+
+.upgrade-plans .fi.no svg {
+  stroke: var(--upgrade-muted);
+}
+
+.upgrade-plans .plan-btn,
+.upgrade-payment .plan-btn,
+.success-overlay .plan-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .2s;
+  border: 0;
+  letter-spacing: .3px;
+}
+
+.success-overlay .plan-btn {
+  max-width: 200px;
+}
+
+.upgrade-plans .plan-btn.primary,
+.upgrade-payment .plan-btn.primary,
+.success-overlay .plan-btn.primary {
+  background: var(--upgrade-accent, #00b4d8);
+  color: #0a0e1a;
+  font-weight: 600;
+}
+
+.upgrade-plans .plan-btn.primary:hover,
+.upgrade-payment .plan-btn.primary:hover,
+.success-overlay .plan-btn.primary:hover {
+  background: #00caf0;
+  transform: translateY(-1px);
+}
+
+.upgrade-plans .plan-btn.ghost,
+.upgrade-payment .plan-btn.ghost,
+.success-overlay .plan-btn.ghost {
+  background: rgba(0,180,216,.08);
+  border: 1px solid rgba(0,180,216,.2);
+  color: var(--upgrade-accent, #00b4d8);
+}
+
+.upgrade-plans .plan-btn.ghost:hover,
+.upgrade-payment .plan-btn.ghost:hover,
+.success-overlay .plan-btn.ghost:hover {
+  background: rgba(0,180,216,.15);
+}
+
+.upgrade-plans .trust-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem 1.5rem 2rem;
+  flex-wrap: wrap;
+  color: var(--upgrade-muted);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.upgrade-plans .trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--upgrade-muted);
+}
+
+.upgrade-plans .trust-item svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--upgrade-green);
+}
+
+.upgrade-payment {
+  display: none;
+}
+
+.upgrade-payment .pay-wrap {
+  max-width: 920px;
+  margin: 3rem auto;
+}
+
+.upgrade-payment .order-card,
+.upgrade-payment .form-card {
+  background: var(--upgrade-card);
+  border-color: var(--upgrade-border);
+  border-radius: 16px;
+}
+
+.upgrade-payment .order-title,
+.upgrade-payment .form-section-title,
+.upgrade-payment .order-plan-name {
+  font-family: 'Syne', sans-serif;
+}
+
+.upgrade-payment .pay-submit,
+.upgrade-payment .pix-btn {
+  width: 100%;
+  padding: 12px;
+  border: 0;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.upgrade-payment .pay-submit {
+  background: var(--upgrade-accent);
+  color: #0a0e1a;
+}
+
+.upgrade-payment .pix-btn {
+  margin-top: .75rem;
+  background: rgba(0,180,216,.08);
+  border: 1px solid rgba(0,180,216,.2);
+  color: var(--upgrade-accent);
+}
+
+.upgrade-payment .back-plan-btn {
+  margin-top: .75rem;
 }
 
 @media (max-width: 760px) {
