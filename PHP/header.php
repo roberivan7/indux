@@ -94,9 +94,11 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
           <small>Abrir chamado</small>
         </span>
       </a>
+      <?php if (ehAdmin() || ehStaff()): ?>
       <a href="planos.php" class="btn-upgrade">
         <span>UP</span> Upgrade de plano
       </a>
+      <?php endif; ?>
       <div class="sidebar-user">
         <div class="user-avatar"><?php echo inicialNome($_SESSION['usuario_nome'] ?? 'U'); ?></div>
         <div class="user-info">

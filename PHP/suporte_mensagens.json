@@ -8,6 +8,15 @@
             "mensagem": "Olá bom dia",
             "status": "aguardando_resposta_email",
             "criada_em": "2026-05-25 17:43:16"
+        },
+        {
+            "id_solicitacao": "solicitacao_20260526150158_f9200ad5",
+            "nome_usuario": "Roberivan Santos",
+            "email_usuario": "roberivan@indux.com.br",
+            "tipo_suporte": "Bugs",
+            "mensagem": "bom dia",
+            "status": "aguardando_resposta_email",
+            "criada_em": "2026-05-26 15:01:58"
         }
     ]
 }
