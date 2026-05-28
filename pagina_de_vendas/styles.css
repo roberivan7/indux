@@ -1659,123 +1659,209 @@ border: 1px solid transparent;
         max-width:320px
     }
 
-    /* ===== Parte Contato Matheus ===== */
+   /* ===== Parte Contato ===== */
+
 .conteiner{
     width: 100%;
-    height: 60rem;
+    min-height: 100vh;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    flex-direction: row;
+    padding: 6rem 4%;
 }
+
 .conteiner-f{
     width: 100%;
+    max-width: 1500px;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: row;
-}
-.conteiner-centralizar{
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-}
-form{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    width: 98%;
-}
-.form{
-    width: 80%;
-    height: 700px;
-    background: linear-gradient(0deg,#0a1628,#111d33);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 3rem;
-    border-radius: 2rem;
-    overflow-y: hidden;
-    transition: all .2s ease-in-out;
-    border: 1px solid var(--azul-borda);
-    position: relative;
-}
-
-
-.form::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--ciano);
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-
-.form:hover{
-    box-shadow: 0px 7px 10px 3px rgba(0, 200, 255, 0.3);
-   
-}
-
-
-.form:hover::before {
-    opacity: 1;
-}
-
-.form.orcamento {
-    height: 700px;
-    padding: 1.75rem;
+    justify-content: space-between;
     align-items: stretch;
+    gap: 5rem;
 }
 
-.orcamento-grid {
+/* ===== FORM GERAL ===== */
+
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== BLOCO ESQUERDA ===== */
+
+.form.orcamento{
+    width: 50%;
+    max-width: 700px;
+    min-height: 650px;
+    padding: 1.8rem;
+    background: linear-gradient(0deg,#0a1628,#111d33);
+    border-radius: 2rem;
+    border: 1px solid var(--azul-borda);
+    overflow: hidden;
+}
+
+/* ===== GRID ===== */
+
+.orcamento-grid{
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
-    align-items: stretch;
+    grid-template-columns: repeat(2,1fr);
+    gap: 1.5rem;
 }
 
-.orcamento-card {
-    width: 100%;
-    height: 100%;
-    min-width: 0;
-    padding: 1.5rem;
-    border-radius: 1.25rem;
-    background: rgba(15, 23, 42, 0.95);
+.orcamento-card{
+    padding: 2rem;
+    border-radius: 1.4rem;
+    background: rgba(15,23,42,0.95);
     border: 1px solid var(--azul-borda);
-    color: var(--branco);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    transition: border-color .2s ease;
 }
 
-.orcamento-label {
-    margin-bottom: 0.75rem;
-    font-size: 0.8rem;
+.orcamento-card:hover{
+    border-color: var(--ciano);
+}
+
+.orcamento-label{
+    margin-bottom: 1rem;
     color: var(--ciano);
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .15em;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
 }
 
-.orcamento-card h2 {
-    font-size: 1.1rem;
-    margin-bottom: 0.75rem;
+.orcamento-card h2{
     color: var(--branco);
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
 }
 
-.orcamento-card p:last-child {
+.orcamento-card p:last-child{
     color: var(--texto-paragrafo);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.8;
 }
+
+/* ===== BLOCO DIREITA ===== */
+
+.form.contato{
+    width: 50%;
+    max-width: 700px;
+    min-height: 650px;
+    padding: 3rem;
+    background: linear-gradient(0deg,#0a1628,#111d33);
+    border-radius: 2rem;
+    border: 1px solid var(--azul-borda);
+}
+
+/* ===== TÍTULO ===== */
+
+.form.contato h1{
+    text-align: center;
+    color: var(--branco);
+    font-size: 3rem;
+    margin-bottom: 2.5rem;
+}
+
+/* ===== LINHAS ===== */
+
+.form-linha{
+    width: 100%;
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ===== INPUT GROUP ===== */
+
+.input-group{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label{
+    color: var(--branco);
+    font-weight: 600;
+    margin-bottom: .7rem;
+}
+
+/* ===== INPUTS ===== */
+
+.input-group input,
+.input-group select,
+.input-group textarea{
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border-radius: 1rem;
+    border: 2px solid #0f6db8;
+    background: transparent;
+    outline: none;
+    font-size: .95rem;
+    transition: border-color .2s ease;
+    box-shadow: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ===== LINHA AZUL ===== */
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus{
+    border-color: var(--ciano);
+    outline: none;
+    box-shadow: none;
+}
+
+/* ===== REMOVE EFEITO BRANCO ===== */
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible{
+    outline: none;
+    box-shadow: none;
+}
+
+/* ===== TEXTAREA ===== */
+
+.input-group textarea{
+    height: 130px;
+    resize: none;
+}
+
+/* ===== PLACEHOLDER ===== */
+
+.input-group input::placeholder,
+.input-group textarea::placeholder{
+    color: rgba(255,255,255,0.4);
+}
+
+/* ===== BOTÃO ===== */
+
+.btn-enviar{
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    border-radius: 1rem;
+    border: 2px solid var(--ciano);
+    background: transparent;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.btn-enviar:hover{
+    background: var(--ciano);
+    color: #08111f;
+}
+
 
 
 /* Variações de cor para .form */
@@ -1819,8 +1905,6 @@ input{
         linear-gradient(#0a1628, #0a1628) padding-box,
         linear-gradient(#1a3a6e, #0077b6) border-box;
     border-radius: 1.5rem;
-    transition: transform .2s ease-in-out;
-    color: white;
 }
 
 .card input{
