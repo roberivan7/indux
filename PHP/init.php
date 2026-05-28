@@ -38,6 +38,7 @@ function podeEditarEquip(): bool    { return ehGestor() || (bool)($_SESSION['per
 function podeExcluirEquip(): bool   { return ehAdmin(); }
 function podeResolverAlarme(): bool { return ehGestor() || (bool)($_SESSION['perm_resolver_alarme'] ?? false); }
 function podeVerUsuarios(): bool    { return ehAdmin(); }
+function podeAcessarSuporte(): bool { return !ehFuncionario(); }
 function podeGerenciarPerfil(string $alvo): bool {
     if (ehAdmin()) return true;
     return false;

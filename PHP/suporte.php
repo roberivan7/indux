@@ -3,6 +3,11 @@ require_once 'icon.php';
 require_once 'init.php';
 
 $usuarioLogado = isset($_SESSION['logado']) && $_SESSION['logado'] === true;
+if ($usuarioLogado && !podeAcessarSuporte()) {
+    header('Location: dashboard.php?erro=acesso_negado');
+    exit;
+}
+
 $nomeUsuario = $_SESSION['usuario_nome'] ?? '';
 $emailUsuario = $_SESSION['usuario_email'] ?? '';
 $classeBody = $usuarioLogado ? 'pagina-suporte' : 'pagina-suporte pagina-suporte-publica';

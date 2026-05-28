@@ -3,22 +3,19 @@ require_once 'header.php';
 require_once 'footer.php';
 ?>
 
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contato</title>
+    <title>Document</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-<header>
-    <?php echo $header; ?>
-</header>
-
+<header><?php echo $header;?></header>
 <div class="conteiner">
-    <div class="conteiner-f">
+    <div class="conteiner-centralizar">
         <main class="form orcamento" id="orcamento">
             <div class="orcamento-grid">
                 <article class="orcamento-card">
@@ -26,19 +23,16 @@ require_once 'footer.php';
                     <h2>Diagnóstico rápido</h2>
                     <p>Entendemos suas necessidades e mapeamos a melhor solução para seu negócio.</p>
                 </article>
-
                 <article class="orcamento-card">
                     <p class="orcamento-label">Escopo</p>
                     <h2>Estrutura do projeto</h2>
                     <p>Definimos funcionalidades, prazos e prioridades para o lançamento sem surpresas.</p>
                 </article>
-
                 <article class="orcamento-card">
                     <p class="orcamento-label">Entrega</p>
                     <h2>Implementação</h2>
                     <p>Desenvolvemos, testamos e ajustamos o fluxo com acompanhamento próximo ao cliente.</p>
                 </article>
-
                 <article class="orcamento-card">
                     <p class="orcamento-label">Suporte</p>
                     <h2>Monitoramento contínuo</h2>
@@ -46,68 +40,48 @@ require_once 'footer.php';
                 </article>
             </div>
         </main>
+    </div>
+    <div class="conteiner-centralizar">
 
-<<<<<<< HEAD
+
+        <main class="form">
+
             <form id="formContato">
                 <p class="Titulo-Orcamento">Entre em Contato</p>
                 <div class="conteiner-f">
                     <div class="teste">
                        
-=======
-        <main class="form contato">
-            <form>
-                <h1>Entre em Contato</h1>
-                <div class="form-linha">
-                    <div class="input-group">
->>>>>>> ac4e1636b13af18baddfc2eae3a3d2a0d0976cfa
                         <label for="nome">Nome Completo:</label>
                         <input type="text" id="nome" name="nome" placeholder="Digite o seu nome ou o de sua empresa">
-                    </div>
-
-                    <div class="input-group">
-                        <label for="numero">Número para Retorno:</label>
-                        <input type="text" id="numero" name="numero" placeholder="Digite seu Número">
-                    </div>
-                </div>
-
-                <div class="form-linha">
-                    <div class="input-group">
+                           
                         <label for="email">Email Principal:</label>
                         <input type="email" id="email" name="email" placeholder="Digite seu Email">
                     </div>
+                    <div class="teste">
+                        <label for="numero">Número para Retorno:</label>
+                        <input type="number" id="numero" name="numero" placeholder="Digite seu Número">
 
-                    <div class="input-group">
+
                         <label for="urgencia">Planos de serviço</label>
-
                         <select name="urgencia" id="urgencia">
-                            <option>Starter</option>
-                            <option>Pro</option>
-                            <option>Enterprise</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
                         </select>
                     </div>
                 </div>
-<<<<<<< HEAD
                     <div class="teste">
                            
                         <label for="mensagem">Fale Aqui:</label>
                         <textarea id="mensagem" name="mensagem" rows="2"  draggable="true"  ></textarea>
                         <button type="submit">Enviar --&gt;</button>
                     </div>
-=======
->>>>>>> ac4e1636b13af18baddfc2eae3a3d2a0d0976cfa
 
-                <div class="input-group">
-                    <label for="mensagem">Fale Aqui:</label>
-                    <textarea id="mensagem" name="mensagem" placeholder="Digite sua mensagem..."></textarea>
 
-                </div>
-
-                <button type="submit" class="btn-enviar">Enviar</button>
             </form>
         </main>
     </div>
 </div>
-<<<<<<< HEAD
 <div class="contato-popup" id="popupContato" hidden>
     <div class="contato-popup__caixa" role="dialog" aria-modal="true" aria-labelledby="popupContatoTitulo">
         <div class="contato-popup__icone">OK</div>
@@ -156,12 +130,5 @@ document.addEventListener('keydown', function(evento) {
     }
 });
 </script>
-=======
-
-<footer>
-    <?php echo $footer; ?>
-</footer>
-
->>>>>>> ac4e1636b13af18baddfc2eae3a3d2a0d0976cfa
 </body>
 </html>

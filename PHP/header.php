@@ -87,6 +87,7 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
 
     <div class="sidebar-footer">
       <?php if (isset($_SESSION['logado']) && $_SESSION['logado']): ?>
+      <?php if (podeAcessarSuporte()): ?>
       <a href="suporte.php" class="btn-suporte-sidebar <?php echo $paginaAtual === 'suporte' ? 'active' : ''; ?>">
         <span class="btn-suporte-sidebar__icone">💬</span>
         <span>
@@ -94,6 +95,7 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
           <small>Abrir chamado</small>
         </span>
       </a>
+      <?php endif; ?>
       <?php if (ehAdmin()): ?>
       <a href="planos.php" class="btn-upgrade">
         <span>UP</span> Upgrade de plano

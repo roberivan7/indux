@@ -17,6 +17,15 @@
             "mensagem": "gjzdtj\\erj",
             "status": "aguardando_resposta_email",
             "criada_em": "2026-05-26 15:32:18"
+        },
+        {
+            "id_solicitacao": "solicitacao_20260527135729_38fd91e9",
+            "nome_usuario": "Administrador INDUX",
+            "email_usuario": "admin@indux.com.br",
+            "tipo_suporte": "Suporte geral",
+            "mensagem": "Oi",
+            "status": "aguardando_resposta_email",
+            "criada_em": "2026-05-27 13:57:29"
         }
     ]
 }

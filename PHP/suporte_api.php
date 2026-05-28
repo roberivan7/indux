@@ -1,4 +1,6 @@
 <?php
+require_once 'init.php';
+
 // ============================================================
 // INDUX — API simples de solicitações de suporte
 // O usuário escolhe o tipo de suporte, envia a mensagem e
@@ -22,6 +24,10 @@ function responderJson(array $resposta, int $codigoHttp = 200): void
     http_response_code($codigoHttp);
     echo json_encode($resposta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     exit;
+}
+
+if (isset($_SESSION['logado']) && $_SESSION['logado'] === true && !podeAcessarSuporte()) {
+    responderJson(['ok' => false, 'erro' => 'Acesso negado ao suporte para usuários do perfil Funcionário.'], 403);
 }
 
 function pegarDadosEnviados(): array
