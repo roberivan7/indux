@@ -1,0 +1,22 @@
+{
+    "solicitacoes": [
+        {
+            "id_solicitacao": "solicitacao_20260525174316_af76ac33",
+            "nome_usuario": "Roberivan Santo",
+            "email_usuario": "roberivan@indux.com.br",
+            "tipo_suporte": "Bugs",
+            "mensagem": "Olá bom dia",
+            "status": "aguardando_resposta_email",
+            "criada_em": "2026-05-25 17:43:16"
+        },
+        {
+            "id_solicitacao": "solicitacao_20260526153218_a5686ca2",
+            "nome_usuario": "Administrador INDUX",
+            "email_usuario": "admin@indux.com.br",
+            "tipo_suporte": "Erros diversos",
+            "mensagem": "gjzdtj\\erj",
+            "status": "aguardando_resposta_email",
+            "criada_em": "2026-05-26 15:32:18"
+        }
+    ]
+}
