@@ -1,5 +1,5 @@
 <?php
-require_once 'icon.php';
+require_once '../PHP/icon.php';
 $header = '<nav class="navbar">
     <a href="index.php" class="navbar-logo">
         <img src="img/Monitoramento industrial (2).png" alt="INDUX Logo" onerror="this.style.display=\'none\'">
