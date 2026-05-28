@@ -46,7 +46,7 @@ require_once 'footer.php';
 
         <main class="form">
 
-            <form>
+            <form id="formContato">
                 <p class="Titulo-Orcamento">Entre em Contato</p>
                 <div class="conteiner-f">
                     <div class="teste">
@@ -74,7 +74,7 @@ require_once 'footer.php';
                            
                         <label for="mensagem">Fale Aqui:</label>
                         <textarea id="mensagem" name="mensagem" rows="2"  draggable="true"  ></textarea>
-                        <button><a href="../index.html">Enviar  --></a></button>
+                        <button type="submit">Enviar --&gt;</button>
                     </div>
 
 
@@ -82,6 +82,53 @@ require_once 'footer.php';
         </main>
     </div>
 </div>
+<div class="contato-popup" id="popupContato" hidden>
+    <div class="contato-popup__caixa" role="dialog" aria-modal="true" aria-labelledby="popupContatoTitulo">
+        <div class="contato-popup__icone">OK</div>
+        <h2 id="popupContatoTitulo">Mensagem enviada com sucesso!</h2>
+        <button type="button" class="contato-popup__botao" id="fecharPopupContato">Fechar</button>
+    </div>
+</div>
 <footer><?php echo $footer; ?></footer>
+<script>
+const formContato = document.getElementById('formContato');
+const popupContato = document.getElementById('popupContato');
+const fecharPopupContato = document.getElementById('fecharPopupContato');
+
+function abrirPopupContato() {
+    popupContato.hidden = false;
+    popupContato.classList.add('ativo');
+    fecharPopupContato.focus();
+}
+
+function fecharPopup() {
+    popupContato.classList.remove('ativo');
+    popupContato.hidden = true;
+}
+
+formContato.addEventListener('submit', function(evento) {
+    evento.preventDefault();
+
+    if (!formContato.checkValidity()) {
+        formContato.reportValidity();
+        return;
+    }
+
+    formContato.reset();
+    abrirPopupContato();
+});
+
+fecharPopupContato.addEventListener('click', fecharPopup);
+popupContato.addEventListener('click', function(evento) {
+    if (evento.target === popupContato) {
+        fecharPopup();
+    }
+});
+document.addEventListener('keydown', function(evento) {
+    if (evento.key === 'Escape' && !popupContato.hidden) {
+        fecharPopup();
+    }
+});
+</script>
 </body>
 </html>
