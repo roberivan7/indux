@@ -72,16 +72,16 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
       </div>
 
       <div>
+        <?php if (ehAdmin()): ?>
         <div class="nav-label">Administração</div>
         <ul>
-          <?php if (ehAdmin()): ?>
           <li>
             <a href="usuarios.php" class="<?php echo in_array($paginaAtual, ['usuarios','novo-usuario']) ? 'active' : ''; ?>">
               <span class="nav-icon">👥</span> Usuários
             </a>
           </li>
-          <?php endif; ?>
         </ul>
+        <?php endif; ?>
       </div>
     </nav>
 

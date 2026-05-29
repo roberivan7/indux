@@ -244,7 +244,7 @@ try {
             </div>
 
             <?php if (!$alarme['resolvido'] && ehOperador()): ?>
-              <a href="monitoramento.php?resolver=<?php echo $alarme['id']; ?>&res=0"
+              <a href="monitoramento.php?equip=<?php echo $alarme['id']; ?>"
                 class="btn btn--success btn--sm">Resolver</a>
             <?php endif; ?>
 
