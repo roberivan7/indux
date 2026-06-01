@@ -1,10 +1,10 @@
 <?php
 require_once 'icon.php';
-define('DB_HOST',    'localhost');
+define('DB_HOST',    '127.0.0.1');
 define('DB_NAME',    'indux');
 define('DB_USER',    'root');
-define('DB_PASS',    '');
-define('DB_CHARSET', 'utf8mb4');
+define('DB_PASS',    '123');
+define('DB_CHARSET', 'utf8mb4');    
 
 function getDB(): PDO {
     static $pdo = null;

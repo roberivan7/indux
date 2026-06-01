@@ -69,14 +69,22 @@ function criarIdSuporte(string $prefixo): string
 function lerArquivoSuporte(): array
 {
     if (!file_exists(ARQUIVO_SUPORTE)) {
-        file_put_contents(
+        $arquivoCriado = @file_put_contents(
             ARQUIVO_SUPORTE,
             json_encode(['solicitacoes' => []], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE),
             LOCK_EX
         );
+
+        if ($arquivoCriado === false) {
+            throw new RuntimeException('Não foi possível criar o arquivo de suporte.');
+        }
     }
 
-    $conteudoArquivo = file_get_contents(ARQUIVO_SUPORTE);
+    $conteudoArquivo = @file_get_contents(ARQUIVO_SUPORTE);
+    if ($conteudoArquivo === false) {
+        throw new RuntimeException('Não foi possível ler o arquivo de suporte.');
+    }
+
     $dados = json_decode($conteudoArquivo ?: '', true);
 
     if (!is_array($dados) || !isset($dados['solicitacoes']) || !is_array($dados['solicitacoes'])) {
@@ -88,11 +96,20 @@ function lerArquivoSuporte(): array
 
 function salvarArquivoSuporte(array $dados): void
 {
-    file_put_contents(
+    $jsonSuporte = json_encode($dados, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    if ($jsonSuporte === false) {
+        throw new RuntimeException('Não foi possível preparar os dados do suporte.');
+    }
+
+    $arquivoSalvo = @file_put_contents(
         ARQUIVO_SUPORTE,
-        json_encode($dados, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+        $jsonSuporte,
         LOCK_EX
     );
+
+    if ($arquivoSalvo === false) {
+        throw new RuntimeException('Não foi possível salvar a solicitação de suporte. Verifique a permissão do arquivo suporte_mensagens.json.');
+    }
 }
 
 $dadosEnviados = pegarDadosEnviados();

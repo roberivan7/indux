@@ -85,7 +85,7 @@ try {
   $filtroSql = $filtrosSql ? 'WHERE ' . implode(' AND ', $filtrosSql) : '';
 
   $consultaAlarmes = $db->prepare(
-    "SELECT a.*, e.nome as equip_nome, e.tag as equip_tag,
+    "SELECT a.*, e.id as equipamento_id, e.nome as equip_nome, e.tag as equip_tag,
                 u.nome as resolvido_nome
          FROM alarmes a
          JOIN equipamentos e ON e.id = a.equipamento_id
@@ -102,10 +102,10 @@ try {
 } catch (Throwable $e) {
   // Demo
   $alarmes = [
-    ['id' => 1, 'tipo' => 'temperatura', 'severidade' => 'critico', 'mensagem' => 'Temperatura acima do limite: 88.9°C (máx: 70°C)', 'valor_registrado' => 88.9, 'valor_limite' => 70, 'resolvido' => 0, 'resolvido_por' => null, 'resolvido_em' => null, 'criado_em' => date('Y-m-d H:i:s', time() - 120), 'equip_nome' => 'Compressor Industrial', 'equip_tag' => 'CMP-002', 'resolvido_nome' => null],
-    ['id' => 2, 'tipo' => 'pressao', 'severidade' => 'critico', 'mensagem' => 'Pressão excede limite crítico: 13.2 bar (máx: 12 bar)', 'valor_registrado' => 13.2, 'valor_limite' => 12, 'resolvido' => 0, 'resolvido_por' => null, 'resolvido_em' => null, 'criado_em' => date('Y-m-d H:i:s', time() - 180), 'equip_nome' => 'Compressor Industrial', 'equip_tag' => 'CMP-002', 'resolvido_nome' => null],
-    ['id' => 3, 'tipo' => 'manutencao', 'severidade' => 'alerta', 'mensagem' => 'Manutenção preventiva programada para esta semana', 'valor_registrado' => null, 'valor_limite' => null, 'resolvido' => 0, 'resolvido_por' => null, 'resolvido_em' => null, 'criado_em' => date('Y-m-d H:i:s', time() - 3600), 'equip_nome' => 'Caldeira Principal', 'equip_tag' => 'CLD-001', 'resolvido_nome' => null],
-    ['id' => 4, 'tipo' => 'conexao', 'severidade' => 'informativo', 'mensagem' => 'Sensor de temperatura reiniciado com sucesso', 'valor_registrado' => null, 'valor_limite' => null, 'resolvido' => 1, 'resolvido_por' => 1, 'resolvido_em' => date('Y-m-d H:i:s', time() - 1800), 'criado_em' => date('Y-m-d H:i:s', time() - 7200), 'equip_nome' => 'Bomba Hidráulica', 'equip_tag' => 'BBA-003', 'resolvido_nome' => 'Administrador INDUX'],
+    ['id' => 1, 'equipamento_id' => 2, 'tipo' => 'temperatura', 'severidade' => 'critico', 'mensagem' => 'Temperatura acima do limite: 88.9°C (máx: 70°C)', 'valor_registrado' => 88.9, 'valor_limite' => 70, 'resolvido' => 0, 'resolvido_por' => null, 'resolvido_em' => null, 'criado_em' => date('Y-m-d H:i:s', time() - 120), 'equip_nome' => 'Compressor Industrial', 'equip_tag' => 'CMP-002', 'resolvido_nome' => null],
+    ['id' => 2, 'equipamento_id' => 2, 'tipo' => 'pressao', 'severidade' => 'critico', 'mensagem' => 'Pressão excede limite crítico: 13.2 bar (máx: 12 bar)', 'valor_registrado' => 13.2, 'valor_limite' => 12, 'resolvido' => 0, 'resolvido_por' => null, 'resolvido_em' => null, 'criado_em' => date('Y-m-d H:i:s', time() - 180), 'equip_nome' => 'Compressor Industrial', 'equip_tag' => 'CMP-002', 'resolvido_nome' => null],
+    ['id' => 3, 'equipamento_id' => 1, 'tipo' => 'manutencao', 'severidade' => 'alerta', 'mensagem' => 'Manutenção preventiva programada para esta semana', 'valor_registrado' => null, 'valor_limite' => null, 'resolvido' => 0, 'resolvido_por' => null, 'resolvido_em' => null, 'criado_em' => date('Y-m-d H:i:s', time() - 3600), 'equip_nome' => 'Caldeira Principal', 'equip_tag' => 'CLD-001', 'resolvido_nome' => null],
+    ['id' => 4, 'equipamento_id' => 3, 'tipo' => 'conexao', 'severidade' => 'informativo', 'mensagem' => 'Sensor de temperatura reiniciado com sucesso', 'valor_registrado' => null, 'valor_limite' => null, 'resolvido' => 1, 'resolvido_por' => 1, 'resolvido_em' => date('Y-m-d H:i:s', time() - 1800), 'criado_em' => date('Y-m-d H:i:s', time() - 7200), 'equip_nome' => 'Bomba Hidráulica', 'equip_tag' => 'BBA-003', 'resolvido_nome' => 'Administrador INDUX'],
   ];
   $contagens = ['total' => 3, 'critico' => 2, 'alerta' => 1, 'informativo' => 0, 'resolvidos' => 1];
 
@@ -244,7 +244,7 @@ try {
             </div>
 
             <?php if (!$alarme['resolvido'] && ehOperador()): ?>
-              <a href="monitoramento.php?equip=<?php echo $alarme['id']; ?>"
+              <a href="monitoramento.php?equip=<?php echo (int)$alarme['equipamento_id']; ?>"
                 class="btn btn--success btn--sm">Resolver</a>
             <?php endif; ?>
 
