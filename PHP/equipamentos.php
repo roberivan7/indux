@@ -293,18 +293,16 @@ if ($filtroStatus !== '') {
               onclick="this.nextElementSibling.classList.toggle('open')"
               type="button"
             >Status ▾</button>
-            <div style="position:absolute;bottom:calc(100% + 4px);right:0;background:var(--card);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:.4rem;min-width:150px;z-index:10;display:none" class="status-dropdown">
+           <div class="status-dropdown">
               <?php foreach (['ativo'=>'Ativo','inativo'=>'Inativo','em_falha'=>'Em Falha'] as $statusValor => $statusTexto): ?>
               <?php if ($statusValor !== $equipamento['status']): ?>
-              <form method="POST">
-                <input type="hidden" name="equip_id" value="<?php echo $equipamento['id']; ?>">
-                <input type="hidden" name="novo_status" value="<?php echo $statusValor; ?>">
-                <button type="submit" name="alterar_status" value="1"
-                  class="btn btn--ghost btn--sm"
-                  style="width:100%;justify-content:flex-start;border:none;margin:.15rem 0">
-                  <?php echo $statusTexto; ?>
-                </button>
-              </form>
+                <form method="POST">
+                  <input type="hidden" name="equip_id" value="<?php echo $equipamento['id']; ?>">
+                  <input type="hidden" name="novo_status" value="<?php echo $statusValor; ?>">
+                  <button type="submit" name="alterar_status" value="1" class="btn btn--ghost btn--sm">
+                    <?php echo $statusTexto; ?>
+                  </button>
+                </form>
               <?php endif; ?>
               <?php endforeach; ?>
               <?php if (podeExcluirEquip()): ?>
