@@ -225,7 +225,7 @@ foreach ($listaUsuarios as $usuarioItem) {
               <?php if ($usuarioItem['perm_editar_equip']): ?><span style="background:rgba(245,158,11,.1);color:var(--yellow);border:1px solid rgba(245,158,11,.2);border-radius:4px;padding:1px 5px;font-size:.65rem;font-family:var(--font-mono)">Editar Equip.</span><?php endif; ?>
               <?php if ($usuarioItem['perm_resolver_alarme']): ?><span style="background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.2);border-radius:4px;padding:1px 5px;font-size:.65rem;font-family:var(--font-mono)">Resolver Alarme</span><?php endif; ?>
               <?php if (!$usuarioItem['is_operador']&&!$usuarioItem['perm_criar_equip']&&!$usuarioItem['perm_editar_equip']&&!$usuarioItem['perm_resolver_alarme']): ?>
-              <span style="color:var(--text-muted);font-size:.7rem">Somente visualização</span>
+              <span style="color:var(--text-muted);font-size:.7rem">Somente Visualização</span>
               <?php endif; ?>
             </div>
           </td>

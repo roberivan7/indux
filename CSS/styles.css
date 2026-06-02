@@ -371,7 +371,7 @@ img { max-width: 100%; display: block; }
   text-decoration: none;
 }
 
-/* ════════════════════════ MAIN ═════════════════════════════════ */
+/* ================ MAIN =============== */
 
 .site-main {
   padding: 15px;
@@ -699,8 +699,9 @@ img { max-width: 100%; display: block; }
   height: 3px;
 }
 
-.equip-card.ativo    { border-color: rgba(16,185,129,.2); }
-.equip-card.ativo::before { background: linear-gradient(90deg, var(--green), transparent); }
+.equip-card.ativo    {
+   border-color: rgba(16,185,129,.2);
+   }
 
 .equip-card.inativo  {
   background: #0d1422;
@@ -717,9 +718,47 @@ img { max-width: 100%; display: block; }
   border-color: rgba(148,163,184,.12);
 }
 
-.equip-card.em_falha { border-color: rgba(239,68,68,.3); }
-.equip-card.em_falha::before { background: linear-gradient(90deg, var(--red), transparent); }
-.equip-card.em_falha { animation: falha-pulse 3s infinite; }
+.equip-card.inativo  { 
+  border-color: rgba(59,130,246,.15); 
+}
+
+.equip-card.inativo::before { 
+  background: linear-gradient(90deg, #4d5764, transparent);
+ }
+
+.equip-card.inativo {
+    opacity: 0.8; 
+    filter: grayscale(20%);
+    transition: all 0.3s ease;
+}
+
+.equip-card.inativo .equip-card__header,
+.equip-card.inativo .equip-card__metrics,
+.equip-card.inativo .gauge-wrap,
+.equip-card.inativo div:not(.equip-card__actions) {
+    opacity: 0.35; 
+}
+
+.equip-card.inativo .equip-card__actions {
+    opacity: 1 !important;
+    pointer-events: auto !important; 
+}
+
+.equip-card.inativo .equip-card__title {
+    color: #ffffff !important; 
+    opacity: 1 !important; 
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.2); 
+}
+
+.equip-card.em_falha { 
+  border-color: rgba(239,68,68,.3); 
+}
+.equip-card.em_falha::before { 
+  background: linear-gradient(90deg, var(--red), transparent); 
+}
+.equip-card.em_falha { 
+  animation: falha-pulse 3s infinite; 
+}
 
 @keyframes falha-pulse {
   0%, 100% { box-shadow: 0 0 0 rgba(239,68,68,0); }
@@ -1483,7 +1522,7 @@ body.login-body {
 .empty-state__title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--text-dim); margin-bottom: .5rem; }
 .empty-state__desc { font-size: .875rem; }
 
-/* Planos */
+/* =============== Planos =============== */
 .plans-shell {
   display: grid;
   gap: 1.5rem;
@@ -1814,7 +1853,6 @@ body.login-body {
   max-width: 360px;
 }
 
-/* Upgrade de plano: espelha a pagina publica de planos */
 .site-main--upgrade {
   max-width: none;
   padding-top: 2rem;
@@ -2156,7 +2194,7 @@ body.login-body {
   .page-header { flex-direction: column; }
 }
 
-/* ════════════════════════ SUPORTE INDUX ════════════════════════ */
+/* =============== SUPORTE INDUX =============== */
 .btn-suporte-sidebar {
   display: flex;
   align-items: center;
@@ -2493,7 +2531,6 @@ body.login-body {
   }
 }
 
-/* Ajustes do suporte por chamado */
 .suporte-caixa-resposta {
   min-height: 220px;
   height: auto;

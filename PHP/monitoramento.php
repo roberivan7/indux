@@ -217,7 +217,7 @@ if ($equipFiltro > 0) {
       $pT  = $equipamento['ultima_temp']    !== null ? pctBar($equipamento['ultima_temp'],    $equipamento['temp_min'],    $equipamento['temp_max'])    : 0;
       $pP  = $equipamento['ultima_pressao'] !== null ? pctBar($equipamento['ultima_pressao'],$equipamento['pressao_min'],$equipamento['pressao_max']) : 0;
     ?>
-    <div class="equip-card <?= $equipamento['status'] ?>">
+<div class="equip-card <?= $equipamento['status'] ?> <?= ($equipamento['status'] === 'inativo') ? 'card-inativo' : '' ?>">
       <div class="equip-card__header">
         <div>
           <div class="equip-card__title"><?= htmlspecialchars($equipamento['nome']) ?></div>

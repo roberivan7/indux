@@ -26,6 +26,15 @@
             "mensagem": "Oi",
             "status": "aguardando_resposta_email",
             "criada_em": "2026-05-27 13:57:29"
+        },
+        {
+            "id_solicitacao": "solicitacao_20260602001540_e367f459",
+            "nome_usuario": "Administrador INDUX",
+            "email_usuario": "admin@indux.com.br",
+            "tipo_suporte": "Erros diversos",
+            "mensagem": "Ok google",
+            "status": "aguardando_resposta_email",
+            "criada_em": "2026-06-02 00:15:40"
         }
     ]
 }
