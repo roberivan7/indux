@@ -14,19 +14,25 @@ require_once 'footer.php';
 </head>
 <body>
 <header><?php echo $header;?></header>
+<section class="hero-solucoes">
+    <h1>
+        Entre em contato<br>
+        <span class="destaque">estamos prontos para atendê-lo</span>
+    </h1>
+    <p>
+        Fale com nossa equipe e descubra como nossas soluções podem <br> 
+        transformar sua indústria.
+    </p>
+    <span class="status-online">Resposta rápida em até 24h úteis</span>
+</section>
 <div class="conteiner">
-    <div class="conteiner-centralizar">
+    <div class="conteiner-left">
         <main class="form orcamento" id="orcamento">
             <div class="orcamento-grid">
                 <article class="orcamento-card">
                     <p class="orcamento-label">Consulta inicial</p>
                     <h2>Diagnóstico rápido</h2>
                     <p>Entendemos suas necessidades e mapeamos a melhor solução para seu negócio.</p>
-                </article>
-                <article class="orcamento-card">
-                    <p class="orcamento-label">Escopo</p>
-                    <h2>Estrutura do projeto</h2>
-                    <p>Definimos funcionalidades, prazos e prioridades para o lançamento sem surpresas.</p>
                 </article>
                 <article class="orcamento-card">
                     <p class="orcamento-label">Entrega</p>
@@ -41,23 +47,35 @@ require_once 'footer.php';
             </div>
         </main>
     </div>
-    <div class="conteiner-centralizar">
-
-
+    <div class="conteiner-right">
         <main class="form">
-
-            <form id="formContato">
-                <p class="Titulo-Orcamento">Entre em Contato</p>
+            <form>
+                <p class="Titulo-Orcamento"></p>
                 <div class="conteiner-f">
-                    <div class="teste">
-                       
+                    <div class="inpt l">
                         <label for="nome">Nome Completo:</label>
                         <input type="text" id="nome" name="nome" placeholder="Digite o seu nome ou o de sua empresa">
                            
                         <label for="email">Email Principal:</label>
                         <input type="email" id="email" name="email" placeholder="Digite seu Email">
+
+
+                        <label for="setor">Setor da indústria*</label>
+                        <input type="text" id="setor" name="setor" placeholder="Digite o setor da indústria">
+
+
+                        <label for="cargo">Cargo*</label>
+                        <input type="text" id="cargo" name="cargo" placeholder="Digite seu cargo">
                     </div>
-                    <div class="teste">
+                    <div class="inpt r">
+                        <label for="documento">CNPJ ou CPF*</label>
+                        <input type="text" id="documento" name="documento" placeholder="CNPJ ou CPF">
+
+
+                        <label for="endereco">ENDEREÇO*</label>
+                        <input type="text" id="endereco" name="endereco" placeholder="Digite o endereço">
+
+
                         <label for="numero">Número para Retorno:</label>
                         <input type="number" id="numero" name="numero" placeholder="Digite seu Número">
 
@@ -70,26 +88,18 @@ require_once 'footer.php';
                         </select>
                     </div>
                 </div>
-                    <div class="teste">
+                    <div class="inpt">
                            
                         <label for="mensagem">Fale Aqui:</label>
                         <textarea id="mensagem" name="mensagem" rows="2"  draggable="true"  ></textarea>
-                        <button type="submit">Enviar --&gt;</button>
+                        <button><a href="../index.html">Enviar</a></button>
                     </div>
-
-
             </form>
         </main>
     </div>
 </div>
-<div class="contato-popup" id="popupContato" hidden>
-    <div class="contato-popup__caixa" role="dialog" aria-modal="true" aria-labelledby="popupContatoTitulo">
-        <div class="contato-popup__icone">OK</div>
-        <h2 id="popupContatoTitulo">Mensagem enviada com sucesso!</h2>
-        <button type="button" class="contato-popup__botao" id="fecharPopupContato">Fechar</button>
-    </div>
-</div>
 <footer><?php echo $footer; ?></footer>
+
 <script>
 const formContato = document.getElementById('formContato');
 const popupContato = document.getElementById('popupContato');
