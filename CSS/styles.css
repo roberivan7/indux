@@ -657,21 +657,13 @@ img { max-width: 100%; display: block; }
   white-space: nowrap;
 }
 
-.status-badge::before {
-  content: '';
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
 .status-ativo   { background: var(--green-dim);  color: var(--green);  border: 1px solid rgba(16,185,129,.25); }
 .status-ativo::before   { background: var(--green);  box-shadow: 0 0 5px var(--green); animation: pulse 2s infinite; }
 
 .status-inativo { background: var(--blue-dim);   color: #94a3b8; border: 1px solid rgba(59,130,246,.2); }
 .status-inativo::before { background: #64748b; }
 
-.status-em_falha { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(239,68,68,.3); }
-.status-em_falha::before { background: var(--red); box-shadow: 0 0 5px var(--red); animation: pulse 1s infinite; }
+.status-em_falha { width: 110px; background: var(--red-dim);   color: var(--red); border: 1px solid rgba(239,68,68,.3); }
 
 .equip-grid {
   display: grid;
