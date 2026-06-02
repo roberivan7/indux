@@ -12,7 +12,7 @@ requerLogin();
   <?php echo $icon; ?>
   <title>Indux | Planos</title>
   <link rel="stylesheet" href="../CSS/styles.css">
-  <link rel="shortcut icon" type="png" href="../IMG/logo.png">
+  <link rel="shortcut icon" type="png" href="IMG/logo.png">
 </head>
 <body>
 

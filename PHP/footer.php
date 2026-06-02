@@ -17,7 +17,14 @@ try {
     $consultaFalhas = $db->query("SELECT COUNT(*) FROM equipamentos WHERE status = 'em_falha'");
     $totalFalhas = (int)$consultaFalhas->fetchColumn();
 
-    $consultaAlarmesCriticos = $db->query("SELECT COUNT(*) FROM alarmes WHERE resolvido = 0 AND severidade = 'critico'");
+    $consultaAlarmesCriticos = $db->query(
+        "SELECT COUNT(*)
+           FROM alarmes a
+           JOIN equipamentos e ON e.id = a.equipamento_id
+          WHERE a.resolvido = 0
+            AND a.severidade = 'critico'
+            AND e.status <> 'inativo'"
+    );
     $alarmesCriticos = (int)$consultaAlarmesCriticos->fetchColumn();
 } catch (Throwable $e) {
 

@@ -7,17 +7,108 @@ requerLogin();
 $msg     = '';
 $msgTipo = 'info';
 
+function valorEstavelOperacional(float $minimo, float $maximo, int $decimais): float {
+  if ($maximo <= $minimo) {
+    return round($minimo, $decimais);
+  }
+  return round($minimo + (($maximo - $minimo) * 0.30), $decimais);
+}
+
+function buscarContextoAlarme(PDO $db, int $alarmeId): ?array {
+  $consulta = $db->prepare(
+    "SELECT a.id as alarme_id, a.tipo as alarme_tipo, a.resolvido,
+            e.id as equipamento_id, e.tag, e.nome, e.status,
+            e.temp_min, e.temp_max, e.pressao_min, e.pressao_max,
+            (SELECT ls.umidade
+               FROM leituras_sensor ls
+              WHERE ls.equipamento_id = e.id
+              ORDER BY ls.id DESC
+              LIMIT 1) as ultima_umidade
+       FROM alarmes a
+       JOIN equipamentos e ON e.id = a.equipamento_id
+      WHERE a.id = ?
+      LIMIT 1"
+  );
+  $consulta->execute([$alarmeId]);
+  return $consulta->fetch() ?: null;
+}
+
+function registrarLeituraEstavel(PDO $db, array $equipamento): array {
+  $temperatura = valorEstavelOperacional((float)$equipamento['temp_min'], (float)$equipamento['temp_max'], 1);
+  $pressao = valorEstavelOperacional((float)$equipamento['pressao_min'], (float)$equipamento['pressao_max'], 2);
+  $umidade = $equipamento['ultima_umidade'] !== null ? (float)$equipamento['ultima_umidade'] : null;
+
+  $db->prepare(
+    'INSERT INTO leituras_sensor (equipamento_id, temperatura, pressao, umidade, registrado_em)
+     VALUES (?, ?, ?, ?, NOW())'
+  )->execute([(int)$equipamento['equipamento_id'], $temperatura, $pressao, $umidade]);
+
+  return [$temperatura, $pressao, $umidade];
+}
+
 if (isset($_GET['resolver']) && podeResolverAlarme()) {
   $alarmeId = (int)$_GET['resolver'];
+  $equipamentoId = 0;
   try {
     $db = getDB();
-    $db->prepare(
-      'UPDATE alarmes SET resolvido=1, resolvido_por=?, resolvido_em=NOW() WHERE id=?'
-    )->execute([$_SESSION['usuario_id'], $alarmeId]);
-    registrarLog('RESOLVER_ALARME', 'alarmes', $alarmeId);
-    $msg = 'Alarme marcado como resolvido.';
-    $msgTipo = 'sucesso';
+    $contexto = buscarContextoAlarme($db, $alarmeId);
+
+    if (!$contexto) {
+      throw new RuntimeException('Alarme nao encontrado.');
+    }
+
+    $equipamentoId = (int)$contexto['equipamento_id'];
+
+    if ($contexto['status'] === 'inativo') {
+      $msg = 'Equipamento inativo: alarme oculto na lista.';
+      header('Location: alarmes.php?msg=' . urlencode($msg) . '&tipo=info');
+      exit;
+    }
+
+    if ((int)$contexto['resolvido'] === 0) {
+      $db->beginTransaction();
+
+      [$temperatura, $pressao] = registrarLeituraEstavel($db, $contexto);
+
+      $db->prepare(
+        "UPDATE alarmes
+            SET resolvido=1, resolvido_por=?, resolvido_em=NOW()
+          WHERE equipamento_id=?
+            AND resolvido=0
+            AND (id=? OR tipo IN ('temperatura','pressao'))"
+      )->execute([$_SESSION['usuario_id'], $equipamentoId, $alarmeId]);
+
+      $consultaCriticosPendentes = $db->prepare(
+        "SELECT COUNT(*)
+           FROM alarmes
+          WHERE equipamento_id=?
+            AND resolvido=0
+            AND equipamento_id IN (SELECT id FROM equipamentos WHERE status <> 'inativo')
+            AND severidade='critico'"
+      );
+      $consultaCriticosPendentes->execute([$equipamentoId]);
+
+      if ((int)$consultaCriticosPendentes->fetchColumn() === 0) {
+        $db->prepare("UPDATE equipamentos SET status='ativo' WHERE id=? AND status='em_falha'")
+           ->execute([$equipamentoId]);
+      }
+
+      $db->commit();
+
+      registrarLog(
+        'RESOLVER_ALARME',
+        'alarmes',
+        $alarmeId,
+        'Equipamento '.$contexto['tag'].' estabilizado: T='.$temperatura.'C P='.$pressao.'bar'
+      );
+    }
+
+    header('Location: monitoramento.php?equip=' . $equipamentoId . '&msg=alarme_resolvido');
+    exit;
   } catch (Throwable $e) {
+    if (isset($db) && $db instanceof PDO && $db->inTransaction()) {
+      $db->rollBack();
+    }
     $msg = 'Erro ao resolver alarme.';
     $msgTipo = 'erro';
   }
@@ -28,12 +119,44 @@ if (isset($_GET['resolver']) && podeResolverAlarme()) {
 if (isset($_GET['resolver_todos']) && podeResolverAlarme()) {
   try {
     $db = getDB();
+    $db->beginTransaction();
+
+    $equipamentosComAlarme = $db->query(
+      "SELECT DISTINCT e.id as equipamento_id, e.tag, e.nome, e.status,
+              e.temp_min, e.temp_max, e.pressao_min, e.pressao_max,
+              (SELECT ls.umidade
+                 FROM leituras_sensor ls
+                WHERE ls.equipamento_id = e.id
+                ORDER BY ls.id DESC
+                LIMIT 1) as ultima_umidade
+         FROM alarmes a
+         JOIN equipamentos e ON e.id = a.equipamento_id
+        WHERE a.resolvido = 0
+          AND e.status <> 'inativo'"
+    )->fetchAll();
+
+    foreach ($equipamentosComAlarme as $equipamentoComAlarme) {
+      registrarLeituraEstavel($db, $equipamentoComAlarme);
+      $db->prepare("UPDATE equipamentos SET status='ativo' WHERE id=? AND status='em_falha'")
+         ->execute([(int)$equipamentoComAlarme['equipamento_id']]);
+    }
+
     $db->prepare(
-      'UPDATE alarmes SET resolvido=1, resolvido_por=?, resolvido_em=NOW() WHERE resolvido=0'
+      "UPDATE alarmes
+          SET resolvido=1, resolvido_por=?, resolvido_em=NOW()
+        WHERE resolvido=0
+          AND equipamento_id IN (SELECT id FROM equipamentos WHERE status <> 'inativo')"
     )->execute([$_SESSION['usuario_id']]);
+
+    $db->commit();
+    registrarLog('RESOLVER_TODOS_ALARMES', 'alarmes', null, 'Equipamentos estabilizados: '.count($equipamentosComAlarme));
+
     $msg = 'Todos os alarmes ativos foram resolvidos.';
     $msgTipo = 'sucesso';
   } catch (Throwable $e) {
+    if (isset($db) && $db instanceof PDO && $db->inTransaction()) {
+      $db->rollBack();
+    }
     $msg = 'Erro.';
     $msgTipo = 'erro';
   }
@@ -57,13 +180,24 @@ try {
   $db = getDB();
 
   $linhasSeveridade = $db->query(
-    "SELECT severidade, COUNT(*) as qtd FROM alarmes WHERE resolvido=0 GROUP BY severidade"
+    "SELECT a.severidade, COUNT(*) as qtd
+       FROM alarmes a
+       JOIN equipamentos e ON e.id = a.equipamento_id
+      WHERE a.resolvido=0
+        AND e.status <> 'inativo'
+      GROUP BY a.severidade"
   )->fetchAll();
   foreach ($linhasSeveridade as $linhaSeveridade) {
     $contagens[$linhaSeveridade['severidade']] = (int)$linhaSeveridade['qtd'];
     $contagens['total'] += (int)$linhaSeveridade['qtd'];
   }
-  $totalResolvidos = $db->query("SELECT COUNT(*) FROM alarmes WHERE resolvido=1")->fetchColumn();
+  $totalResolvidos = $db->query(
+    "SELECT COUNT(*)
+       FROM alarmes a
+       JOIN equipamentos e ON e.id = a.equipamento_id
+      WHERE a.resolvido=1
+        AND e.status <> 'inativo'"
+  )->fetchColumn();
   $contagens['resolvidos'] = (int)$totalResolvidos;
 
   $filtrosSql = [];
@@ -91,6 +225,7 @@ try {
          JOIN equipamentos e ON e.id = a.equipamento_id
          LEFT JOIN usuarios u ON u.id = a.resolvido_por
          $filtroSql
+         " . ($filtroSql ? "AND" : "WHERE") . " e.status <> 'inativo'
          ORDER BY
            a.resolvido ASC,
            CASE a.severidade WHEN 'critico' THEN 0 WHEN 'alerta' THEN 1 ELSE 2 END,
@@ -243,8 +378,8 @@ try {
               </div>
             </div>
 
-            <?php if (!$alarme['resolvido'] && ehOperador()): ?>
-              <a href="monitoramento.php?resolver=<?php echo $alarme['id']; ?>&res=0"
+            <?php if (!$alarme['resolvido'] && podeResolverAlarme()): ?>
+              <a href="alarmes.php?resolver=<?php echo $alarme['id']; ?>"
                 class="btn btn--success btn--sm">Resolver</a>
             <?php endif; ?>
 

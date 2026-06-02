@@ -286,20 +286,21 @@ foreach ($listaUsuarios as $usuarioItem) {
     $editandoUsuario = ($modo === 'editar');
   ?>
 
-  <form method="POST" action="usuarios.php">
+  <form method="POST" action="usuarios.php" class="user-form">
     <?php if ($editandoUsuario): ?>
     <input type="hidden" name="usuario_id" value="<?= $editId ?>">
     <?php endif; ?>
 
     <div class="form-card">
       <div class="form-title">👤 Dados do Usuário</div>
-      <div class="form-grid">
+      <div class="form-grid form-grid--user">
 
         <div class="form-group">
           <label class="form-label" for="nome">Nome Completo <span style="color:var(--red)">*</span></label>
           <input type="text" id="nome" name="nome" class="form-control"
             placeholder="Ex: João da Silva"
             value="<?= htmlspecialchars($formUsuario['nome'] ?? '') ?>" required maxlength="150">
+          <span class="form-hint">&nbsp;</span>
         </div>
 
         <div class="form-group">
@@ -307,15 +308,15 @@ foreach ($listaUsuarios as $usuarioItem) {
           <input type="email" id="email" name="email" class="form-control"
             placeholder="usuario@empresa.com"
             value="<?= htmlspecialchars($formUsuario['email'] ?? '') ?>" required maxlength="150">
+          <span class="form-hint">&nbsp;</span>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="senha">
-            Senha <?= $editandoUsuario ? '<span style="color:var(--text-muted);font-weight:400">(deixe em branco para manter)</span>' : '<span style="color:var(--red)">*</span>' ?>
-          </label>
+          <label class="form-label" for="senha">Senha <?= $editandoUsuario ? '' : '<span style="color:var(--red)">*</span>' ?></label>
           <input type="password" id="senha" name="senha" class="form-control"
             placeholder="<?= $editandoUsuario ? 'Nova senha (opcional)' : 'Mínimo 6 caracteres' ?>"
             minlength="6" autocomplete="new-password">
+          <span class="form-hint"><?= $editandoUsuario ? 'Deixe em branco para manter a senha atual' : '&nbsp;' ?></span>
         </div>
 
         <div class="form-group">

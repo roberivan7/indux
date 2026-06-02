@@ -112,7 +112,7 @@ function dbListarEquipamentos(): array {
                 (SELECT ls.pressao       FROM leituras_sensor ls WHERE ls.equipamento_id=e.id ORDER BY ls.id DESC LIMIT 1) AS ultima_pressao,
                 (SELECT ls.umidade       FROM leituras_sensor ls WHERE ls.equipamento_id=e.id ORDER BY ls.id DESC LIMIT 1) AS ultima_umidade,
                 (SELECT ls.registrado_em FROM leituras_sensor ls WHERE ls.equipamento_id=e.id ORDER BY ls.id DESC LIMIT 1) AS ultima_leitura,
-                (SELECT COUNT(*) FROM alarmes a WHERE a.equipamento_id=e.id AND a.resolvido=0) AS qtd_alarmes
+                (SELECT COUNT(*) FROM alarmes a WHERE a.equipamento_id=e.id AND a.resolvido=0 AND e.status <> 'inativo') AS qtd_alarmes
              FROM equipamentos e
              ORDER BY CASE e.status WHEN 'em_falha' THEN 0 WHEN 'ativo' THEN 1 ELSE 2 END, e.nome"
         )->fetchAll();
@@ -143,9 +143,22 @@ function dbContarAlarmes(): array {
     $contagem = ['total'=>0,'critico'=>0,'alerta'=>0,'informativo'=>0,'resolvidos'=>0];
     try {
         $db = getDB();
-        $linhasSeveridade = $db->query("SELECT severidade, COUNT(*) as qtd FROM alarmes WHERE resolvido=0 GROUP BY severidade")->fetchAll();
+        $linhasSeveridade = $db->query(
+            "SELECT a.severidade, COUNT(*) as qtd
+               FROM alarmes a
+               JOIN equipamentos e ON e.id = a.equipamento_id
+              WHERE a.resolvido=0
+                AND e.status <> 'inativo'
+              GROUP BY a.severidade"
+        )->fetchAll();
         foreach ($linhasSeveridade as $linhaSeveridade) { $contagem[$linhaSeveridade['severidade']] = (int)$linhaSeveridade['qtd']; $contagem['total'] += (int)$linhaSeveridade['qtd']; }
-        $contagem['resolvidos'] = (int)$db->query("SELECT COUNT(*) FROM alarmes WHERE resolvido=1")->fetchColumn();
+        $contagem['resolvidos'] = (int)$db->query(
+            "SELECT COUNT(*)
+               FROM alarmes a
+               JOIN equipamentos e ON e.id = a.equipamento_id
+              WHERE a.resolvido=1
+                AND e.status <> 'inativo'"
+        )->fetchColumn();
     } catch (Throwable $e) {}
     return $contagem;
 }

@@ -3,6 +3,8 @@ require_once 'icon.php';
 require_once 'init.php';
 require_once 'db.php';
 
+$loginLogo = './IMG/logo.png'; // Atualize para caminho local ou URL externa
+
 if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
     header('Location: dashboard.php');
     exit;
@@ -32,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['usuario_id']   = $usuario['id'];
                 $_SESSION['usuario_nome'] = $usuario['nome'];
                 $_SESSION['usuario_email']= $usuario['email'];
+                $_SESSION['usuario_foto'] = $usuario['foto'] ?? '';
                 $_SESSION['perfil']       = $usuario['perfil'];
                 $_SESSION['is_operador']  = (bool)($usuario['is_operador'] ?? false);
                 $_SESSION['perm_criar_equip']     = (bool)($usuario['perm_criar_equip'] ?? false);
@@ -50,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['usuario_id']   = 1;
                     $_SESSION['usuario_nome'] = 'Administrador INDUX';
                     $_SESSION['usuario_email']= 'admin@indux.com.br';
+                    $_SESSION['usuario_foto'] = '';
                     $_SESSION['perfil']       = 'admin';
                     $_SESSION['is_operador']  = false;
                     $_SESSION['perm_criar_equip']     = false;
@@ -66,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['usuario_id']   = 1;
                 $_SESSION['usuario_nome'] = 'Administrador INDUX';
                 $_SESSION['usuario_email']= 'admin@indux.com.br';
+                $_SESSION['usuario_foto'] = '';
                 $_SESSION['perfil']       = 'admin';
                 $_SESSION['is_operador']  = false;
                 $_SESSION['perm_criar_equip']     = false;
@@ -100,17 +105,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <main class="login-container">
 
     <div class="login-brand">
-      <svg width="52" height="52" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="42" height="42" rx="10" fill="rgba(0,200,255,0.1)" stroke="rgba(0,200,255,0.3)" stroke-width="1"/>
-        <polygon points="21,4 34,11.5 34,26.5 21,34 8,26.5 8,11.5" fill="none" stroke="#00c8ff" stroke-width="1.5"/>
-        <line x1="21" y1="11" x2="21" y2="27" stroke="#00c8ff" stroke-width="1.5" stroke-linecap="round"/>
-        <line x1="13" y1="19" x2="29" y2="19" stroke="#00c8ff" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="21" cy="19" r="3" fill="#00c8ff"/>
-        <circle cx="21" cy="5.5" r="1.5" fill="#f59e0b"/>
-      </svg>
+      <img src="<?php echo htmlspecialchars($loginLogo); ?>" alt="Indux" class="login-logo">
     </div>
-
-    <h1 class="login-titulo">INDUX</h1>
     <p class="login-subtitulo">Monitoramento Industrial Inteligente</p>
 
     <div class="login-divider"></div>

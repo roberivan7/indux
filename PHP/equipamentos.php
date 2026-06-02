@@ -88,7 +88,7 @@ try {
                 (SELECT ls.temperatura FROM leituras_sensor ls WHERE ls.equipamento_id = e.id ORDER BY ls.id DESC LIMIT 1) as ultima_temp,
                 (SELECT ls.pressao FROM leituras_sensor ls WHERE ls.equipamento_id = e.id ORDER BY ls.id DESC LIMIT 1) as ultima_pressao,
                 (SELECT ls.registrado_em FROM leituras_sensor ls WHERE ls.equipamento_id = e.id ORDER BY ls.id DESC LIMIT 1) as ultima_leitura,
-                (SELECT COUNT(*) FROM alarmes a WHERE a.equipamento_id = e.id AND a.resolvido = 0) as qtd_alarmes
+                (SELECT COUNT(*) FROM alarmes a WHERE a.equipamento_id = e.id AND a.resolvido = 0 AND e.status <> 'inativo') as qtd_alarmes
             FROM equipamentos e
             $filtroSql
             ORDER BY
@@ -272,7 +272,7 @@ if ($filtroStatus !== '') {
 
         <div style="display:flex;gap:.75rem;font-size:.72rem;color:var(--text-muted);font-family:var(--font-mono);margin-top:.5rem">
           <?php if ($equipamento['modelo']): ?><span>📦 <?php echo htmlspecialchars($equipamento['modelo']); ?></span><?php endif; ?>
-          <?php if ($equipamento['qtd_alarmes'] > 0): ?>
+          <?php if ($equipamento['status'] !== 'inativo' && $equipamento['qtd_alarmes'] > 0): ?>
           <span style="color:var(--red)">🔔 <?php echo $equipamento['qtd_alarmes']; ?> alarme(s)</span>
           <?php endif; ?>
           <?php if ($equipamento['ultima_leitura']): ?>

@@ -28,7 +28,7 @@ $classeBody = $usuarioLogado ? 'pagina-suporte' : 'pagina-suporte pagina-suporte
   <?php else: ?>
     <header class="suporte-topo-publico">
       <a href="../pagina_de_vendas/index.php" class="suporte-logo-publico">
-        <img src="IMG/Monitoramento industrial (2).png" alt="INDUX">
+        <img src="IMG/logo.png" alt="INDUX">
       </a>
       <div class="suporte-topo-publico__links">
         <a href="../pagina_de_vendas/index.php">← Página inicial</a>
