@@ -1,19 +1,11 @@
 <?php
 require_once 'icon.php';
+require_once 'init.php';
 
 $paginaAtual = basename($_SERVER['PHP_SELF'], '.php');
 $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
 $usuarioFoto = $_SESSION['usuario_foto'] ?? '';
 ?>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php echo $icon; ?>
-<title>Indux | Header</title>
-  <link rel="stylesheet" href="../CSS/styles.css">
-</head>
 <header class="site-header">
   <div class="site-header__inner">
 
@@ -134,4 +126,3 @@ $usuarioFoto = $_SESSION['usuario_foto'] ?? '';
 
   </div>
 </header>
-</html>

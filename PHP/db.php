@@ -42,7 +42,7 @@ function dbListarUsuarios(string $busca = '', string $perfil = ''): array {
         $filtrosSql = []; $parametros = [];
         if ($busca !== '') { $filtrosSql[] = '(nome LIKE ? OR email LIKE ?)'; $buscaLike = '%'.$busca.'%'; $parametros[] = $buscaLike; $parametros[] = $buscaLike; }
         if ($perfil !== '') { $filtrosSql[] = 'perfil = ?'; $parametros[] = $perfil; }
-        $sql = 'SELECT * FROM usuarios' . ($filtrosSql ? ' WHERE '.implode(' AND ',$filtrosSql) : '') . ' ORDER BY perfil, nome';
+        $sql = 'SELECT * FROM usuarios' . ($filtrosSql ? ' WHERE '.implode(' AND ',$filtrosSql) : '') . ' ORDER BY id ASC';
         $consultaUsuarios = getDB()->prepare($sql);
         $consultaUsuarios->execute($parametros);
         $usuarios = $consultaUsuarios->fetchAll();

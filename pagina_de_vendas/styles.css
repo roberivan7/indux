@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Manrope:wght@200..800&family=Sora:wght@100..800&family=DM+Sans:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap');
 
+/* =============== BASE / CABECALHO DA PAGINA DE VENDAS =============== */
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -132,6 +134,10 @@ p {
 h1{
     font-family: var(--font-titulo);
 }
+
+/* =============== FIM DA BASE / CABECALHO DA PAGINA DE VENDAS =============== */
+
+/* =============== PAGINA INICIAL =============== */
 
 .inicial {
     height: 90vh;
@@ -356,6 +362,10 @@ hr {
     border-radius: 8px;
     text-align: center;
 }
+
+/* =============== FIM DA PAGINA INICIAL =============== */
+
+/* =============== PAGINA SOLUCOES =============== */
 
 .hero-solucoes {
     padding: clamp(100px, 8vw, 140px) clamp(1.25rem, 3vw, 2rem) clamp(60px, 6vw, 80px);
@@ -728,6 +738,10 @@ hr {
     transform: translateY(-2px);
 }
 
+/* =============== FIM DA PAGINA SOLUCOES =============== */
+
+/* =============== RODAPE COMPARTILHADO DA PAGINA DE VENDAS =============== */
+
 .footer {
     background: rgba(5, 12, 22, 0.95);
     border-top: 1px solid var(--azul-borda);
@@ -797,6 +811,10 @@ hr {
     0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,230,118,0.4); }
     50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(0,230,118,0); }
 }
+
+/* =============== FIM DO RODAPE COMPARTILHADO DA PAGINA DE VENDAS =============== */
+
+/* =============== PAGINA SOBRE =============== */
 
 .hero-section {
 padding: 80px 20px;
@@ -918,12 +936,13 @@ transition: transform 0.3s, border-color 0.3s;
 border: 1px solid transparent;
 }
 
+/* =============== FIM DA PAGINA SOBRE =============== */
 
 @media (max-width: 768px) {
     .navbar > ul { display: none; }
 }
 
-        /* ===== PAGAMENTOS ===== */
+/* =============== PAGINA PLANOS / PAGAMENTOS =============== */
 
 .plans-page{display:block}
 .payment-page{display:none}
@@ -984,9 +1003,8 @@ border: 1px solid transparent;
 
     .main-title{
         font-family:var(--font-titulo);
-        font-size:clamp(28px,5vw,42px);
+        font-size: clamp(28px, 5vw, 65px);
         font-weight:800;
-        font-size: 65px;
         line-height:1.15;
         margin-bottom:1rem;
         color:#f8fafc
@@ -1659,7 +1677,10 @@ border: 1px solid transparent;
         max-width:320px
     }
 
-    /* ===== Parte Contato Matheus ===== */
+/* =============== FIM DA PAGINA PLANOS / PAGAMENTOS =============== */
+
+/* =============== PAGINA CONTATO / ORCAMENTO =============== */
+
 .conteiner{
     width: 100%;
     height: 60rem;
@@ -1778,7 +1799,7 @@ form{
 }
 
 
-/* Variações de cor para .form */
+/* Variacoes de cor para .form */
 .form.verde::before { background: var(--verde); box-shadow: 0 0 10px var(--verde); }
 .form.amarelo::before { background: var(--amarelo); box-shadow: 0 0 10px var(--amarelo); }
 .form.roxo::before { background: #b388ff; box-shadow: 0 0 10px #b388ff; }
@@ -1799,7 +1820,7 @@ form{
 .teste{
     display: flex;
     justify-content: center;
-    align-items: right;
+    align-items: flex-end;
     flex-direction: column;
     width: 80%;
     height: auto;
@@ -1956,88 +1977,6 @@ button{
     display: block;
 }
 
-
-.kpi-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 1.25rem 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  transition: all .3s;
-  position: relative;
-  overflow: hidden;
-}
-
-
-.kpi-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-}
-
-
-.kpi-card:hover {
-  background: var(--card-hover);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-
-.kpi-card--green::before { background: var(--green); box-shadow: 0 0 10px var(--green); }
-.kpi-card--blue::before  { background: var(--blue); box-shadow: 0 0 10px var(--blue); }
-.kpi-card--yellow::before{ background: var(--yellow); box-shadow: 0 0 10px var(--yellow); }
-.kpi-card--red::before   { background: var(--red); box-shadow: 0 0 10px var(--red); }
-.kpi-card--cyan::before  { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
-.kpi-card--purple::before{ background: var(--purple); box-shadow: 0 0 10px var(--purple); }
-
-
-.kpi-icon {
-  font-size: 1.75rem;
-  width: 48px; height: 48px;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: var(--radius);
-  flex-shrink: 0;
-}
-
-
-.kpi-card--green  .kpi-icon { background: var(--green-dim); }
-.kpi-card--blue   .kpi-icon { background: var(--blue-dim); }
-.kpi-card--yellow .kpi-icon { background: var(--yellow-dim); }
-.kpi-card--red    .kpi-icon { background: var(--red-dim); }
-.kpi-card--cyan   .kpi-icon { background: var(--accent-dim); }
-.kpi-card--purple .kpi-icon { background: var(--purple-dim); }
-
-
-.kpi-label {
-  font-size: .75rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: .07em;
-  font-family: var(--font-mono);
-  margin-bottom: .2rem;
-}
-
-
-.kpi-valor {
-  font-family: var(--font-display);
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1;
-}
-
-
-.kpi-card--green  .kpi-valor { color: var(--green); }
-.kpi-card--blue   .kpi-valor { color: var(--blue); }
-.kpi-card--yellow .kpi-valor { color: var(--yellow); }
-.kpi-card--red    .kpi-valor { color: var(--red); }
-.kpi-card--cyan   .kpi-valor { color: var(--accent); }
-
-
 .Titulo-Orcamento {
     font-family: var(--font-titulo-pequeno);
     text-align: center;
@@ -2045,3 +1984,5 @@ button{
     font-weight: 800;
     color: var(--branco);
 }
+
+/* =============== FIM DA PAGINA CONTATO / ORCAMENTO =============== */
