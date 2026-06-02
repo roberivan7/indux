@@ -28,7 +28,7 @@ $classeBody = $usuarioLogado ? 'pagina-suporte' : 'pagina-suporte pagina-suporte
   <?php else: ?>
     <header class="suporte-topo-publico">
       <a href="../pagina_de_vendas/index.php" class="suporte-logo-publico">
-        <img src="IMG/Monitoramento industrial (2).png" alt="INDUX">
+        <img src="IMG/logo.png" alt="INDUX">
       </a>
       <div class="suporte-topo-publico__links">
         <a href="../pagina_de_vendas/index.php">← Página inicial</a>
@@ -51,7 +51,7 @@ $classeBody = $usuarioLogado ? 'pagina-suporte' : 'pagina-suporte pagina-suporte
       </div>
 
       <div class="suporte-acoes-topo">
-        <a href="../pagina_de_vendas/index.php" class="btn btn--ghost btn--sm">← Voltar para vendas</a>
+        <a href="<?php echo $usuarioLogado ? 'logout.php?destino=vendas' : '../pagina_de_vendas/index.php'; ?>" class="btn btn--ghost btn--sm">← Voltar para vendas</a>
         <?php if ($usuarioLogado): ?>
           <a href="dashboard.php" class="btn btn--ghost btn--sm">📊 Dashboard</a>
         <?php endif; ?>

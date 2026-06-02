@@ -180,6 +180,7 @@ CREATE TABLE `usuarios` (
   `email` varchar(200) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `perfil` enum('admin','funcionario') NOT NULL DEFAULT 'funcionario',
+  `foto` varchar(255) DEFAULT NULL,
   `ativo` tinyint(1) NOT NULL DEFAULT 1,
   `ultimo_acesso` datetime DEFAULT NULL,
   `criado_em` datetime NOT NULL DEFAULT current_timestamp(),

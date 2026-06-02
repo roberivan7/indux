@@ -28,9 +28,22 @@ try {
     $estatisticasEquipamentos['total'] += (int)$linhaStatus['qtd'];
   }
 
-  $consultaAlarmesAbertos = $db->query("SELECT COUNT(*) FROM alarmes WHERE resolvido = 0");
+  $consultaAlarmesAbertos = $db->query(
+    "SELECT COUNT(*)
+       FROM alarmes a
+       JOIN equipamentos e ON e.id = a.equipamento_id
+      WHERE a.resolvido = 0
+        AND e.status <> 'inativo'"
+  );
   $alarmesTotal = (int)$consultaAlarmesAbertos->fetchColumn();
-  $consultaAlarmesCriticos = $db->query("SELECT COUNT(*) FROM alarmes WHERE resolvido = 0 AND severidade = 'critico'");
+  $consultaAlarmesCriticos = $db->query(
+    "SELECT COUNT(*)
+       FROM alarmes a
+       JOIN equipamentos e ON e.id = a.equipamento_id
+      WHERE a.resolvido = 0
+        AND a.severidade = 'critico'
+        AND e.status <> 'inativo'"
+  );
   $alarmesCriticos = (int)$consultaAlarmesCriticos->fetchColumn();
 
   $ultimosAlarmes = $db->query(
@@ -38,6 +51,7 @@ try {
          FROM alarmes a
          JOIN equipamentos e ON e.id = a.equipamento_id
          WHERE a.resolvido = 0
+           AND e.status <> 'inativo'
          ORDER BY a.criado_em DESC LIMIT 5"
   )->fetchAll();
 
@@ -69,7 +83,7 @@ try {
   <?php echo $icon; ?>
   <title>Indux | Dashboard</title>
   <link rel="stylesheet" href="../CSS/styles.css">
-  <link rel="shortcut icon" type="png" href="../IMG/logo.png">
+  <link rel="shortcut icon" type="png" href="IMG/logo.png">
 </head>
 
 <body>

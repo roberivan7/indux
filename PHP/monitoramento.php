@@ -99,7 +99,7 @@ if ($equipFiltro > 0) {
                 (SELECT ls.pressao       FROM leituras_sensor ls WHERE ls.equipamento_id=e.id ORDER BY ls.id DESC LIMIT 1) AS ultima_pressao,
                 (SELECT ls.umidade       FROM leituras_sensor ls WHERE ls.equipamento_id=e.id ORDER BY ls.id DESC LIMIT 1) AS ultima_umidade,
                 (SELECT ls.registrado_em FROM leituras_sensor ls WHERE ls.equipamento_id=e.id ORDER BY ls.id DESC LIMIT 1) AS ultima_leitura,
-                (SELECT COUNT(*) FROM alarmes a WHERE a.equipamento_id=e.id AND a.resolvido=0) AS qtd_alarmes
+                (SELECT COUNT(*) FROM alarmes a WHERE a.equipamento_id=e.id AND a.resolvido=0 AND e.status <> 'inativo') AS qtd_alarmes
              FROM equipamentos e
              WHERE e.id = ?"
         );
@@ -201,6 +201,8 @@ if ($equipFiltro > 0) {
 
   <?php if ($msg === 'leitura_ok'): ?>
   <div class="alerta alerta--sucesso">Leitura registrada com sucesso. Alarmes verificados automaticamente.</div>
+  <?php elseif ($msg === 'alarme_resolvido'): ?>
+  <div class="alerta alerta--sucesso">Alarme resolvido. Uma leitura estavel foi registrada para este equipamento.</div>
   <?php endif; ?>
   <?php if (isset($erroForm)): ?>
   <div class="alerta alerta--erro"><?= htmlspecialchars($erroForm) ?></div>
@@ -245,7 +247,7 @@ if ($equipFiltro > 0) {
           <div class="metric-value ok"><?= number_format($equipamento['ultima_umidade'],1) ?>%</div>
         </div>
         <?php endif; ?>
-        <?php if ($equipamento['qtd_alarmes'] > 0): ?>
+        <?php if ($equipamento['status'] !== 'inativo' && $equipamento['qtd_alarmes'] > 0): ?>
         <div class="metric-item" style="border-color:rgba(239,68,68,.3)">
           <div class="metric-label">🔔 Alarmes</div>
           <div class="metric-value danger"><?= $equipamento['qtd_alarmes'] ?> ativo(s)</div>
@@ -269,11 +271,11 @@ if ($equipFiltro > 0) {
       </div>
       <?php endif; ?>
 
-      <div class="equip-card__actions" style="margin-top:.75rem">
+      <div class="equip-card__actions">
         <a href="monitoramento.php?equip=<?= $equipamento['id'] ?>" class="btn btn--primary btn--sm" style="flex:1;justify-content:center">
-          Detalhar
+          Detalhes
         </a>
-        <?php if ($equipamento['qtd_alarmes'] > 0): ?>
+        <?php if ($equipamento['status'] !== 'inativo' && $equipamento['qtd_alarmes'] > 0): ?>
         <a href="alarmes.php" class="btn btn--danger btn--sm">🔔 <?= $equipamento['qtd_alarmes'] ?></a>
         <?php endif; ?>
       </div>

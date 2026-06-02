@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
   email        VARCHAR(200) NOT NULL UNIQUE,
   senha        VARCHAR(255) NOT NULL,
   perfil       ENUM('admin','funcionario') NOT NULL DEFAULT 'funcionario',
+  foto         VARCHAR(255) NULL,
   ativo        TINYINT(1) NOT NULL DEFAULT 1,
   ultimo_acesso DATETIME NULL,
   criado_em    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

@@ -3,6 +3,7 @@ require_once 'icon.php';
 
 $paginaAtual = basename($_SERVER['PHP_SELF'], '.php');
 $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
+$usuarioFoto = $_SESSION['usuario_foto'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -18,7 +19,7 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
 
     <a class="logo" href="dashboard.php">
       <div class="logo-icon">
-        <img src="IMG/Monitoramento industrial (2).png">
+        <img src="IMG/logo.png" alt="INDUX">
       </div>
     </a>
 
@@ -59,7 +60,14 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
               <?php
               try {
                   require_once 'db.php';
-                  $consultaCriticos = getDB()->query("SELECT COUNT(*) FROM alarmes WHERE resolvido = 0 AND severidade = 'critico'");
+                  $consultaCriticos = getDB()->query(
+                      "SELECT COUNT(*)
+                         FROM alarmes a
+                         JOIN equipamentos e ON e.id = a.equipamento_id
+                        WHERE a.resolvido = 0
+                          AND a.severidade = 'critico'
+                          AND e.status <> 'inativo'"
+                  );
                   $qtdCriticos = $consultaCriticos->fetchColumn();
                   if ($qtdCriticos > 0):
               ?><span style="background:var(--red);color:#fff;font-size:.6rem;padding:1px 5px;border-radius:3px;margin-left:.3rem;font-family:var(--font-mono)"><?php echo $qtdCriticos; ?></span><?php
@@ -101,13 +109,19 @@ $paginaAtual = ($paginaAtual === 'index') ? 'dashboard' : $paginaAtual;
         <span>UP</span> Upgrade de plano
       </a>
       <?php endif; ?>
-      <div class="sidebar-user">
-        <div class="user-avatar"><?php echo inicialNome($_SESSION['usuario_nome'] ?? 'U'); ?></div>
+      <a href="configuracoes.php" class="sidebar-user <?php echo $paginaAtual === 'configuracoes' ? 'active' : ''; ?>" title="Configurações do usuário">
+        <div class="user-avatar">
+          <?php if ($usuarioFoto): ?>
+          <img src="<?php echo htmlspecialchars($usuarioFoto); ?>" alt="<?php echo htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuário'); ?>">
+          <?php else: ?>
+          <?php echo inicialNome($_SESSION['usuario_nome'] ?? 'U'); ?>
+          <?php endif; ?>
+        </div>
         <div class="user-info">
           <div class="user-name"><?php echo htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuário'); ?></div>
           <div class="user-role"><?php echo $_SESSION['perfil'] ?? 'visualizador'; ?></div>
         </div>
-      </div>
+      </a>
       <a href="logout.php" class="btn-logout">
         <span><img src="IMG/trash-2.png" alt=""></span> Sair do Sistema
       </a>

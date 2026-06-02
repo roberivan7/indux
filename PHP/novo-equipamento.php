@@ -136,7 +136,7 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
     </div>
     <?php endif; ?>
 
-    <form method="POST" action="novo-equipamento.php">
+    <form method="POST" action="novo-equipamento.php" class="equipment-form">
       <?php if ($editando): ?>
       <input type="hidden" name="editar_id" value="<?php echo $equipamentoId; ?>">
       <?php endif; ?>
@@ -144,7 +144,7 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
       <div class="form-card">
 
         <div class="form-title">📋 Identificação do Equipamento</div>
-        <div class="form-grid">
+        <div class="form-grid form-grid--identity">
           <div class="form-group">
             <label class="form-label" for="tag">TAG <span style="color:var(--red)">*</span></label>
             <input type="text" id="tag" name="tag" class="form-control"
@@ -161,6 +161,7 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
               placeholder="Ex: Caldeira Principal"
               value="<?php echo htmlspecialchars($form['nome'] ?? ''); ?>"
               required maxlength="150">
+            <span class="form-hint">&nbsp;</span>
           </div>
 
           <div class="form-group">
@@ -168,6 +169,7 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
             <input type="text" id="modelo" name="modelo" class="form-control"
               placeholder="Ex: CBR-5000"
               value="<?php echo htmlspecialchars($form['modelo'] ?? ''); ?>" maxlength="100">
+            <span class="form-hint">&nbsp;</span>
           </div>
 
           <div class="form-group">
@@ -175,6 +177,7 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
             <input type="text" id="fabricante" name="fabricante" class="form-control"
               placeholder="Ex: ThermoTec Ind."
               value="<?php echo htmlspecialchars($form['fabricante'] ?? ''); ?>" maxlength="100">
+            <span class="form-hint">&nbsp;</span>
           </div>
 
           <div class="form-group">
@@ -182,6 +185,7 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
             <input type="text" id="localizacao" name="localizacao" class="form-control"
               placeholder="Ex: Sala 01 / Área B / Subsolo"
               value="<?php echo htmlspecialchars($form['localizacao'] ?? ''); ?>" maxlength="200">
+            <span class="form-hint">&nbsp;</span>
           </div>
 
           <div class="form-group">
@@ -191,6 +195,7 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
               <option value="inativo"  <?php echo ($form['status']??'')==='inativo'       ? 'selected' : ''; ?>>⏸️ Inativo</option>
               <option value="em_falha" <?php echo ($form['status']??'')==='em_falha'      ? 'selected' : ''; ?>>🔴 Em Falha</option>
             </select>
+            <span class="form-hint">&nbsp;</span>
           </div>
 
           <div class="form-group full">
@@ -202,12 +207,13 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
 
         <div class="form-section">
           <div class="form-section-title">🌡️ Limites de Temperatura (°C)</div>
-          <div class="form-grid">
+          <div class="form-grid form-grid--limits">
             <div class="form-group">
               <label class="form-label" for="temp_min">Mínima (°C)</label>
               <input type="number" id="temp_min" name="temp_min" class="form-control"
                 step="0.1" min="-50" max="500"
                 value="<?php echo $form['temp_min'] ?? 0; ?>">
+              <span class="form-hint">&nbsp;</span>
             </div>
             <div class="form-group">
               <label class="form-label" for="temp_max">Máxima aceitável (°C)</label>
@@ -221,12 +227,13 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
 
         <div class="form-section">
           <div class="form-section-title">⚙️ Limites de Pressão (bar)</div>
-          <div class="form-grid">
+          <div class="form-grid form-grid--limits">
             <div class="form-group">
               <label class="form-label" for="pressao_min">Mínima (bar)</label>
               <input type="number" id="pressao_min" name="pressao_min" class="form-control"
                 step="0.01" min="0" max="1000"
                 value="<?php echo $form['pressao_min'] ?? 0; ?>">
+              <span class="form-hint">&nbsp;</span>
             </div>
             <div class="form-group">
               <label class="form-label" for="pressao_max">Máxima aceitável (bar)</label>
