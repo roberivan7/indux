@@ -19,6 +19,7 @@ Sistema PHP simples para cadastrar equipamentos industriais, registrar leituras 
 | `usuarios.php` | CRUD de usuarios, perfis e permissoes. |
 | `styles.css` | Estilos visuais do sistema. |
 | `banco.sql` | Script de criacao do banco e dados iniciais. |
+| `banco(backup).sql` | Script de criacao do banco e dados para recuperação. |
 
 ## Fluxo principal
 
