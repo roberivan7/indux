@@ -1250,61 +1250,394 @@ select.form-control option {
 
 .settings-layout {
   display: grid;
-  grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
-  gap: 1.25rem;
+  grid-template-columns: minmax(280px, 330px) minmax(0, 1fr);
+  gap: 1.4rem;
   align-items: start;
   max-width: 1120px;
   margin: 0 auto;
 }
 
+.settings-form .form-card {
+  border-color: rgba(46, 76, 119, .9);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  background:
+    linear-gradient(160deg, rgba(20, 34, 60, .98), rgba(14, 26, 47, .98));
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .24);
+}
+
 .settings-photo-card {
+  position: sticky;
+  top: 2rem;
   display: flex;
   flex-direction: column;
-  gap: .9rem;
+  align-items: stretch;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.settings-photo-card::before,
+.settings-data-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: .7;
+}
+
+.settings-photo-card,
+.settings-data-card {
+  position: relative;
+}
+
+.settings-photo-card {
+  position: sticky;
+}
+
+.settings-card-heading {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.settings-card-heading--data {
+  margin-bottom: 1.35rem;
+}
+
+.settings-card-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(0, 200, 255, .25);
+  border-radius: 12px;
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+.settings-card-icon svg {
+  width: 21px;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.settings-card-heading .form-title {
+  margin: 0 0 .12rem;
+  padding: 0;
+  border: 0;
+}
+
+.settings-card-heading p {
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: .75rem;
+  line-height: 1.45;
+}
+
+.profile-photo-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: .45rem 0 .25rem;
+}
+
+.profile-file-input,
+.profile-remove-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  opacity: 0;
+}
+
+.profile-photo-picker {
+  position: relative;
+  display: block;
+  width: 156px;
+  height: 156px;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+}
+
+.profile-photo-picker::before {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border: 1px dashed rgba(0, 200, 255, .3);
+  border-radius: inherit;
+  transition: border-color .25s ease, transform .25s ease;
 }
 
 .profile-photo-preview {
-  width: 132px;
-  height: 132px;
+  position: relative;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  margin: 0 auto .5rem;
   background: linear-gradient(135deg, var(--accent), var(--blue));
-  border: 1px solid rgba(0,200,255,.3);
+  border: 2px solid rgba(0, 200, 255, .42);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: 0 0 22px rgba(0,200,255,.12);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .28), 0 0 28px rgba(0, 200, 255, .12);
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
 }
 
 .profile-photo-preview img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform .35s ease, filter .35s ease;
 }
 
-.profile-photo-preview span {
+.profile-photo-preview img[hidden],
+#profilePhotoInitials[hidden] {
+  display: none;
+}
+
+#profilePhotoInitials {
   color: #fff;
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+
+.profile-photo-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: .18rem;
+  padding: 1rem;
+  border-radius: inherit;
+  background: rgba(3, 10, 24, .78);
+  color: #fff;
+  text-align: center;
+  opacity: 0;
+  transform: scale(.94);
+  transition: opacity .25s ease, transform .25s ease;
+  backdrop-filter: blur(3px);
+}
+
+.profile-photo-overlay svg {
+  width: 28px;
+  margin-bottom: .25rem;
+  stroke: var(--accent);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.profile-photo-overlay strong {
+  font-family: var(--font-body);
+  font-size: .82rem;
   font-weight: 700;
 }
 
-.profile-file-input {
-  padding: .55rem .7rem;
+.profile-photo-overlay small {
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: .58rem;
 }
 
-.profile-remove-photo {
+.profile-photo-picker:hover .profile-photo-preview,
+.profile-photo-picker:focus-visible .profile-photo-preview,
+.profile-photo-picker.is-dragging .profile-photo-preview {
+  transform: translateY(-3px) scale(1.015);
+  border-color: var(--accent);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, .32), 0 0 34px rgba(0, 200, 255, .24);
+}
+
+.profile-photo-picker:hover .profile-photo-preview img,
+.profile-photo-picker:focus-visible .profile-photo-preview img,
+.profile-photo-picker.is-dragging .profile-photo-preview img {
+  transform: scale(1.06);
+  filter: brightness(.72);
+}
+
+.profile-photo-picker:hover .profile-photo-overlay,
+.profile-photo-picker:focus-visible .profile-photo-overlay,
+.profile-photo-picker.is-dragging .profile-photo-overlay {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.profile-photo-picker:hover::before,
+.profile-photo-picker:focus-visible::before,
+.profile-photo-picker.is-dragging::before {
+  border-color: var(--accent);
+  transform: scale(1.03);
+}
+
+.profile-photo-picker.is-dragging .profile-photo-overlay {
+  background: rgba(0, 72, 105, .86);
+}
+
+.profile-camera-badge {
+  position: absolute;
+  right: 1px;
+  bottom: 6px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 3px solid var(--card);
+  border-radius: 50%;
+  background: var(--accent);
+  color: #03101d;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .35);
+  transition: transform .25s ease, background-color .25s ease;
+}
+
+.profile-camera-badge svg {
+  width: 18px;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.profile-photo-picker:hover .profile-camera-badge,
+.profile-photo-picker:focus-visible .profile-camera-badge {
+  transform: rotate(-7deg) scale(1.08);
+  background: #43d8ff;
+}
+
+.profile-file-status {
   display: flex;
   align-items: center;
-  gap: .5rem;
-  color: var(--text-dim);
-  font-size: .82rem;
+  gap: .75rem;
+  min-height: 58px;
+  padding: .7rem .8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: rgba(7, 13, 26, .38);
+  transition: border-color .2s ease, background-color .2s ease;
+}
+
+.profile-file-status__icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+.profile-file-status__icon svg,
+.profile-photo-actions svg,
+.settings-data-card .form-actions svg {
+  width: 17px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.profile-file-status > span:last-child {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.profile-file-status strong {
+  overflow: hidden;
+  color: var(--text);
+  font-size: .76rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-file-status small {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: .61rem;
+}
+
+.profile-file-status[data-state="ready"] {
+  border-color: rgba(16, 185, 129, .34);
+  background: var(--green-dim);
+}
+
+.profile-file-status[data-state="ready"] .profile-file-status__icon {
+  background: rgba(16, 185, 129, .16);
+  color: var(--green);
+}
+
+.profile-file-status[data-state="error"] {
+  border-color: rgba(239, 68, 68, .35);
+  background: var(--red-dim);
+}
+
+.profile-file-status[data-state="error"] .profile-file-status__icon {
+  background: rgba(239, 68, 68, .16);
+  color: var(--red);
+}
+
+.profile-file-status[data-state="removed"] {
+  border-color: rgba(245, 158, 11, .32);
+  background: var(--yellow-dim);
+}
+
+.profile-file-status[data-state="removed"] .profile-file-status__icon {
+  background: rgba(245, 158, 11, .14);
+  color: var(--yellow);
+}
+
+.profile-photo-actions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .6rem;
+}
+
+.profile-select-button {
+  justify-content: center;
   cursor: pointer;
 }
 
-.profile-remove-photo input {
-  accent-color: var(--red);
+.profile-remove-photo {
+  justify-content: center;
+  border-color: rgba(239, 68, 68, .25);
+  background: var(--red-dim);
+  color: var(--red);
+}
+
+.profile-remove-photo:hover {
+  border-color: rgba(239, 68, 68, .45);
+  background: rgba(239, 68, 68, .2);
+  color: #ff7a7a;
+}
+
+.profile-remove-photo[hidden] {
+  display: none;
+}
+
+.profile-photo-tip {
+  padding-top: .9rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: .64rem;
+  line-height: 1.55;
+  text-align: center;
 }
 
 .settings-form .form-grid--settings {
@@ -1313,6 +1646,109 @@ select.form-control option {
 
 .settings-form .form-grid--password {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.settings-data-card .form-section {
+  margin: 1.35rem 0 0;
+  padding: 1.2rem;
+  border-color: rgba(46, 76, 119, .72);
+  background: rgba(7, 13, 26, .3);
+}
+
+.settings-data-card .form-section-title {
+  color: var(--accent);
+}
+
+.settings-data-card .form-control:disabled {
+  cursor: not-allowed;
+  border-color: rgba(30, 51, 84, .7);
+  color: var(--text-dim);
+  opacity: .72;
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-field .form-control {
+  padding-right: 2.85rem;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: .55rem;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  place-items: center;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 7px;
+  outline: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color .2s ease, background-color .2s ease;
+}
+
+.password-toggle:hover,
+.password-toggle:focus-visible,
+.password-toggle.is-visible {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+.password-toggle svg {
+  width: 17px;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.password-strength {
+  display: block;
+  width: 100%;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--border);
+}
+
+.password-strength i {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--red);
+  transition: width .25s ease, background-color .25s ease;
+}
+
+.password-strength i[data-score="2"] {
+  background: var(--yellow);
+}
+
+.password-strength i[data-score="3"],
+.password-strength i[data-score="4"] {
+  background: var(--green);
+}
+
+#passwordMatchText[data-state="success"] {
+  color: var(--green);
+}
+
+#passwordMatchText[data-state="error"] {
+  color: var(--red);
+}
+
+.settings-data-card .form-actions {
+  align-items: center;
+}
+
+.settings-data-card .form-actions .btn {
+  justify-content: center;
 }
 
 @media (max-width: 1100px) {
@@ -1327,6 +1763,16 @@ select.form-control option {
     grid-template-columns: 1fr;
   }
 
+  .settings-photo-card {
+    position: relative;
+    top: auto;
+  }
+
+  .profile-photo-tip {
+    max-width: 34rem;
+    margin: 0 auto;
+  }
+
   .settings-form .form-grid--password {
     grid-template-columns: 1fr;
   }
@@ -1338,6 +1784,23 @@ select.form-control option {
   .user-form .form-grid--user,
   .settings-form .form-grid--settings {
     grid-template-columns: 1fr;
+  }
+
+  .settings-form .form-card {
+    padding: 1.15rem;
+  }
+
+  .profile-photo-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-data-card .form-actions {
+    align-items: stretch;
+    flex-direction: column-reverse;
+  }
+
+  .settings-data-card .form-actions .btn {
+    width: 100%;
   }
 }
 
