@@ -37,6 +37,7 @@
             "criada_em": "2026-06-02 00:15:40"
         },
         {
+<<<<<<< HEAD
             "id_solicitacao": "solicitacao_20260610135109_e22e9f70",
             "nome_usuario": "Administrador INDUX",
             "email_usuario": "admin@indux.com.br",
@@ -80,6 +81,15 @@
             "mensagem": "kkkkkk",
             "status": "aguardando_resposta_email",
             "criada_em": "2026-06-10 13:54:22"
+=======
+            "id_solicitacao": "solicitacao_20260604212001_28f062a5",
+            "nome_usuario": "Administrador INDUX",
+            "email_usuario": "admin@indux.com.br",
+            "tipo_suporte": "Suporte geral",
+            "mensagem": "Quero ajuda urgente.",
+            "status": "aguardando_resposta_email",
+            "criada_em": "2026-06-04 21:20:01"
+>>>>>>> 6a8dbaa (atualização no db.php)
         }
     ]
 }

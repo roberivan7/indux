@@ -5,7 +5,6 @@ require_once 'footer.php';
 
 $paginaAtiva = 'solucoes';
 
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
