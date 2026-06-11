@@ -247,10 +247,136 @@ img { max-width: 100%; display: block; }
 }
 
 .nav-icon {
-  font-size: 1rem;
   width: 20px;
-  text-align: center;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+}
+
+.lucide-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: -0.15em;
+  flex-shrink: 0;
+}
+
+.nav-icon .lucide-icon { width: 17px; height: 17px; }
+.page-icon .lucide-icon { width: 24px; height: 24px; }
+.kpi-icon .lucide-icon { width: 24px; height: 24px; }
+.alarme-icon .lucide-icon { width: 22px; height: 22px; }
+.empty-state__icon .lucide-icon { width: 36px; height: 36px; }
+.btn-suporte-sidebar__icone .lucide-icon { width: 18px; height: 18px; }
+
+.btn .lucide-icon { width: 16px; height: 16px; }
+.btn--sm .lucide-icon { width: 14px; height: 14px; }
+.btn--lg .lucide-icon { width: 17px; height: 17px; }
+.panel-title .lucide-icon { width: 16px; height: 16px; }
+.form-title .lucide-icon { width: 18px; height: 18px; }
+.form-section-title .lucide-icon { width: 14px; height: 14px; }
+.metric-label .lucide-icon { width: 12px; height: 12px; }
+.footer-stat__label .lucide-icon { width: 13px; height: 13px; }
+.status-badge .lucide-icon { width: 13px; height: 13px; }
+.alerta .lucide-icon { width: 18px; height: 18px; }
+.success-circle .lucide-icon { width: 30px; height: 30px; }
+
+.btn .lucide-icon,
+.panel-title .lucide-icon,
+.form-title .lucide-icon,
+.form-section-title .lucide-icon,
+.metric-label .lucide-icon,
+.footer-stat__label .lucide-icon,
+.status-badge .lucide-icon {
+  display: block;
+}
+
+.alerta .lucide-icon,
+.inline-icon-text .lucide-icon,
+.equip-card__meta .lucide-icon,
+.alarme-meta .lucide-icon,
+.permission-title .lucide-icon,
+.gauge-card-title .lucide-icon,
+.form-label .lucide-icon,
+.section-heading-icon .lucide-icon,
+.perfil-badge .lucide-icon {
+  display: block;
+}
+
+.input-icon {
+  position: absolute;
+  left: .8rem;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.input-icon .lucide-icon { width: 15px; height: 15px; }
+
+.inline-icon-text,
+.equip-card__meta span,
+.alarme-meta span,
+.permission-title,
+.gauge-card-title {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+}
+
+.inline-icon-text .lucide-icon,
+.equip-card__meta .lucide-icon,
+.alarme-meta .lucide-icon {
+  width: 13px;
+  height: 13px;
+}
+
+.permission-title {
+  font-size: .85rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.permission-title .lucide-icon,
+.gauge-card-title .lucide-icon,
+.form-label .lucide-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.section-heading-icon {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+}
+
+.section-heading-icon .lucide-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.perfil-badge .lucide-icon {
+  display: block;
+  width: 12px;
+  height: 12px;
+}
+
+.page-icon,
+.kpi-icon,
+.alarme-icon,
+.empty-state__icon,
+.btn-suporte-sidebar__icone,
+.success-circle {
+  align-items: center;
+  justify-content: center;
 }
 
 .sidebar-footer {
@@ -340,7 +466,11 @@ img { max-width: 100%; display: block; }
 }
 
 .btn-logout img {
+  display: block;
+  width: 17px;
   height: 17px;
+  object-fit: contain;
+  flex: 0 0 auto;
 }
 
 .btn-logout:hover {
@@ -977,6 +1107,9 @@ img { max-width: 100%; display: block; }
 }
 
 .metric-label {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
   font-size: .65rem;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -1183,7 +1316,8 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-mono);
   min-height: 1rem;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  gap: .35rem;
 }
 
 .form-control {
@@ -2035,7 +2169,10 @@ body.login-body {
   font-size: .72rem;
   color: var(--text-muted);
   font-family: var(--font-mono);
-  display: flex; gap: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .severidade-badge {
@@ -2218,6 +2355,9 @@ body.login-body {
 }
 
 .footer-stat__label {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
   font-size: .72rem;
   color: var(--text-muted);
   font-family: var(--font-mono);
@@ -2349,8 +2489,11 @@ body.login-body {
   color: var(--text-muted);
 }
 
-.empty-state__icon { 
-  font-size: 3rem; margin-bottom: 1rem; opacity: .4; 
+.empty-state__icon {
+  min-height: 40px;
+  display: flex;
+  margin-bottom: 1rem;
+  opacity: .4;
 }
 
 .empty-state__title { 

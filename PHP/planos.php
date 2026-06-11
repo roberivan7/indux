@@ -148,7 +148,7 @@ requerLogin();
   </main>
 
   <div id="successOverlay" class="success-overlay">
-    <div class="success-circle">✓</div>
+    <div class="success-circle">{{lucide:check}}</div>
     <div class="success-title">Assinatura confirmada!</div>
     <p class="success-sub">Seu acesso ao INDUX foi ativado. Verifique seu e-mail para as instruções de acesso.</p>
     <button class="plan-btn primary" type="button" onclick="document.getElementById('successOverlay').classList.remove('show')">Acessar sistema</button>

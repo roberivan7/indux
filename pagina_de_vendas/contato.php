@@ -165,7 +165,7 @@ require_once 'icon.php';
 
                 <div class="contato-form-acoes">
                     <p><span>*</span> Campos obrigatórios</p>
-                    <button type="button" onclick="window.location.href='../index.html'">
+                <button type="button" onclick="processPayment()">
                         Enviar solicitação
                         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                             <path d="M5 12h14" />
@@ -176,7 +176,25 @@ require_once 'icon.php';
             </form>
         </main>
     </div>
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-circle"><svg viewBox="0 0 36 36" fill="none" stroke-width="2.5">
+            <polyline points="8,18 15,25 28,11" />
+        </svg></div>
+        <div class="success-title">Contato confirmada! {{lucide:circle-check}}</div>
+        <p class="success-sub">Entreramos em contato por email, aguarde !!!.</p>
+        <button class="plan-btn primary" style="max-width:200px" onclick="window.location.href='index.php'" >Volta</button>
+    </div>
 </div>
 <footer><?php echo $footer; ?></footer>
 </body>
+<script>
+    function processPayment() {
+        const btn = document.querySelector('.pay-submit');
+        setTimeout(() => {
+        document.getElementById('successOverlay').classList.add('show');
+        btn.innerHTML = '<svg viewBox="0 0 18 18" fill="none"><rect x="2" y="5" width="14" height="10" rx="2"/><path d="M2 8h14"/><circle cx="5.5" cy="12" r="1" fill="currentColor" stroke="none"/></svg> Assinar agora — <span id="btn-price">R$ ' + (isYearly ? currentPlan.yearly : currentPlan.monthly) + '/mês</span>';
+        btn.style.opacity = '1';
+        }, 1800);
+    }
+</script>
 </html>

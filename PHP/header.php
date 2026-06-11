@@ -27,12 +27,12 @@ $usuarioFoto = $_SESSION['usuario_foto'] ?? '';
         <ul>
           <li>
             <a href="dashboard.php" class="<?php echo $paginaAtual === 'dashboard' ? 'active' : ''; ?>">
-              <span class="nav-icon">📊</span> Dashboard
+              <span class="nav-icon">{{lucide:chart-no-axes-combined}}</span> Dashboard
             </a>
           </li>
           <li>
             <a href="monitoramento.php" class="<?php echo $paginaAtual === 'monitoramento' ? 'active' : ''; ?>">
-              <span class="nav-icon">📡</span> Monitoramento
+              <span class="nav-icon">{{lucide:radio}}</span> Monitoramento
             </a>
           </li>
         </ul>
@@ -43,12 +43,12 @@ $usuarioFoto = $_SESSION['usuario_foto'] ?? '';
         <ul>
           <li>
             <a href="equipamentos.php" class="<?php echo in_array($paginaAtual, ['equipamentos','novo-equipamento']) ? 'active' : ''; ?>">
-              <span class="nav-icon">⚙️</span> Equipamentos
+              <span class="nav-icon">{{lucide:settings}}</span> Equipamentos
             </a>
           </li>
           <li>
             <a href="alarmes.php" class="<?php echo $paginaAtual === 'alarmes' ? 'active' : ''; ?>">
-              <span class="nav-icon">🔔</span> Alarmes
+              <span class="nav-icon">{{lucide:bell}}</span> Alarmes
               <?php
               try {
                   require_once 'db.php';
@@ -77,7 +77,7 @@ $usuarioFoto = $_SESSION['usuario_foto'] ?? '';
         <ul>
           <li>
             <a href="usuarios.php" class="<?php echo in_array($paginaAtual, ['usuarios','novo-usuario']) ? 'active' : ''; ?>">
-              <span class="nav-icon">👥</span> Usuários
+              <span class="nav-icon">{{lucide:users-round}}</span> Usuários
             </a>
           </li>
         </ul>
@@ -89,7 +89,7 @@ $usuarioFoto = $_SESSION['usuario_foto'] ?? '';
       <?php if (isset($_SESSION['logado']) && $_SESSION['logado']): ?>
       <?php if (podeAcessarSuporte()): ?>
       <a href="suporte.php" class="btn-suporte-sidebar <?php echo $paginaAtual === 'suporte' ? 'active' : ''; ?>">
-        <span class="btn-suporte-sidebar__icone">💬</span>
+        <span class="btn-suporte-sidebar__icone">{{lucide:message-circle}}</span>
         <span>
           <strong>Suporte INDUX</strong>
           <small>Abrir chamado</small>
@@ -119,7 +119,7 @@ $usuarioFoto = $_SESSION['usuario_foto'] ?? '';
       </a>
       <?php else: ?>
       <a href="login.php" class="btn-logout" style="color:var(--green);border-color:rgba(16,185,129,.3)">
-        <span>🔑</span> Entrar
+        <span>{{lucide:key-round}}</span> Entrar
       </a>
       <?php endif; ?>
     </div>

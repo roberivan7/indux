@@ -40,7 +40,7 @@ $classeBody = $usuarioLogado ? 'pagina-suporte' : 'pagina-suporte pagina-suporte
   <main class="site-main suporte-main">
     <div class="page-header suporte-page-header">
       <div class="page-header-left">
-        <div class="page-icon">💬</div>
+        <div class="page-icon">{{lucide:message-circle}}</div>
         <div>
           <div class="breadcrumb">
             <span>INDUX</span> / <span>Suporte</span>
@@ -53,7 +53,7 @@ $classeBody = $usuarioLogado ? 'pagina-suporte' : 'pagina-suporte pagina-suporte
       <div class="suporte-acoes-topo">
         <a href="<?php echo $usuarioLogado ? 'logout.php?destino=vendas' : '../pagina_de_vendas/index.php'; ?>" class="btn btn--ghost btn--sm">← Voltar para vendas</a>
         <?php if ($usuarioLogado): ?>
-          <a href="dashboard.php" class="btn btn--ghost btn--sm">📊 Dashboard</a>
+          <a href="dashboard.php" class="btn btn--ghost btn--sm">{{lucide:chart-no-axes-combined}} Dashboard</a>
         <?php endif; ?>
       </div>
     </div>
@@ -68,9 +68,7 @@ $classeBody = $usuarioLogado ? 'pagina-suporte' : 'pagina-suporte pagina-suporte
           <span class="suporte-status"><i></i> Online</span>
         </div>
 
-        <div id="caixaRespostaSuporte" class="suporte-mensagens suporte-caixa-resposta">
-          <div class="suporte-vazio">Preencha os dados abaixo para enviar sua solicitação.</div>
-        </div>
+        
 
         <form id="formularioSuporte" class="suporte-formulario">
           <div class="suporte-grid-formulario">
@@ -111,24 +109,11 @@ $classeBody = $usuarioLogado ? 'pagina-suporte' : 'pagina-suporte pagina-suporte
 
   <script>
   const formularioSuporte = document.getElementById('formularioSuporte');
-  const caixaRespostaSuporte = document.getElementById('caixaRespostaSuporte');
   const retornoSuporte = document.getElementById('retornoSuporte');
 
   function mostrarRetornoSuporte(texto, tipo) {
     retornoSuporte.textContent = texto || '';
     retornoSuporte.className = 'suporte-retorno' + (tipo ? ' ' + tipo : '');
-  }
-
-  function mostrarMensagemAutomatica() {
-    caixaRespostaSuporte.innerHTML = `
-      <div class="suporte-mensagem suporte-mensagem-automatica suporte-confirmacao">
-        <div class="suporte-mensagem__topo">
-          <strong>Suporte INDUX</strong>
-          <small>Automático</small>
-        </div>
-        <p>Obrigado! mensagem enviada, aguarde resposta pelo Email.</p>
-      </div>
-    `;
   }
 
   function enviarSolicitacaoSuporte(dadosFormulario) {
@@ -162,7 +147,6 @@ $classeBody = $usuarioLogado ? 'pagina-suporte' : 'pagina-suporte pagina-suporte
     enviarSolicitacaoSuporte(dadosFormulario)
       .then(function() {
         formularioSuporte.reset();
-        mostrarMensagemAutomatica();
         mostrarRetornoSuporte('Solicitação enviada com sucesso.', 'sucesso');
       })
       .catch(function(erro) {

@@ -53,6 +53,42 @@
             "mensagem": "uifhruif",
             "status": "aguardando_resposta_email",
             "criada_em": "2026-06-11 13:59:29"
+        },
+        {
+            "id_solicitacao": "solicitacao_20260610135241_220a6366",
+            "nome_usuario": "Administrador INDUX",
+            "email_usuario": "admin@indux.com.br",
+            "tipo_suporte": "Bugs",
+            "mensagem": "Oi, tenho um problema de buug",
+            "status": "aguardando_resposta_email",
+            "criada_em": "2026-06-10 13:52:41"
+        },
+        {
+            "id_solicitacao": "solicitacao_20260610135342_fa803d77",
+            "nome_usuario": "Administrador INDUX",
+            "email_usuario": "admin@indux.com.br",
+            "tipo_suporte": "Bugs",
+            "mensagem": "teho um biug",
+            "status": "aguardando_resposta_email",
+            "criada_em": "2026-06-10 13:53:42"
+        },
+        {
+            "id_solicitacao": "solicitacao_20260610135411_efc73609",
+            "nome_usuario": "Administrador INDUX",
+            "email_usuario": "admin@indux.com.br",
+            "tipo_suporte": "Erros diversos",
+            "mensagem": "kkkkk",
+            "status": "aguardando_resposta_email",
+            "criada_em": "2026-06-10 13:54:11"
+        },
+        {
+            "id_solicitacao": "solicitacao_20260610135422_b8373ba5",
+            "nome_usuario": "Administrador INDUX",
+            "email_usuario": "admin@indux.com.br",
+            "tipo_suporte": "Bugs",
+            "mensagem": "kkkkkk",
+            "status": "aguardando_resposta_email",
+            "criada_em": "2026-06-10 13:54:22"
         }
     ]
 }

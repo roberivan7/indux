@@ -5,7 +5,6 @@ require_once 'footer.php';
 
 $paginaAtiva = 'solucoes';
 
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -47,7 +46,7 @@ $paginaAtiva = 'solucoes';
         <div class="grid-solucoes">
 
             <div class="card-solucao">
-                <div class="card-icone">📡</div>
+                <div class="card-icone">{{lucide:radio}}</div>
                 <h3>Monitoramento em Tempo Real</h3>
                 <p>
                     Acompanhe leituras de sensores — temperatura, pressão e mais —
@@ -62,7 +61,7 @@ $paginaAtiva = 'solucoes';
             </div>
 
             <div class="card-solucao amarelo">
-                <div class="card-icone">🔔</div>
+                <div class="card-icone">{{lucide:bell}}</div>
                 <h3>Gestão de Alarmes</h3>
                 <p>
                     Alarmes gerados automaticamente quando leituras ultrapassam limites
@@ -77,7 +76,7 @@ $paginaAtiva = 'solucoes';
             </div>
 
             <div class="card-solucao verde">
-                <div class="card-icone">🏭</div>
+                <div class="card-icone">{{lucide:factory}}</div>
                 <h3>Cadastro de Equipamentos</h3>
                 <p>
                     Registre, edite e controle o status de cada equipamento do parque
@@ -92,7 +91,7 @@ $paginaAtiva = 'solucoes';
             </div>
 
             <div class="card-solucao roxo">
-                <div class="card-icone">📊</div>
+                <div class="card-icone">{{lucide:chart-no-axes-combined}}</div>
                 <h3>Dashboard Analítico</h3>
                 <p>
                     Visão executiva com KPIs consolidados: total de equipamentos,
@@ -107,7 +106,7 @@ $paginaAtiva = 'solucoes';
             </div>
 
             <div class="card-solucao laranja">
-                <div class="card-icone">🔐</div>
+                <div class="card-icone">{{lucide:lock-keyhole}}</div>
                 <h3>Controle de Acesso e Usuários</h3>
                 <p>
                     Gerencie usuários com perfis e permissões diferenciadas. Defina
@@ -122,7 +121,7 @@ $paginaAtiva = 'solucoes';
             </div>
 
             <div class="card-solucao">
-                <div class="card-icone">🕒</div>
+                <div class="card-icone">{{lucide:clock-3}}</div>
                 <h3>Suporte 24 horas</h3>
                 <p>Atendimento contínuo para monitoramento, suporte técnico e resposta rápida a falhas industriais, garantindo estabilidade e segurança operacional da planta.</p>
                 <div class="card-tags">
@@ -207,7 +206,7 @@ $paginaAtiva = 'solucoes';
     </p>
     <div class="cta-botoes">
         <a href="../PHP/login.php" class="btn-primario">
-            ⚡ Acessar o Sistema
+            {{lucide:zap}} Acessar o Sistema
         </a>
         <a href="sobre.php" class="btn-secundario">
             Saiba mais sobre nós →

@@ -243,7 +243,7 @@ $fotoUsuario = $usuario['foto'] ?? ($_SESSION['usuario_foto'] ?? '');
   <main class="site-main">
     <div class="page-header">
       <div class="page-header-left">
-        <div class="page-icon">⚙️</div>
+        <div class="page-icon">{{lucide:settings}}</div>
         <div>
           <div class="breadcrumb"><span>INDUX</span> / <span>Configurações</span></div>
           <h1 class="page-title">Configurações do Usuário</h1>

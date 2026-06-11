@@ -2,7 +2,7 @@
 require_once 'icon.php';
 define('DB_HOST',    '127.0.0.1');
 define('DB_NAME',    'indux');
-define('DB_USER',    'root');
+define('DB_USER',    'roberivan');
 define('DB_PASS',    '123');
 define('DB_CHARSET', 'utf8mb4');    
 
@@ -19,7 +19,7 @@ function getDB(): PDO {
             $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
         } catch (PDOException $e) {
             die('<div style="font-family:monospace;background:#1a0000;color:#ff4444;padding:2rem;border-radius:8px;margin:2rem">
-                <strong>❌ ERRO DE CONEXÃO COM O BANCO DE DADOS</strong><br><br>
+                <strong>{{lucide:circle-x}} ERRO DE CONEXÃO COM O BANCO DE DADOS</strong><br><br>
                 Verifique as configurações em <code>db.php</code>:<br>
                 HOST: ' . DB_HOST . '<br>BANCO: ' . DB_NAME . '<br>USUÁRIO: ' . DB_USER . '<br><br>
                 Detalhes: ' . htmlspecialchars($e->getMessage()) . '
@@ -166,7 +166,7 @@ function dbContarAlarmes(): array {
 if (!function_exists('perfilBadgeHtml')) {
     function perfilBadgeHtml(string $perfil): string {
         $perfil = $perfil === 'admin' ? 'admin' : 'funcionario';
-        $t=['admin'=>'👑 Admin','funcionario'=>'👤 Funcionário'];
+        $t=['admin'=>'{{lucide:user-round}} Admin','funcionario'=>'{{lucide:user-round}} Funcionário'];
         $c=['admin'=>'perfil--admin','funcionario'=>'perfil--funcionario'];
         return '<span class="perfil-badge '.($c[$perfil]??'').'">'.(htmlspecialchars($t[$perfil]??$perfil)).'</span>';
     }

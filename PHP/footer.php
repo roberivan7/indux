@@ -36,22 +36,22 @@ try {
 
     <div style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap">
       <div class="footer-stat">
-        <span class="footer-stat__label">⚙️ Equipamentos</span>
+        <span class="footer-stat__label">{{lucide:settings}} Equipamentos</span>
         <strong class="footer-stat__value text-cyan"><?php echo $totalEquipamentos; ?></strong>
       </div>
       <div class="footer-stat">
-        <span class="footer-stat__label">✅ Ativos</span>
+        <span class="footer-stat__label">{{lucide:circle-check}} Ativos</span>
         <strong class="footer-stat__value footer-stat__value--green"><?php echo $totalAtivos; ?></strong>
       </div>
       <?php if ($totalFalhas > 0): ?>
       <div class="footer-stat">
-        <span class="footer-stat__label">🔴 Em Falha</span>
+        <span class="footer-stat__label">{{lucide:circle-alert}} Em Falha</span>
         <strong class="footer-stat__value footer-stat__value--red"><?php echo $totalFalhas; ?></strong>
       </div>
       <?php endif; ?>
       <?php if ($alarmesCriticos > 0): ?>
       <div class="footer-stat">
-        <span class="footer-stat__label">🔔 Alarmes Críticos</span>
+        <span class="footer-stat__label">{{lucide:bell}} Alarmes Críticos</span>
         <strong class="footer-stat__value footer-stat__value--yellow"><?php echo $alarmesCriticos; ?></strong>
       </div>
       <?php endif; ?>

@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <?php if ($erro): ?>
     <div class="alerta alerta--erro" style="margin-bottom:1rem">
-      ⚠️ <?php echo htmlspecialchars($erro); ?>
+      {{lucide:triangle-alert}} <?php echo htmlspecialchars($erro); ?>
     </div>
     <?php endif; ?>
 
@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
 
       <button type="submit" class="btn btn--primary btn--lg">
-        🔑 Acessar o Sistema
+        {{lucide:key-round}} Acessar o Sistema
       </button>
 
     </form>

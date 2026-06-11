@@ -271,7 +271,7 @@ try {
 
     <div class="page-header">
       <div class="page-header-left">
-        <div class="page-icon">🔔</div>
+        <div class="page-icon">{{lucide:bell}}</div>
         <div>
           <div class="breadcrumb"><span>INDUX</span> / <span>Alarmes</span></div>
           <h1 class="page-title">Alarmes Industriais</h1>
@@ -340,7 +340,7 @@ try {
 
     <?php if (empty($alarmes)): ?>
       <div class="empty-state">
-        <div class="empty-state__icon"><?php echo $filtroResolvido === '0' ? '✅' : '📋'; ?></div>
+        <div class="empty-state__icon"><?php echo $filtroResolvido === '0' ? '{{lucide:circle-check}}' : '{{lucide:clipboard-list}}'; ?></div>
         <div class="empty-state__title">
           <?php echo $filtroResolvido === '0' ? 'Nenhum alarme ativo' : 'Nenhum alarme encontrado'; ?>
         </div>
@@ -366,14 +366,14 @@ try {
               <div class="alarme-msg"><?php echo htmlspecialchars($alarme['mensagem']); ?></div>
               <div class="alarme-meta" style="margin-top:.3rem">
                 <?php if ($alarme['valor_registrado'] !== null): ?>
-                  <span>📊 Valor: <strong><?php echo number_format($alarme['valor_registrado'], 2); ?></strong></span>
+                  <span>{{lucide:chart-no-axes-combined}} Valor: <strong><?php echo number_format($alarme['valor_registrado'], 2); ?></strong></span>
                 <?php endif; ?>
                 <?php if ($alarme['valor_limite'] !== null): ?>
-                  <span>🚧 Limite: <strong><?php echo number_format($alarme['valor_limite'], 2); ?></strong></span>
+                  <span>{{lucide:triangle-alert}} Limite: <strong><?php echo number_format($alarme['valor_limite'], 2); ?></strong></span>
                 <?php endif; ?>
-                <span>🕐 <?php echo date('d/m/Y H:i', strtotime($alarme['criado_em'])); ?></span>
+                <span>{{lucide:clock-3}} <?php echo date('d/m/Y H:i', strtotime($alarme['criado_em'])); ?></span>
                 <?php if ($alarme['resolvido'] && $alarme['resolvido_nome']): ?>
-                  <span style="color:var(--green)">✅ Resolvido por <?php echo htmlspecialchars($alarme['resolvido_nome']); ?></span>
+                  <span style="color:var(--green)">{{lucide:circle-check}} Resolvido por <?php echo htmlspecialchars($alarme['resolvido_nome']); ?></span>
                 <?php endif; ?>
               </div>
             </div>
