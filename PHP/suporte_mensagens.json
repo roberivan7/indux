@@ -35,6 +35,24 @@
             "mensagem": "Ok google",
             "status": "aguardando_resposta_email",
             "criada_em": "2026-06-02 00:15:40"
+        },
+        {
+            "id_solicitacao": "solicitacao_20260610152453_41fabd85",
+            "nome_usuario": "Administrador INDUX",
+            "email_usuario": "admin@indux.com.br",
+            "tipo_suporte": "Outros",
+            "mensagem": "frfurnfrf",
+            "status": "aguardando_resposta_email",
+            "criada_em": "2026-06-10 15:24:53"
+        },
+        {
+            "id_solicitacao": "solicitacao_20260611135929_afa5fb88",
+            "nome_usuario": "Administrador INDUX",
+            "email_usuario": "admin@indux.com.br",
+            "tipo_suporte": "Bugs",
+            "mensagem": "uifhruif",
+            "status": "aguardando_resposta_email",
+            "criada_em": "2026-06-11 13:59:29"
         }
     ]
 }
