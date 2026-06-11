@@ -17,7 +17,7 @@ if (isset($_GET['excluir']) && podeExcluirEquip()) {
         if ($equipamentoRemovido) {
             $db->prepare('DELETE FROM equipamentos WHERE id = ?')->execute([$equipamentoId]);
             registrarLog('EXCLUIR_EQUIPAMENTO', 'equipamentos', $equipamentoId, 'Nome: '.$equipamentoRemovido['nome']);
-            $msg     = '🗑️ Equipamento "' . $equipamentoRemovido['nome'] . '" removido.';
+            $msg     = '{{lucide:trash-2}} Equipamento "' . $equipamentoRemovido['nome'] . '" removido.';
             $msgTipo = 'aviso';
         }
     } catch (Throwable $e) {
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['alterar_status']) && 
             $db->prepare('UPDATE equipamentos SET status = ? WHERE id = ?')
                ->execute([$novoStatus, $equipamentoId]);
             registrarLog('ALTERAR_STATUS', 'equipamentos', $equipamentoId, 'Novo status: '.$novoStatus);
-            $msg     = '✅ Status atualizado para: ' . statusLabel($novoStatus);
+            $msg     = '{{lucide:circle-check}} Status atualizado para: ' . statusLabel($novoStatus);
             $msgTipo = 'sucesso';
         } catch (Throwable $e) {
             $msg = 'Erro ao atualizar status.';
@@ -136,7 +136,7 @@ if ($filtroStatus !== '') {
 
     <div class="page-header">
       <div class="page-header-left">
-        <div class="page-icon">⚙️</div>
+        <div class="page-icon">{{lucide:settings}}</div>
         <div>
           <div class="breadcrumb"><span>INDUX</span> / <span>Equipamentos</span></div>
           <h1 class="page-title">Equipamentos</h1>
@@ -144,7 +144,7 @@ if ($filtroStatus !== '') {
         </div>
       </div>
       <?php if (podeCriarEquip()): ?>
-      <a href="novo-equipamento.php" class="btn btn--primary">➕ Novo Equipamento</a>
+      <a href="novo-equipamento.php" class="btn btn--primary">{{lucide:plus}} Novo Equipamento</a>
       <?php endif; ?>
     </div>
 
@@ -172,7 +172,7 @@ if ($filtroStatus !== '') {
       <input type="hidden" name="status" value="<?php echo htmlspecialchars($filtroStatus); ?>">
       <?php endif; ?>
       <div style="flex:1;min-width:250px;position:relative">
-        <span style="position:absolute;left:.8rem;top:50%;transform:translateY(-50%);font-size:.9rem">🔍</span>
+        <span class="input-icon">{{lucide:search}}</span>
         <input
           type="text"
           name="busca"
@@ -184,7 +184,7 @@ if ($filtroStatus !== '') {
       </div>
       <button type="submit" class="btn btn--primary">Buscar</button>
       <?php if ($busca || $filtroStatus): ?>
-      <a href="equipamentos.php" class="btn btn--ghost">✕ Limpar</a>
+      <a href="equipamentos.php" class="btn btn--ghost">{{lucide:x}} Limpar</a>
       <?php endif; ?>
     </form>
 
@@ -209,13 +209,13 @@ if ($filtroStatus !== '') {
 
     <?php if (empty($equipamentos)): ?>
     <div class="empty-state">
-      <div class="empty-state__icon">⚙️</div>
+      <div class="empty-state__icon">{{lucide:settings}}</div>
       <div class="empty-state__title">Nenhum equipamento encontrado</div>
       <div class="empty-state__desc">
         <?php if ($busca || $filtroStatus): ?>
           Tente alterar os filtros de busca.
         <?php elseif (podeCriarEquip()): ?>
-          <a href="novo-equipamento.php" class="btn btn--primary" style="margin-top:1rem">➕ Cadastrar primeiro equipamento</a>
+          <a href="novo-equipamento.php" class="btn btn--primary" style="margin-top:1rem">{{lucide:plus}} Cadastrar primeiro equipamento</a>
         <?php else: ?>
           Nenhum equipamento cadastrado ainda.
         <?php endif; ?>
@@ -237,7 +237,7 @@ if ($filtroStatus !== '') {
             <div class="equip-card__sub">
               <span class="tag-chip"><?php echo htmlspecialchars($equipamento['tag']); ?></span>
               <?php if ($equipamento['localizacao']): ?>
-              <span style="margin-left:.4rem;color:var(--text-muted);font-size:.72rem">📍 <?php echo htmlspecialchars($equipamento['localizacao']); ?></span>
+              <span class="inline-icon-text" style="margin-left:.4rem;color:var(--text-muted);font-size:.72rem">{{lucide:map-pin}} <?php echo htmlspecialchars($equipamento['localizacao']); ?></span>
               <?php endif; ?>
             </div>
           </div>
@@ -247,11 +247,11 @@ if ($filtroStatus !== '') {
         <?php if ($equipamento['ultima_temp'] !== null): ?>
         <div class="equip-card__metrics">
           <div class="metric-item">
-            <div class="metric-label">🌡️ Temperatura</div>
+            <div class="metric-label">{{lucide:thermometer}} Temperatura</div>
             <div class="metric-value <?php echo $classeTemperatura; ?>"><?php echo number_format($equipamento['ultima_temp'],1); ?>°C</div>
           </div>
           <div class="metric-item">
-            <div class="metric-label">⚙️ Pressão</div>
+            <div class="metric-label">{{lucide:settings}} Pressão</div>
             <div class="metric-value <?php echo $classePressao; ?>"><?php echo number_format($equipamento['ultima_pressao'],2); ?> bar</div>
           </div>
         </div>
@@ -270,13 +270,13 @@ if ($filtroStatus !== '') {
         </div>
         <?php endif; ?>
 
-        <div style="display:flex;gap:.75rem;font-size:.72rem;color:var(--text-muted);font-family:var(--font-mono);margin-top:.5rem">
-          <?php if ($equipamento['modelo']): ?><span>📦 <?php echo htmlspecialchars($equipamento['modelo']); ?></span><?php endif; ?>
+        <div class="equip-card__meta" style="display:flex;gap:.75rem;font-size:.72rem;color:var(--text-muted);font-family:var(--font-mono);margin-top:.5rem">
+          <?php if ($equipamento['modelo']): ?><span>{{lucide:box}} <?php echo htmlspecialchars($equipamento['modelo']); ?></span><?php endif; ?>
           <?php if ($equipamento['status'] !== 'inativo' && $equipamento['qtd_alarmes'] > 0): ?>
-          <span style="color:var(--red)">🔔 <?php echo $equipamento['qtd_alarmes']; ?> alarme(s)</span>
+          <span style="color:var(--red)">{{lucide:bell}} <?php echo $equipamento['qtd_alarmes']; ?> alarme(s)</span>
           <?php endif; ?>
           <?php if ($equipamento['ultima_leitura']): ?>
-          <span>🕐 <?php echo date('H:i', strtotime($equipamento['ultima_leitura'])); ?></span>
+          <span>{{lucide:clock-3}} <?php echo date('H:i', strtotime($equipamento['ultima_leitura'])); ?></span>
           <?php endif; ?>
         </div>
 
@@ -317,7 +317,7 @@ if ($filtroStatus !== '') {
           <?php endif; ?>
 
           <?php if (podeEditarEquip()): ?>
-          <a href="novo-equipamento.php?editar=<?php echo $equipamento['id']; ?>" class="btn btn--ghost btn--sm">✏️</a>
+          <a href="novo-equipamento.php?editar=<?php echo $equipamento['id']; ?>" class="btn btn--ghost btn--sm">{{lucide:pencil}}</a>
           <?php endif; ?>
         </div>
 

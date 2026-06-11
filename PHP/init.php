@@ -19,7 +19,7 @@ define('PRESSAO_ALERTA_MAX',   9.0);
 $statusLabels = ['ativo'=>'Ativo','inativo'=>'Inativo','em_falha'=>'Em Falha'];
 $tipoAlarmeLabels = ['temperatura'=>'Temperatura','pressao'=>'Pressão','falha'=>'Falha','conexao'=>'Conexão','manutencao'=>'Manutenção'];
 $severidadeLabels = ['critico'=>'Crítico','alerta'=>'Alerta','informativo'=>'Informativo'];
-$perfilLabels     = ['admin'=>'👑 Admin','funcionario'=>'👤 Funcionário'];
+$perfilLabels     = ['admin'=>'{{lucide:user-round}} Admin','funcionario'=>'{{lucide:user-round}} Funcionário'];
 
 function requerLogin(): void {
     if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
@@ -53,21 +53,20 @@ function inicialNome(string $nome): string {
 function statusClass(string $status): string { return match($status){ 'ativo'=>'status-ativo','inativo'=>'status-inativo','em_falha'=>'status-em_falha',default=>'' }; }
 function statusLabel(string $status): string { global $statusLabels; return $statusLabels[$status] ?? $status; }
 function severidadeIcon(string $severidade): string {
-    $gifCritico = 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXRudXl3eWR3bXNlaWticm0xY3Z5amVwa204Mm5xNW9rZHJwaXc4aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/f4z6vCWrGcMw6xRlOA/giphy.gif';
     return match($severidade){
-        'critico'=>'<img src="'.$gifCritico.'" alt="Alerta" style="width:22px;height:22px;object-fit:contain;display:inline-block;vertical-align:middle" />',
-        'alerta'=>'⚠️',
-        'informativo'=>'💡',
-        default=>'❓'
+        'critico'=>'{{lucide:circle-alert}}',
+        'alerta'=>'{{lucide:triangle-alert}}',
+        'informativo'=>'{{lucide:lightbulb}}',
+        default=>'{{lucide:circle-help}}'
     };
 }
-function tipoAlarmeIcon(string $tipoAlarme): string { return match($tipoAlarme){ 'temperatura'=>'🌡️','pressao'=>'⚙️','falha'=>'🔴','conexao'=>'📡','manutencao'=>'🔧',default=>'❓' }; }
+function tipoAlarmeIcon(string $tipoAlarme): string { return match($tipoAlarme){ 'temperatura'=>'{{lucide:thermometer}}','pressao'=>'{{lucide:settings}}','falha'=>'{{lucide:circle-alert}}','conexao'=>'{{lucide:radio}}','manutencao'=>'{{lucide:wrench}}',default=>'{{lucide:circle-help}}' }; }
 function avaliarTemp(float $valor, float $minimo, float $maximo): string { if($valor>$maximo||$valor<$minimo)return'danger'; if($valor>($maximo*0.85))return'warning'; return'ok'; }
 function avaliarPressao(float $valor, float $minimo, float $maximo): string { if($valor>$maximo||$valor<$minimo)return'danger'; if($valor>($maximo*0.85))return'warning'; return'ok'; }
 function pctBar(float $valor, float $minimo, float $maximo): float { if($maximo<=$minimo)return 0; return min(100,max(0,(($valor-$minimo)/($maximo-$minimo))*100)); }
 function perfilBadgeHtml(string $perfil): string {
     $perfil = $perfil === 'admin' ? 'admin' : 'funcionario';
-    $perfilTexto=['admin'=>'👑 Admin','funcionario'=>'👤 Funcionário'];
+    $perfilTexto=['admin'=>'{{lucide:user-round}} Admin','funcionario'=>'{{lucide:user-round}} Funcionário'];
     $perfilClasse=['admin'=>'perfil--admin','funcionario'=>'perfil--funcionario'];
     return '<span class="perfil-badge '.($perfilClasse[$perfil]??'').'">'.($perfilTexto[$perfil]??$perfil).'</span>';
 }

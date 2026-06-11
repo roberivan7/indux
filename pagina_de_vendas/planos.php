@@ -220,7 +220,7 @@
     <div class="success-circle"><svg viewBox="0 0 36 36" fill="none" stroke-width="2.5">
         <polyline points="8,18 15,25 28,11" />
       </svg></div>
-    <div class="success-title">Assinatura confirmada! 🎉</div>
+    <div class="success-title">Assinatura confirmada! {{lucide:circle-check}}</div>
     <p class="success-sub">Seu acesso ao INDUX foi ativado. Verifique seu e-mail para as instruções de acesso.</p>
     <button class="plan-btn primary" style="max-width:200px" onclick="document.getElementById('successOverlay').classList.remove('show')">Acessar sistema</button>
   </div>

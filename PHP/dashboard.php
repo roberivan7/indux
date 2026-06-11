@@ -94,7 +94,7 @@ try {
 
     <div class="page-header">
       <div class="page-header-left">
-        <div class="page-icon">📊</div>
+        <div class="page-icon">{{lucide:chart-no-axes-combined}}</div>
         <div>
           <div class="breadcrumb">
             <span>INDUX</span> / <span>Dashboard</span>
@@ -107,12 +107,12 @@ try {
         <span style="font-size:.72rem;color:var(--text-muted);font-family:var(--font-mono)">
           Atualizado: <?php echo date('d/m/Y H:i:s'); ?>
         </span>
-        <a href="dashboard.php" class="btn btn--ghost btn--sm">🔄 Atualizar</a>
+        <a href="dashboard.php" class="btn btn--ghost btn--sm">{{lucide:rotate-cw}} Atualizar</a>
       </div>
     </div>
 
     <?php if (isset($_GET['erro']) && $_GET['erro'] === 'acesso_negado'): ?>
-      <div class="alerta alerta--erro">🚫 Acesso negado. Você não tem permissão para acessar essa área.</div>
+      <div class="alerta alerta--erro">{{lucide:shield-x}} Acesso negado. Você não tem permissão para acessar essa área.</div>
     <?php endif; ?>
 
     <!-- KPI Cards -->
@@ -159,13 +159,13 @@ try {
 
       <div class="panel-card">
         <div class="panel-header">
-          <div class="panel-title">📡 Últimas Leituras dos Sensores</div>
+          <div class="panel-title">{{lucide:radio}} Últimas Leituras dos Sensores</div>
           <a href="monitoramento.php" class="btn btn--ghost btn--sm">Ver tudo</a>
         </div>
         <div class="panel-body" style="padding:0">
           <?php if (empty($ultimasLeituras)): ?>
             <div class="empty-state" style="padding:2.5rem">
-              <div class="empty-state__icon">📡</div>
+              <div class="empty-state__icon">{{lucide:radio}}</div>
               <div class="empty-state__title">Nenhuma leitura registrada</div>
               <div class="empty-state__desc">Cadastre equipamentos e registre leituras</div>
             </div>
@@ -204,13 +204,13 @@ try {
 
       <div class="panel-card">
         <div class="panel-header">
-          <div class="panel-title">🔔 Alarmes Ativos</div>
+          <div class="panel-title">{{lucide:bell}} Alarmes Ativos</div>
           <a href="alarmes.php" class="btn btn--ghost btn--sm">Ver todos</a>
         </div>
         <div class="panel-body">
           <?php if (empty($ultimosAlarmes)): ?>
             <div class="empty-state" style="padding:2rem">
-              <div class="empty-state__icon">✅</div>
+              <div class="empty-state__icon">{{lucide:circle-check}}</div>
               <div class="empty-state__title">Nenhum alarme ativo</div>
               <div class="empty-state__desc">Sistema operando normalmente</div>
             </div>
@@ -237,7 +237,7 @@ try {
     <?php if (!empty($ultimosEquip)): ?>
       <div class="panel-card" style="margin-top:1.25rem">
         <div class="panel-header">
-          <div class="panel-title">⚙️ Equipamentos Recentes</div>
+          <div class="panel-title">{{lucide:settings}} Equipamentos Recentes</div>
           <a href="equipamentos.php" class="btn btn--ghost btn--sm">Ver todos</a>
         </div>
         <div class="panel-body" style="padding:0">
@@ -279,18 +279,18 @@ try {
     <div style="margin-top:1.75rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem">
       <?php if (podeCriarEquip()): ?>
         <a href="novo-equipamento.php" class="btn btn--primary btn--lg" style="justify-content:center">
-          ➕ Novo Equipamento
+          {{lucide:plus}} Novo Equipamento
         </a>
       <?php endif; ?>
       <a href="equipamentos.php" class="btn btn--ghost btn--lg" style="justify-content:center">
-        ⚙️ Todos Equipamentos
+        {{lucide:settings}} Todos Equipamentos
       </a>
       <a href="alarmes.php" class="btn btn--warning btn--lg" style="justify-content:center">
-        🔔 Ver Alarmes
+        {{lucide:bell}} Ver Alarmes
       </a>
       <?php if (ehAdmin()): ?>
         <a href="usuarios.php" class="btn btn--ghost btn--lg" style="justify-content:center">
-          👥 Usuários
+          {{lucide:users-round}} Usuários
         </a>
       <?php endif; ?>
     </div>

@@ -176,7 +176,7 @@ if ($equipFiltro > 0) {
 <main class="site-main">
   <div class="page-header">
     <div class="page-header-left">
-      <div class="page-icon">📡</div>
+      <div class="page-icon">{{lucide:radio}}</div>
       <div>
         <div class="breadcrumb">
           <span>INDUX</span> /
@@ -224,7 +224,7 @@ if ($equipFiltro > 0) {
           <div style="display:flex;gap:.5rem;margin-top:.2rem;flex-wrap:wrap">
             <span class="tag-chip"><?= htmlspecialchars($equipamento['tag']) ?></span>
             <?php if ($equipamento['localizacao']): ?>
-            <span style="font-size:.7rem;color:var(--text-muted)">📍 <?= htmlspecialchars($equipamento['localizacao']) ?></span>
+            <span class="inline-icon-text" style="font-size:.7rem;color:var(--text-muted)">{{lucide:map-pin}} <?= htmlspecialchars($equipamento['localizacao']) ?></span>
             <?php endif; ?>
           </div>
         </div>
@@ -234,22 +234,22 @@ if ($equipFiltro > 0) {
       <?php if ($equipamento['ultima_temp'] !== null): ?>
       <div class="equip-card__metrics">
         <div class="metric-item">
-          <div class="metric-label">🌡️ Temperatura</div>
+          <div class="metric-label">{{lucide:thermometer}} Temperatura</div>
           <div class="metric-value <?= $cT ?>"><?= number_format($equipamento['ultima_temp'],1) ?>°C</div>
         </div>
         <div class="metric-item">
-          <div class="metric-label">⚙️ Pressão</div>
+          <div class="metric-label">{{lucide:settings}} Pressão</div>
           <div class="metric-value <?= $cP ?>"><?= number_format($equipamento['ultima_pressao'],2) ?> bar</div>
         </div>
         <?php if ($equipamento['ultima_umidade'] !== null): ?>
         <div class="metric-item">
-          <div class="metric-label">💧 Umidade</div>
+          <div class="metric-label">{{lucide:droplet}} Umidade</div>
           <div class="metric-value ok"><?= number_format($equipamento['ultima_umidade'],1) ?>%</div>
         </div>
         <?php endif; ?>
         <?php if ($equipamento['status'] !== 'inativo' && $equipamento['qtd_alarmes'] > 0): ?>
         <div class="metric-item" style="border-color:rgba(239,68,68,.3)">
-          <div class="metric-label">🔔 Alarmes</div>
+          <div class="metric-label">{{lucide:bell}} Alarmes</div>
           <div class="metric-value danger"><?= $equipamento['qtd_alarmes'] ?> ativo(s)</div>
         </div>
         <?php endif; ?>
@@ -262,8 +262,8 @@ if ($equipFiltro > 0) {
         <div class="gauge-label"><span>Pressão</span><span><?= number_format($pP,0) ?>% do limite</span></div>
         <div class="gauge-bar"><div class="gauge-fill <?= $cP ?>" style="width:<?= $pP ?>%"></div></div>
       </div>
-      <div style="font-size:.68rem;color:var(--text-muted);font-family:var(--font-mono);margin-top:.6rem">
-        🕐 Última leitura: <?= $equipamento['ultima_leitura'] ? date('d/m H:i:s', strtotime($equipamento['ultima_leitura'])) : '—' ?>
+      <div class="inline-icon-text" style="font-size:.68rem;color:var(--text-muted);font-family:var(--font-mono);margin-top:.6rem">
+        {{lucide:clock-3}} Última leitura: <?= $equipamento['ultima_leitura'] ? date('d/m H:i:s', strtotime($equipamento['ultima_leitura'])) : '—' ?>
       </div>
       <?php else: ?>
       <div style="text-align:center;padding:1.5rem 0;color:var(--text-muted);font-size:.82rem;font-family:var(--font-mono)">
@@ -276,7 +276,7 @@ if ($equipFiltro > 0) {
           Detalhes
         </a>
         <?php if ($equipamento['status'] !== 'inativo' && $equipamento['qtd_alarmes'] > 0): ?>
-        <a href="alarmes.php" class="btn btn--danger btn--sm">🔔 <?= $equipamento['qtd_alarmes'] ?></a>
+        <a href="alarmes.php" class="btn btn--danger btn--sm">{{lucide:bell}} <?= $equipamento['qtd_alarmes'] ?></a>
         <?php endif; ?>
       </div>
     </div>
@@ -284,10 +284,10 @@ if ($equipFiltro > 0) {
 
     <?php if (empty($equipamentos)): ?>
     <div class="empty-state" style="grid-column:1/-1">
-      <div class="empty-state__icon">📡</div>
+      <div class="empty-state__icon">{{lucide:radio}}</div>
       <div class="empty-state__title">Nenhum equipamento cadastrado</div>
       <?php if (podeCriarEquip()): ?>
-      <a href="novo-equipamento.php" class="btn btn--primary" style="margin-top:1rem">➕ Cadastrar Equipamento</a>
+      <a href="novo-equipamento.php" class="btn btn--primary" style="margin-top:1rem">{{lucide:plus}} Cadastrar Equipamento</a>
       <?php endif; ?>
     </div>
     <?php endif; ?>
@@ -297,7 +297,7 @@ if ($equipFiltro > 0) {
 
 
   <?php if (!$equipSelecionado): ?>
-    <div class="alerta alerta--erro">⚠️ Equipamento não encontrado (ID: <?= $equipFiltro ?>).</div>
+    <div class="alerta alerta--erro">{{lucide:triangle-alert}} Equipamento não encontrado (ID: <?= $equipFiltro ?>).</div>
     <a href="monitoramento.php" class="btn btn--ghost" style="margin-top:1rem">← Voltar para todos</a>
   <?php else:
     $eq       = $equipSelecionado;
@@ -316,9 +316,9 @@ if ($equipFiltro > 0) {
       <h2 style="font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:#fff;text-transform:uppercase">
         <?= htmlspecialchars($eq['nome']) ?>
       </h2>
-      <div style="font-size:.78rem;color:var(--text-muted);font-family:var(--font-mono);margin-top:.3rem">
-        <?php if ($eq['modelo']): ?>📦 <?= htmlspecialchars($eq['modelo']) ?> &nbsp;<?php endif; ?>
-        <?php if ($eq['localizacao']): ?>📍 <?= htmlspecialchars($eq['localizacao']) ?><?php endif; ?>
+      <div class="inline-icon-text" style="font-size:.78rem;color:var(--text-muted);font-family:var(--font-mono);margin-top:.3rem">
+        <?php if ($eq['modelo']): ?>{{lucide:box}} <?= htmlspecialchars($eq['modelo']) ?> &nbsp;<?php endif; ?>
+        <?php if ($eq['localizacao']): ?>{{lucide:map-pin}} <?= htmlspecialchars($eq['localizacao']) ?><?php endif; ?>
       </div>
     </div>
 
@@ -347,8 +347,8 @@ if ($equipFiltro > 0) {
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem">
     <?php foreach ([
-      ['🌡️ TEMPERATURA','°C',$pTA,$cTA,$eq['ultima_temp'],$eq['temp_min'],$eq['temp_max']],
-      ['⚙️ PRESSÃO',    'bar',$pPA,$cPA,$eq['ultima_pressao'],$eq['pressao_min'],$eq['pressao_max']],
+      ['{{lucide:thermometer}} TEMPERATURA','°C',$pTA,$cTA,$eq['ultima_temp'],$eq['temp_min'],$eq['temp_max']],
+      ['{{lucide:settings}} PRESSÃO',    'bar',$pPA,$cPA,$eq['ultima_pressao'],$eq['pressao_min'],$eq['pressao_max']],
     ] as [$titulo,$unidade,$pct,$classe,$valor,$vMin,$vMax]):
       $angulo = min(270, ($pct / 100) * 270);
       $raio = 54; $cx = 70; $cy = 70;
@@ -360,7 +360,7 @@ if ($equipFiltro > 0) {
     ?>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.5rem">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
-        <span style="font-family:var(--font-display);font-size:.85rem;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.05em"><?= $titulo ?></span>
+        <span class="gauge-card-title" style="font-family:var(--font-display);font-size:.85rem;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.05em"><?= $titulo ?></span>
         <span style="font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted)"><?= number_format($vMin,1) ?> – <?= number_format($vMax,1) ?> <?= $unidade ?></span>
       </div>
       <div style="display:flex;align-items:center;gap:1.5rem">
@@ -388,7 +388,7 @@ if ($equipFiltro > 0) {
             <?php if ($classe==='ok'): ?>
             <span class="status-badge status-ativo">Normal</span>
             <?php elseif ($classe==='warning'): ?>
-            <span class="status-badge" style="background:var(--yellow-dim);color:var(--yellow);border:1px solid rgba(245,158,11,.3)">⚠️ Alerta</span>
+            <span class="status-badge" style="background:var(--yellow-dim);color:var(--yellow);border:1px solid rgba(245,158,11,.3)">{{lucide:triangle-alert}} Alerta</span>
             <?php else: ?>
             <span class="status-badge status-em_falha" style="gap:.35rem">
               <?= severidadeIcon('critico') ?> Crítico
@@ -406,32 +406,32 @@ if ($equipFiltro > 0) {
     <?php if (ehGestor()): ?>
     <div class="panel-card">
       <div class="panel-header">
-        <div class="panel-title">➕ Registrar Nova Leitura</div>
+        <div class="panel-title">{{lucide:plus}} Registrar Nova Leitura</div>
       </div>
       <div class="panel-body">
         <form method="POST">
           <input type="hidden" name="equip_id" value="<?= $eq['id'] ?>">
           <div class="form-grid" style="grid-template-columns:1fr 1fr">
             <div class="form-group">
-              <label class="form-label">🌡️ Temperatura (°C) *</label>
+              <label class="form-label">{{lucide:thermometer}} Temperatura (°C) *</label>
               <input type="number" name="temperatura" class="form-control"
                 step="0.1" required placeholder="Ex: <?= $eq['ultima_temp'] ?? '72.5' ?>">
               <span class="form-hint">Faixa: <?= $eq['temp_min'] ?> – <?= $eq['temp_max'] ?>°C</span>
             </div>
             <div class="form-group">
-              <label class="form-label">⚙️ Pressão (bar) *</label>
+              <label class="form-label">{{lucide:settings}} Pressão (bar) *</label>
               <input type="number" name="pressao" class="form-control"
                 step="0.01" required placeholder="Ex: <?= $eq['ultima_pressao'] ?? '8.1' ?>">
               <span class="form-hint">Faixa: <?= $eq['pressao_min'] ?> – <?= $eq['pressao_max'] ?> bar</span>
             </div>
             <div class="form-group">
-              <label class="form-label">💧 Umidade (%) <span style="color:var(--text-muted)">opcional</span></label>
+              <label class="form-label">{{lucide:droplet}} Umidade (%) <span style="color:var(--text-muted)">opcional</span></label>
               <input type="number" name="umidade" class="form-control" step="0.1" min="0" max="100" placeholder="Ex: 55.0">
             </div>
           </div>
           <div class="form-actions" style="margin-top:1rem;padding-top:1rem">
             <button type="submit" name="registrar_leitura" value="1" class="btn btn--primary">
-              📊 Registrar Leitura
+              {{lucide:chart-no-axes-combined}} Registrar Leitura
             </button>
           </div>
         </form>
@@ -441,13 +441,13 @@ if ($equipFiltro > 0) {
 
     <div class="panel-card">
       <div class="panel-header">
-        <div class="panel-title">📋 Histórico de Leituras</div>
+        <div class="panel-title">{{lucide:clipboard-list}} Histórico de Leituras</div>
         <span style="font-size:.7rem;color:var(--text-muted);font-family:var(--font-mono)">Últimas 20</span>
       </div>
       <div class="panel-body" style="padding:0;max-height:400px;overflow-y:auto">
         <?php if (empty($leituras)): ?>
         <div class="empty-state" style="padding:2rem">
-          <div class="empty-state__icon">📊</div>
+          <div class="empty-state__icon">{{lucide:chart-no-axes-combined}}</div>
           <div class="empty-state__title">Sem leituras registradas</div>
         </div>
         <?php else: ?>
@@ -476,7 +476,7 @@ if ($equipFiltro > 0) {
                 <?= severidadeIcon('critico') ?> Crítico
               </span>
               <?php elseif ($pior==='warning'): ?>
-              <span class="status-badge" style="background:var(--yellow-dim);color:var(--yellow);border:1px solid rgba(245,158,11,.3);font-size:.65rem">⚠️ Alerta</span>
+              <span class="status-badge" style="background:var(--yellow-dim);color:var(--yellow);border:1px solid rgba(245,158,11,.3);font-size:.65rem">{{lucide:triangle-alert}} Alerta</span>
               <?php else: ?>
               <span class="status-badge status-ativo" style="font-size:.65rem">Normal</span>
               <?php endif; ?>

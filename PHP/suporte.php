@@ -40,7 +40,7 @@ $classeBody = $usuarioLogado ? 'pagina-suporte' : 'pagina-suporte pagina-suporte
   <main class="site-main suporte-main">
     <div class="page-header suporte-page-header">
       <div class="page-header-left">
-        <div class="page-icon">💬</div>
+        <div class="page-icon">{{lucide:message-circle}}</div>
         <div>
           <div class="breadcrumb">
             <span>INDUX</span> / <span>Suporte</span>
@@ -53,7 +53,7 @@ $classeBody = $usuarioLogado ? 'pagina-suporte' : 'pagina-suporte pagina-suporte
       <div class="suporte-acoes-topo">
         <a href="<?php echo $usuarioLogado ? 'logout.php?destino=vendas' : '../pagina_de_vendas/index.php'; ?>" class="btn btn--ghost btn--sm">← Voltar para vendas</a>
         <?php if ($usuarioLogado): ?>
-          <a href="dashboard.php" class="btn btn--ghost btn--sm">📊 Dashboard</a>
+          <a href="dashboard.php" class="btn btn--ghost btn--sm">{{lucide:chart-no-axes-combined}} Dashboard</a>
         <?php endif; ?>
       </div>
     </div>

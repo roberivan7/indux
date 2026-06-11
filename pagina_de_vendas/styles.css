@@ -574,6 +574,32 @@ hr {
     border: 1px solid rgba(0, 200, 255, 0.15);
 }
 
+.lucide-icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    flex-shrink: 0;
+}
+
+.card-icone .lucide-icon {
+    display: block;
+    width: 26px;
+    height: 26px;
+}
+
+.btn-primario .lucide-icon {
+    display: block;
+    width: 17px;
+    height: 17px;
+}
+
+.success-title .lucide-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: .25rem;
+}
+
 
 .card-solucao h3 {
     font-size: 1.1rem;

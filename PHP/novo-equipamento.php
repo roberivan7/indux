@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                          temp_min=?,temp_max=?,pressao_min=?,pressao_max=?,status=? WHERE id=?'
                     )->execute(array_merge(array_values($dadosEquipamento), [$equipamentoId]));
                     registrarLog('EDITAR_EQUIPAMENTO','equipamentos',$equipamentoId,'TAG:'.$dadosEquipamento['tag']);
-                    header('Location: equipamentos.php?msg='.urlencode('✅ Equipamento atualizado!').'&tipo=sucesso');
+                    header('Location: equipamentos.php?msg='.urlencode('{{lucide:circle-check}} Equipamento atualizado!').'&tipo=sucesso');
                     exit;
                 }
             } else {
@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     )->execute(array_values($dadosEquipamento));
                     $novoId = (int)$db->lastInsertId();
                     registrarLog('CRIAR_EQUIPAMENTO','equipamentos',$novoId,'TAG:'.$dadosEquipamento['tag']);
-                    header('Location: equipamentos.php?msg='.urlencode('✅ Equipamento "'.$dadosEquipamento['nome'].'" cadastrado!').'&tipo=sucesso');
+                    header('Location: equipamentos.php?msg='.urlencode('{{lucide:circle-check}} Equipamento "'.$dadosEquipamento['nome'].'" cadastrado!').'&tipo=sucesso');
                     exit;
                 }
             }
@@ -116,7 +116,7 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
 
     <div class="page-header">
       <div class="page-header-left">
-        <div class="page-icon"><?php echo $editando ? '✏️' : '➕'; ?></div>
+        <div class="page-icon"><?php echo $editando ? '{{lucide:pencil}}' : '{{lucide:plus}}'; ?></div>
         <div>
           <div class="breadcrumb"><span>INDUX</span> / <a href="equipamentos.php">Equipamentos</a> / <span><?php echo $editando ? 'Editar' : 'Novo'; ?></span></div>
           <h1 class="page-title"><?php echo $editando ? 'Editar Equipamento' : 'Novo Equipamento'; ?></h1>
@@ -130,7 +130,7 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
     <div class="alerta alerta--erro">
       <div>
         <?php foreach ($erros as $erro): ?>
-        <div>⚠️ <?php echo htmlspecialchars($erro); ?></div>
+        <div>{{lucide:triangle-alert}} <?php echo htmlspecialchars($erro); ?></div>
         <?php endforeach; ?>
       </div>
     </div>
@@ -143,7 +143,7 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
 
       <div class="form-card">
 
-        <div class="form-title">📋 Identificação do Equipamento</div>
+        <div class="form-title">{{lucide:clipboard-list}} Identificação do Equipamento</div>
         <div class="form-grid form-grid--identity">
           <div class="form-group">
             <label class="form-label" for="tag">TAG <span style="color:var(--red)">*</span></label>
@@ -191,9 +191,9 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
           <div class="form-group">
             <label class="form-label" for="status">Status Inicial</label>
             <select id="status" name="status" class="form-control">
-              <option value="ativo"    <?php echo ($form['status']??'ativo')==='ativo'    ? 'selected' : ''; ?>>✅ Ativo</option>
-              <option value="inativo"  <?php echo ($form['status']??'')==='inativo'       ? 'selected' : ''; ?>>⏸️ Inativo</option>
-              <option value="em_falha" <?php echo ($form['status']??'')==='em_falha'      ? 'selected' : ''; ?>>🔴 Em Falha</option>
+              <option value="ativo"    <?php echo ($form['status']??'ativo')==='ativo'    ? 'selected' : ''; ?>>Ativo</option>
+              <option value="inativo"  <?php echo ($form['status']??'')==='inativo'       ? 'selected' : ''; ?>>Inativo</option>
+              <option value="em_falha" <?php echo ($form['status']??'')==='em_falha'      ? 'selected' : ''; ?>>Em Falha</option>
             </select>
             <span class="form-hint">&nbsp;</span>
           </div>
@@ -206,7 +206,7 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
         </div>
 
         <div class="form-section">
-          <div class="form-section-title">🌡️ Limites de Temperatura (°C)</div>
+          <div class="form-section-title">{{lucide:thermometer}} Limites de Temperatura (°C)</div>
           <div class="form-grid form-grid--limits">
             <div class="form-group">
               <label class="form-label" for="temp_min">Mínima (°C)</label>
@@ -226,7 +226,7 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
         </div>
 
         <div class="form-section">
-          <div class="form-section-title">⚙️ Limites de Pressão (bar)</div>
+          <div class="form-section-title">{{lucide:settings}} Limites de Pressão (bar)</div>
           <div class="form-grid form-grid--limits">
             <div class="form-group">
               <label class="form-label" for="pressao_min">Mínima (bar)</label>
@@ -248,7 +248,7 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
         <div class="form-actions">
           <a href="equipamentos.php" class="btn btn--ghost">Cancelar</a>
           <button type="submit" class="btn btn--primary btn--lg">
-            <?php echo $editando ? '💾 Salvar Alterações' : '➕ Cadastrar Equipamento'; ?>
+            <?php echo $editando ? '{{lucide:save}} Salvar Alterações' : '{{lucide:plus}} Cadastrar Equipamento'; ?>
           </button>
         </div>
 

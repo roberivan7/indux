@@ -15,7 +15,7 @@ $usuario = null;
 if (isset($_GET['excluir']) && ehAdmin()) {
     $usuarioExcluirId = (int)$_GET['excluir'];
     if ($usuarioExcluirId === ($_SESSION['usuario_id'] ?? 0)) {
-        $msg = '⚠️ Você não pode excluir seu próprio usuário.'; $msgTipo = 'aviso';
+        $msg = '{{lucide:triangle-alert}} Você não pode excluir seu próprio usuário.'; $msgTipo = 'aviso';
     } else {
         $usuarioExcluir = dbBuscarUsuario($usuarioExcluirId);
         if ($usuarioExcluir && dbExcluirUsuario($usuarioExcluirId)) {
@@ -127,7 +127,7 @@ foreach ($listaUsuarios as $usuarioItem) {
 
   <div class="page-header">
     <div class="page-header-left">
-      <div class="page-icon">👥</div>
+      <div class="page-icon">{{lucide:users-round}}</div>
       <div>
         <div class="breadcrumb"><span>INDUX</span> / <span>Usuários</span><?php if ($modo!=='listar'): ?> / <span><?= $modo==='novo'?'Novo':'Editar' ?></span><?php endif; ?></div>
         <h1 class="page-title">Usuários do Sistema</h1>
@@ -135,7 +135,7 @@ foreach ($listaUsuarios as $usuarioItem) {
       </div>
     </div>
     <?php if ($modo==='listar' && ehAdmin()): ?>
-    <a href="usuarios.php?acao=novo" class="btn btn--primary">➕ Novo Usuário</a>
+    <a href="usuarios.php?acao=novo" class="btn btn--primary">{{lucide:plus}} Novo Usuário</a>
     <?php elseif ($modo!=='listar'): ?>
     <a href="usuarios.php" class="btn btn--ghost">← Voltar</a>
     <?php endif; ?>
@@ -147,7 +147,7 @@ foreach ($listaUsuarios as $usuarioItem) {
 
   <?php if (!empty($erros)): ?>
   <div class="alerta alerta--erro">
-    <?php foreach ($erros as $erro): ?><div>⚠️ <?= htmlspecialchars($erro) ?></div><?php endforeach; ?>
+    <?php foreach ($erros as $erro): ?><div>{{lucide:triangle-alert}} <?= htmlspecialchars($erro) ?></div><?php endforeach; ?>
   </div>
   <?php endif; ?>
 
@@ -170,27 +170,27 @@ foreach ($listaUsuarios as $usuarioItem) {
 
   <form method="GET" action="usuarios.php" style="display:flex;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap">
     <div style="flex:1;min-width:220px;position:relative">
-      <span style="position:absolute;left:.8rem;top:50%;transform:translateY(-50%);font-size:.9rem">🔍</span>
+      <span class="input-icon">{{lucide:search}}</span>
       <input type="text" name="busca" class="form-control" placeholder="Buscar por nome ou e-mail..."
         value="<?= htmlspecialchars($busca) ?>" style="padding-left:2.25rem">
     </div>
     <select name="perfil_f" class="form-control" style="width:auto">
       <option value="">Todos os perfis</option>
-      <option value="admin"       <?= $filtroPerfil==='admin'       ?'selected':'' ?>>👑 Admin</option>
-      <option value="funcionario" <?= $filtroPerfil==='funcionario' ?'selected':'' ?>>👤 Funcionário</option>
+      <option value="admin"       <?= $filtroPerfil==='admin'       ?'selected':'' ?>>Admin</option>
+      <option value="funcionario" <?= $filtroPerfil==='funcionario' ?'selected':'' ?>>Funcionário</option>
     </select>
     <button type="submit" class="btn btn--primary">Buscar</button>
-    <?php if ($busca || $filtroPerfil): ?><a href="usuarios.php" class="btn btn--ghost">✕ Limpar</a><?php endif; ?>
+    <?php if ($busca || $filtroPerfil): ?><a href="usuarios.php" class="btn btn--ghost">{{lucide:x}} Limpar</a><?php endif; ?>
   </form>
 
   <div class="panel-card">
     <div class="panel-body" style="padding:0">
       <?php if (empty($listaUsuarios)): ?>
       <div class="empty-state" style="padding:3rem">
-        <div class="empty-state__icon">👥</div>
+        <div class="empty-state__icon">{{lucide:users-round}}</div>
         <div class="empty-state__title">Nenhum usuário encontrado</div>
         <?php if (ehAdmin()): ?>
-        <a href="usuarios.php?acao=novo" class="btn btn--primary" style="margin-top:1rem">➕ Criar Primeiro Usuário</a>
+        <a href="usuarios.php?acao=novo" class="btn btn--primary" style="margin-top:1rem">{{lucide:plus}} Criar Primeiro Usuário</a>
         <?php endif; ?>
       </div>
       <?php else: ?>
@@ -231,9 +231,9 @@ foreach ($listaUsuarios as $usuarioItem) {
           </td>
           <td>
             <?php if ($usuarioItem['ativo']): ?>
-            <span class="status-badge status-ativo">✅ Ativo</span>
+            <span class="status-badge status-ativo">{{lucide:circle-check}} Ativo</span>
             <?php else: ?>
-            <span class="status-badge status-inativo">⏸️ Inativo</span>
+            <span class="status-badge status-inativo">{{lucide:pause}} Inativo</span>
             <?php endif; ?>
           </td>
           <td style="font-size:.72rem;color:var(--text-muted);font-family:var(--font-mono)">
@@ -242,17 +242,17 @@ foreach ($listaUsuarios as $usuarioItem) {
           <td>
             <div style="display:flex;gap:.4rem;flex-wrap:wrap">
               <?php if (podeGerenciarPerfil($usuarioItem['perfil'])): ?>
-              <a href="usuarios.php?acao=editar&id=<?= $usuarioItem['id'] ?>" class="btn btn--ghost btn--sm">✏️ Editar</a>
+              <a href="usuarios.php?acao=editar&id=<?= $usuarioItem['id'] ?>" class="btn btn--ghost btn--sm">{{lucide:pencil}} Editar</a>
               <?php if (ehAdmin() && $usuarioItem['id'] !== ($_SESSION['usuario_id']??0)): ?>
               <a href="usuarios.php?toggle=<?= $usuarioItem['id'] ?>"
                  class="btn btn--ghost btn--sm"
                  onclick="return confirm('<?= $usuarioItem['ativo']?'Desativar':'Ativar' ?> este usuário?')"
                  style="color:<?= $usuarioItem['ativo']?'var(--red)':'var(--green)' ?>">
-                <?= $usuarioItem['ativo']?'⏸️':'▶️' ?>
+                <?= $usuarioItem['ativo']?'{{lucide:pause}}':'{{lucide:play}}' ?>
               </a>
               <a href="usuarios.php?excluir=<?= $usuarioItem['id'] ?>"
                  onclick="return confirm('Excluir usuário <?= htmlspecialchars(addslashes($usuarioItem['nome'])) ?>?')"
-                 class="btn btn--danger btn--sm">🗑️</a>
+                 class="btn btn--danger btn--sm">{{lucide:trash-2}}</a>
               <?php endif; ?>
               <?php endif; ?>
             </div>
@@ -266,7 +266,7 @@ foreach ($listaUsuarios as $usuarioItem) {
   </div>
 
   <div style="margin-top:1.25rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.25rem">
-    <div style="font-family:var(--font-display);font-size:.82rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem">📖 Hierarquia de Acesso</div>
+    <div class="section-heading-icon" style="font-family:var(--font-display);font-size:.82rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem">{{lucide:book-open}} Hierarquia de Acesso</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
       <div>
         <?= perfilBadgeHtml('admin') ?>
@@ -292,7 +292,7 @@ foreach ($listaUsuarios as $usuarioItem) {
     <?php endif; ?>
 
     <div class="form-card">
-      <div class="form-title">👤 Dados do Usuário</div>
+      <div class="form-title">{{lucide:user-round}} Dados do Usuário</div>
       <div class="form-grid form-grid--user">
 
         <div class="form-group">
@@ -323,9 +323,9 @@ foreach ($listaUsuarios as $usuarioItem) {
           <label class="form-label" for="perfil">Perfil <span style="color:var(--red)">*</span></label>
           <select id="perfil" name="perfil" class="form-control" <?= !ehAdmin()?'disabled':'' ?>>
             <?php if (ehAdmin()): ?>
-            <option value="admin"       <?= ($formUsuario['perfil']??'')==='admin'       ?'selected':'' ?>>👑 Admin — Acesso Total</option>
+            <option value="admin"       <?= ($formUsuario['perfil']??'')==='admin'       ?'selected':'' ?>>Admin — Acesso Total</option>
             <?php endif; ?>
-            <option value="funcionario" <?= ($formUsuario['perfil']??'funcionario')==='funcionario' ?'selected':'' ?>>👤 Funcionário — Acesso Limitado</option>
+            <option value="funcionario" <?= ($formUsuario['perfil']??'funcionario')==='funcionario' ?'selected':'' ?>>Funcionário — Acesso Limitado</option>
           </select>
           <?php if (!ehAdmin()): ?><input type="hidden" name="perfil" value="funcionario"><?php endif; ?>
           <span class="form-hint">Define o nível de acesso base do usuário</span>
@@ -341,13 +341,13 @@ foreach ($listaUsuarios as $usuarioItem) {
       </div>
 
       <div class="form-section" id="secao-permissoes">
-        <div class="form-section-title">🔑 Permissões Adicionais <span style="font-weight:400;color:var(--text-muted);font-size:.78rem">(para perfil Funcionário)</span></div>
+        <div class="form-section-title">{{lucide:key-round}} Permissões Adicionais <span style="font-weight:400;color:var(--text-muted);font-size:.78rem">(para perfil Funcionário)</span></div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.75rem">
 
           <label style="display:flex;align-items:flex-start;gap:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:.9rem;cursor:pointer">
             <input type="checkbox" name="is_operador" value="1" <?= ($formUsuario['is_operador']??0)?'checked':'' ?> style="margin-top:2px;accent-color:var(--accent)">
             <div>
-              <div style="font-size:.85rem;font-weight:600;color:#fff">⚙️ Operador</div>
+              <div class="permission-title">{{lucide:settings}} Operador</div>
               <div style="font-size:.72rem;color:var(--text-muted);margin-top:.2rem">Acesso geral de operação (editar status, registrar leituras)</div>
             </div>
           </label>
@@ -355,7 +355,7 @@ foreach ($listaUsuarios as $usuarioItem) {
           <label style="display:flex;align-items:flex-start;gap:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:.9rem;cursor:pointer">
             <input type="checkbox" name="perm_criar_equip" value="1" <?= ($formUsuario['perm_criar_equip']??0)?'checked':'' ?> style="margin-top:2px;accent-color:var(--green)">
             <div>
-              <div style="font-size:.85rem;font-weight:600;color:#fff">➕ Criar Equipamentos</div>
+              <div class="permission-title">{{lucide:plus}} Criar Equipamentos</div>
               <div style="font-size:.72rem;color:var(--text-muted);margin-top:.2rem">Pode cadastrar novos equipamentos</div>
             </div>
           </label>
@@ -363,7 +363,7 @@ foreach ($listaUsuarios as $usuarioItem) {
           <label style="display:flex;align-items:flex-start;gap:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:.9rem;cursor:pointer">
             <input type="checkbox" name="perm_editar_equip" value="1" <?= ($formUsuario['perm_editar_equip']??0)?'checked':'' ?> style="margin-top:2px;accent-color:var(--yellow)">
             <div>
-              <div style="font-size:.85rem;font-weight:600;color:#fff">✏️ Editar Equipamentos</div>
+              <div class="permission-title">{{lucide:pencil}} Editar Equipamentos</div>
               <div style="font-size:.72rem;color:var(--text-muted);margin-top:.2rem">Pode editar dados e status de equipamentos</div>
             </div>
           </label>
@@ -371,7 +371,7 @@ foreach ($listaUsuarios as $usuarioItem) {
           <label style="display:flex;align-items:flex-start;gap:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:.9rem;cursor:pointer">
             <input type="checkbox" name="perm_resolver_alarme" value="1" <?= ($formUsuario['perm_resolver_alarme']??0)?'checked':'' ?> style="margin-top:2px;accent-color:var(--red)">
             <div>
-              <div style="font-size:.85rem;font-weight:600;color:#fff">🔔 Resolver Alarmes</div>
+              <div class="permission-title">{{lucide:bell}} Resolver Alarmes</div>
               <div style="font-size:.72rem;color:var(--text-muted);margin-top:.2rem">Pode marcar alarmes como resolvidos</div>
             </div>
           </label>
@@ -382,7 +382,7 @@ foreach ($listaUsuarios as $usuarioItem) {
       <div class="form-actions">
         <a href="usuarios.php" class="btn btn--ghost">Cancelar</a>
         <button type="submit" class="btn btn--primary btn--lg">
-          <?= $editandoUsuario ? '💾 Salvar Alterações' : '➕ Criar Usuário' ?>
+          <?= $editandoUsuario ? '{{lucide:save}} Salvar Alterações' : '{{lucide:plus}} Criar Usuário' ?>
         </button>
       </div>
     </div>
