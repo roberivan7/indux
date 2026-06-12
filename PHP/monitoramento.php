@@ -21,7 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['registrar_leitura']) 
         $equipamentoBase = dbBuscarEquipamento($equipamentoId);
         if ($equipamentoBase) {
             $alarmesGerados = [];
-            if ($temperatura > $equipamentoBase['temp_max']) {
+            if ($temperatura < $equipamentoBase['temp_min']) {
+                $alarmesGerados[] = ['temperatura','critico',
+                    "Temperatura abaixo do limite: {$temperatura}°C (mín: {$equipamentoBase['temp_min']}°C)",
+                    $temperatura, $equipamentoBase['temp_min']];
+            } elseif ($temperatura > $equipamentoBase['temp_max']) {
                 $alarmesGerados[] = ['temperatura','critico',
                     "Temperatura acima do limite: {$temperatura}°C (máx: {$equipamentoBase['temp_max']}°C)",
                     $temperatura, $equipamentoBase['temp_max']];
@@ -30,7 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['registrar_leitura']) 
                     "Temperatura em zona de alerta: {$temperatura}°C",
                     $temperatura, $equipamentoBase['temp_max']];
             }
-            if ($pressao > $equipamentoBase['pressao_max']) {
+            if ($pressao < $equipamentoBase['pressao_min']) {
+                $alarmesGerados[] = ['pressao','critico',
+                    "Pressão abaixo do limite: {$pressao} bar (mín: {$equipamentoBase['pressao_min']} bar)",
+                    $pressao, $equipamentoBase['pressao_min']];
+            } elseif ($pressao > $equipamentoBase['pressao_max']) {
                 $alarmesGerados[] = ['pressao','critico',
                     "Pressão acima do limite crítico: {$pressao} bar (máx: {$equipamentoBase['pressao_max']} bar)",
                     $pressao, $equipamentoBase['pressao_max']];

@@ -27,7 +27,7 @@ Sistema PHP simples para cadastrar equipamentos industriais, registrar leituras 
 2. `init.php` inicia a sessao e disponibiliza funcoes como `requerLogin()`, `ehAdmin()` e `podeResolverAlarme()`.
 3. As paginas chamam `db.php` para buscar ou salvar dados no MySQL.
 4. Equipamentos sao cadastrados em `novo-equipamento.php` e listados em `equipamentos.php`.
-5. Leituras sao registradas em `monitoramento.php`; se uma leitura passa do limite, o sistema cria alarmes.
+5. Leituras sao registradas em `monitoramento.php`; se uma leitura fica fora dos limites minimo ou maximo, o sistema cria alarmes.
 6. Alarmes aparecem em `alarmes.php` e nos resumos do dashboard, header e footer.
 
 ## Convencao de nomes usada

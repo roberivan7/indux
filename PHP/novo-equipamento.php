@@ -220,7 +220,7 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
               <input type="number" id="temp_max" name="temp_max" class="form-control"
                 step="0.1" min="-50" max="500"
                 value="<?php echo $form['temp_max'] ?? 80; ?>">
-              <span class="form-hint">Acima deste valor → alarme de temperatura</span>
+              <span class="form-hint">Fora da faixa mínima/máxima → alarme de temperatura</span>
             </div>
           </div>
         </div>
@@ -240,7 +240,7 @@ $equipamentoId = $editando && isset($form['id']) ? $form['id'] : 0;
               <input type="number" id="pressao_max" name="pressao_max" class="form-control"
                 step="0.01" min="0" max="1000"
                 value="<?php echo $form['pressao_max'] ?? 10; ?>">
-              <span class="form-hint">Acima deste valor → alarme de pressão</span>
+              <span class="form-hint">Fora da faixa mínima/máxima → alarme de pressão</span>
             </div>
           </div>
         </div>
